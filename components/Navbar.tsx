@@ -21,6 +21,7 @@ import GoogleSignInBtn from "./auth/GoogleSignInBtn";
 import GitSignInBtn from "./auth/GitSignInBtn";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { ExtenderUser } from "@/next-auth";
+import { AiOutlineGoogle } from "react-icons/ai";
 
 const navList = [
   {
@@ -80,7 +81,7 @@ const Navbar = async () => {
                   <DropdownMenuItem className=" flex items-center justify-around">
                     <GoogleSignInBtn />
                     <div className=" text-xl">
-                      <AiFillGoogleCircle />
+                      <AiOutlineGoogle />
                     </div>
                   </DropdownMenuItem>
                   <div className=" h-px w-full bg-zinc-200" />

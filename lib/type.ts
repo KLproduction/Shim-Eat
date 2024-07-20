@@ -1,4 +1,20 @@
-import { Size, AddOns, Product, CartItem, OrderStatus } from "@prisma/client";
+import {
+  Size,
+  AddOns,
+  Product,
+  CartItem,
+  OrderStatus,
+  $Enums,
+} from "@prisma/client";
+
+export type TAddProduct = {
+  name: string;
+  description: string;
+  price: number;
+  image: string | null;
+  category: $Enums.ProductCategory;
+  status: $Enums.ProductStatus;
+};
 
 export type CartItemWithProduct = CartItem & {
   productId: string;
@@ -26,10 +42,6 @@ export type TaddCartToDB = {
   product: Product;
 };
 
-// export type addCartToDB = {
-
-// }
-
 export type TOrderItem = {
   id: string;
   orderId: string;
@@ -49,5 +61,9 @@ export type TUserOrder = {
   orderPrice: number;
   createdAt: Date;
   updatedAt: Date;
-  status: OrderStatus;
+  clientEmail?: string | null;
+  amountReceived?: number | null;
+  deliveryAddress?: string | null;
+  status?: OrderStatus;
+  deliveryStatus?: $Enums.DeliveryStatus;
 };

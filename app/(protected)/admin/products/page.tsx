@@ -16,59 +16,67 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/formatPrice";
+import { checkServerSession } from "@/actions/check-server-session";
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
 const AdminProductsPage = () => {
   const [products, setProducts] = useState<Product[] | null>();
   useEffect(() => {
     (async () => {
+      await checkServerSession();
       const data = await getProducts();
       setProducts(data);
     })();
   }, []);
 
   return (
-    <Table>
-      <TableCaption>A list of your recent invoices.</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[100px] hidden sm:block">
-            Product ID
-          </TableHead>
-          <TableHead>Product Name</TableHead>
-          <TableHead>Category</TableHead>
-          <TableHead>Price</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead className=""></TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {products?.map((product) => (
-          <>
-            <TableRow
-              key={product.id}
-              className=" items-center justify-center bg-zinc-50"
-            >
-              <TableCell className="font-medium hidden sm:block">
-                {product.id}
-              </TableCell>
-              <TableCell>{product.name}</TableCell>
-              <TableCell>{product.category}</TableCell>
-              <TableCell>{formatPrice(product.price)}</TableCell>
-              <TableCell>{product.status}</TableCell>
-              <Button asChild variant={"link"}>
-                <Link
-                  href={`/admin/products/product-details?product=${product.id}`}
-                  className="flex justify-center"
-                >
-                  Config
-                </Link>
-              </Button>
+    <>
+      <MaxWidthWrapper>
+        <Button className="ml-auto mr-3" asChild>
+          <Link href={"/admin/products/add-product"}>Add Product</Link>
+        </Button>
+
+        <Table className="p-3 max-w-[300px] sm:max-w-full text-xs sm:text-md mx-auto">
+          <TableCaption>A list of existing products.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="hidden sm:block"></TableHead>
+              <TableHead>Product Name</TableHead>
+              <TableHead>Category</TableHead>
+              <TableHead>Price</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead className=""></TableHead>
             </TableRow>
-          </>
-        ))}
-      </TableBody>
-      <TableFooter></TableFooter>
-    </Table>
+          </TableHeader>
+          <TableBody>
+            {products?.map((product) => (
+              <TableRow key={product.id} className=" bg-zinc-50 ">
+                <TableCell className="hidden sm:block mt-3">
+                  <img
+                    src={product.image || undefined}
+                    alt="proudct image"
+                    className=" max-w-[80px] rounded-full"
+                  />
+                </TableCell>
+                <TableCell>{product.name}</TableCell>
+                <TableCell>{product.category}</TableCell>
+                <TableCell>{formatPrice(product.price)}</TableCell>
+                <TableCell>{product.status}</TableCell>
+                <TableCell>
+                  <Button asChild variant={"link"}>
+                    <Link
+                      href={`/admin/products/product-details?product=${product.id}`}
+                    >
+                      Config
+                    </Link>
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </MaxWidthWrapper>
+    </>
   );
 };
 

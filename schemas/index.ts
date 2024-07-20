@@ -1,7 +1,30 @@
 import { ProductCategory, UserRole } from "@prisma/client";
-import { Description } from "@radix-ui/react-dialog";
 import * as z from "zod";
 
+export const ChangeDeliveryStatusSchema = z.object({
+  deliveryStatus: z.enum(["PENDING", "DISPATCHED", "DELIVERED"]),
+  orderId: z.string(),
+});
+
+export const ProductAddingSchema = z.object({
+  name: z.string().min(1, {
+    message: "Please give a name",
+  }),
+  description: z.string().min(1, {
+    message: "description required.",
+  }),
+  category: z.enum([
+    ProductCategory.salad,
+    ProductCategory.main,
+    ProductCategory.drinks,
+  ]),
+  price: z.number().min(1),
+  image: z.string().min(1, {
+    message: "Image required.",
+  }),
+
+  status: z.enum(["onSale", "notAvailable"]),
+});
 export const ProductsettingSchema = z.object({
   name: z.string().min(1, {
     message: "Please give a name",

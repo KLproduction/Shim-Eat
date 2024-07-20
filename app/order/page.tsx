@@ -10,24 +10,10 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { ADDONSPRICE } from "@/data/products";
-import { currentUser } from "@/lib/auth";
-import { db } from "@/lib/db";
 import { formatPrice } from "@/lib/formatPrice";
 import { TUserOrder } from "@/lib/type";
-import { revalidatePath } from "next/cache";
 import Link from "next/link";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 import { useEffect, useState } from "react";
-import { ExtenderUser } from "@/next-auth";
 import { getuserOrderFromDB } from "@/data/getuserOrderFromDB";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import MySpinner from "@/components/ui/MySpinner";

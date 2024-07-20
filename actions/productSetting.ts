@@ -27,11 +27,3 @@ export const productSetting = async (
     console.error(e);
   }
 };
-
-// if(product){
-//     values.name = product.name
-//     values.category = product.category
-//     values.description = product.description
-//     values.price = product.price
-//     values.image = product?.image||undefined
-// }
