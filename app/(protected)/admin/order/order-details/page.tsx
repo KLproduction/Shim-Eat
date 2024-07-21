@@ -8,6 +8,7 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 import { ADDONSPRICE } from "@/data/products";
 import { formatPrice } from "@/lib/formatPrice";
@@ -27,17 +28,22 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useSearchParams } from "next/navigation";
 import { getOrderByOrderID } from "@/data/getOrderByOrderID";
 import ChangeDeliveryStatusForm from "../_components/ChangeDeliveryStatusForm";
+import { DeliveryStatus, OrderStatus } from "@prisma/client";
+import { cn } from "@/lib/utils";
+import { Label } from "@/components/ui/label";
 
 const OrderPage = () => {
   const [product, setProduct] = useState<TUserOrder | null>();
   const searchParams = useSearchParams();
   const orderId = searchParams.get("order");
+  const [orderStatus, setOrderStatus] = useState<OrderStatus | null>();
 
   useEffect(() => {
     (async () => {
       if (orderId) {
         const products = await getOrderByOrderID(orderId);
         setProduct(products);
+        setOrderStatus(products?.status);
       }
     })();
   }, []);
@@ -53,8 +59,12 @@ const OrderPage = () => {
     );
   }
 
+  const orderColor = "text-green-500"
+    ? orderStatus === "PAID"
+    : "text-orange-500";
+
   return (
-    <MaxWidthWrapper>
+    <MaxWidthWrapper className="flex justify-center flex-col gap-5">
       <div className="flex justify-center p-5">
         <h1 className=" font-bold text-zinc-600 text-3xl">Order Details</h1>
       </div>
@@ -82,7 +92,7 @@ const OrderPage = () => {
               <div className="text-zinc-500 font-bold">
                 Order reference: {product?.id}
               </div>
-              <div className="text-green-500 font-bold">{product.status}</div>
+              <div className={`text-green-500 font-bold`}>{product.status}</div>
             </div>
 
             <div className="max-w-5xl w-full mx-auto space-y-8">
@@ -133,22 +143,59 @@ const OrderPage = () => {
                     </div>
                   </div>
                 ))}
+                <h2 className="text-xl flex justify-end text-zinc-600">
+                  Order Total:{formatPrice(product?.orderPrice!)}{" "}
+                </h2>
               </div>
             </div>
-            <ChangeDeliveryStatusForm orderId={product.id} />
-
-            <h1 className="text-xl flex justify-end text-zinc-600">
-              Order Total:{formatPrice(product?.orderPrice!)}{" "}
-            </h1>
+            <Card className="mt-5">
+              <CardHeader>
+                <CardTitle>Order Details</CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-col gap-3">
+                <div>
+                  <Label>Email:</Label>
+                  <h2>{product.clientEmail}</h2>
+                </div>
+                <div>
+                  <Label>Delivery Address:</Label>
+                  <h2>{product.deliveryAddress}</h2>
+                </div>
+                <div>
+                  <Label>Amount Received:</Label>
+                  <h2>{formatPrice(product.amountReceived!)}</h2>
+                </div>
+                <div>
+                  <Label>Created at:</Label>
+                  <h2>
+                    {`${product.createdAt.getDate()}/${
+                      product.createdAt.getMonth() + 1
+                    }/${product.createdAt.getFullYear()}`}
+                    <br />
+                    {`${product.createdAt.getHours()}:${product.createdAt.getMinutes()}`}
+                  </h2>
+                </div>
+                <div>
+                  <Label>Last Updated at:</Label>
+                  <h2>
+                    {`${product.updatedAt.getDate()}/${
+                      product.updatedAt.getMonth() + 1
+                    }/${product.updatedAt.getFullYear()}`}
+                    <br />
+                    {`${product.updatedAt.getHours()}:${product.updatedAt.getMinutes()}`}
+                  </h2>
+                </div>
+                <ChangeDeliveryStatusForm orderId={product.id} />
+              </CardContent>
+            </Card>
           </>
         )}
+        <div className="flex justify-end p-5">
+          <Button asChild variant={"outline"} size={"lg"}>
+            <Link href={"/admin/order"}>Back</Link>
+          </Button>
+        </div>
       </Card>
-
-      <div className="flex justify-end p-5">
-        <Button asChild variant={"link"} size={"lg"}>
-          <Link href={"/"}>Back</Link>
-        </Button>
-      </div>
     </MaxWidthWrapper>
   );
 };

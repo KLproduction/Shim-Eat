@@ -1,39 +1,36 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import { UserBtn } from "@/components/auth/UserBtn";
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  DropdownMenuSubTrigger,
+} from "@/components/ui/dropdown-menu";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import { AiOutlineMenu } from "react-icons/ai";
 
 const SettingNav = () => {
   const pathname = usePathname();
+  const [position, setPosition] = useState("order");
+  const route = useRouter();
+  useEffect(() => {
+    setPosition(pathname);
+  }, [pathname]);
+
   return (
-    <MaxWidthWrapper>
-      <nav className=" bg-secondary flex justify-between items-center p-4 rounded-xl w-[600px] shadow-sm">
+    <MaxWidthWrapper className=" flex sm:justify-center justify-start p-3">
+      <nav className=" bg-secondary hidden sm:flex justify-center items-center p-4 rounded-xl w-auto shadow-sm">
         <div className=" sm:flex gap-2 hidden">
-          <Button
-            asChild
-            variant={pathname === "/server" ? "default" : "outline"}
-          >
-            <Link href="/server">Server</Link>
-          </Button>
-          <Button
-            asChild
-            variant={pathname === "/client" ? "default" : "outline"}
-          >
-            <Link href="/client">Client</Link>
-          </Button>
           <Button
             asChild
             variant={pathname === "/admin" ? "default" : "outline"}
@@ -58,36 +55,43 @@ const SettingNav = () => {
           >
             <Link href="/admin/order">Order</Link>
           </Button>
-          <UserBtn />
-        </div>
-
-        <div className="sm:hidden max-w-[200px]">
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder={pathname} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="ADMIN">
-                  <Button asChild>
-                    <Link href="/admin">Admin</Link>
-                  </Button>
-                </SelectItem>
-                <SelectItem value="PRODUCTS">
-                  <Button asChild>
-                    <Link href="/admin/products">Products</Link>
-                  </Button>
-                </SelectItem>
-                <SelectItem value="ORDER">
-                  <Button asChild>
-                    <Link href="/admin/order">Order</Link>
-                  </Button>
-                </SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
         </div>
       </nav>
+
+      <div className="sm:hidden flex justify-start">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant={"outline"} asChild>
+              <div className="flex items-center gap-3">
+                Admin
+                <AiOutlineMenu />
+              </div>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>Admin Page</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuRadioGroup
+              value={position}
+              onValueChange={setPosition}
+            >
+              <DropdownMenuRadioItem
+                value="/admin/order"
+                onClick={() => route.push("/admin/order")}
+              >
+                Orders
+              </DropdownMenuRadioItem>
+
+              <DropdownMenuRadioItem
+                value="/admin/products"
+                onClick={() => route.push("/admin/products")}
+              >
+                Products
+              </DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </MaxWidthWrapper>
   );
 };
