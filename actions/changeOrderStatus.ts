@@ -2,11 +2,10 @@
 import * as z from "zod";
 import { getOrderByOrderID } from "@/data/getOrderByOrderID";
 import { db } from "@/lib/db";
-import { ChangeDeliveryStatusSchema } from "@/schemas";
-import { DeliveryStatus, OrderStatus } from "@prisma/client";
+import { ChangeOrderStatusSchema } from "@/schemas";
 
-export const changeDeliveryStatus = async (
-  values: z.infer<typeof ChangeDeliveryStatusSchema>
+export const changeOrderStatus = async (
+  values: z.infer<typeof ChangeOrderStatusSchema>
 ) => {
   try {
     await db.userOrder.update({
@@ -14,12 +13,12 @@ export const changeDeliveryStatus = async (
         id: values.orderId,
       },
       data: {
-        deliveryStatus: values.deliveryStatus,
+        status: values.status,
       },
     });
-    return { success: "Delivery Status Changed." };
+    return { success: "Order State changed." };
   } catch (e) {
-    console.error(e);
+    console.log(e);
     return { error: "Something went wrong!" };
   }
 };

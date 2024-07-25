@@ -167,14 +167,21 @@ export async function createProducts() {
           data: products,
           skipDuplicates: true, // This prevents errors in case some products already exist
         });
-        console.log("Products successfully created.");
+        return { message: "Products successfully created." };
       }
     }
   } catch (error) {
-    console.error("Error creating products:", error);
+    console.error(error);
+    return { message: "Error creating products:" };
   }
 }
 
 export async function deleProducts() {
-  await db.product.deleteMany();
+  try {
+    await db.product.deleteMany();
+    return { message: "Products successfully deleted." };
+  } catch (error) {
+    console.error(error);
+    return { message: "Error deleting products:" };
+  }
 }

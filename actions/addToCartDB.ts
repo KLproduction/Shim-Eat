@@ -68,16 +68,3 @@ const addToCart = async (data: TaddCartToDB[]) => {
 };
 
 export default addToCart;
-
-// const updatedItem = await db.cartItem.update({
-//   where: {
-//     id: existingCartItem.id,
-//   },
-//   data: {
-//     quantity: existingCartItem.quantity! + 1,
-//   },
-// });
-
-// return {
-//   error: "Item Already in Cart.",
-// };

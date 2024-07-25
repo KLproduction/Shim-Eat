@@ -21,9 +21,11 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 const OrderPage = () => {
   // const [user, setUser] = useState<ExtenderUser>();
@@ -89,6 +91,9 @@ const OrderPage = () => {
                 Show Details
               </div>
             </DialogTrigger>
+            <DialogTitle>
+              <DialogDescription></DialogDescription>
+            </DialogTitle>
             <DialogContent className="h-[500px]">
               <DialogHeader className="p-6">
                 <div className="flex justify-between ">

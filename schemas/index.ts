@@ -1,6 +1,10 @@
 import { ProductCategory, UserRole } from "@prisma/client";
 import * as z from "zod";
 
+export const ChangeOrderStatusSchema = z.object({
+  status: z.enum(["PENDING", "PAID", "COMPLETE", "CANCELLED"]),
+  orderId: z.string(),
+});
 export const ChangeDeliveryStatusSchema = z.object({
   deliveryStatus: z.enum(["PENDING", "DISPATCHED", "DELIVERED"]),
   orderId: z.string(),

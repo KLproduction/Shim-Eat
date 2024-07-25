@@ -27,6 +27,9 @@ import {
 import { changeDeliveryStatus } from "@/actions/changeDeliveryStatus";
 import { startTransition, useEffect, useState } from "react";
 import { getOrderByOrderID } from "@/data/getOrderByOrderID";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 interface ChangeDeliveryStatusFormProps {
   orderId: string;
@@ -36,6 +39,7 @@ const ChangeDeliveryStatusForm = ({
   orderId,
 }: ChangeDeliveryStatusFormProps) => {
   const [order, setOrder] = useState<TUserOrder | null>(null);
+  const route = useRouter();
   useEffect(() => {
     const fetchProduct = async () => {
       const fetchedProduct = await getOrderByOrderID(orderId);
@@ -49,14 +53,31 @@ const ChangeDeliveryStatusForm = ({
   const form = useForm<z.infer<typeof ChangeDeliveryStatusSchema>>({
     resolver: zodResolver(ChangeDeliveryStatusSchema),
     defaultValues: {
-      deliveryStatus: order?.deliveryStatus,
+      deliveryStatus: order?.deliveryStatus || undefined,
+      orderId: order?.id || undefined,
     },
   });
+
+  useEffect(() => {
+    if (order) {
+      form.reset({
+        deliveryStatus: order.deliveryStatus,
+        orderId: order.id,
+      });
+    }
+  }, [order, form]);
+
   const onSubmit = (values: z.infer<typeof ChangeDeliveryStatusSchema>) => {
     try {
       startTransition(async () => {
         if (values.orderId) {
-          await changeDeliveryStatus(values);
+          await changeDeliveryStatus(values).then((data) => {
+            if (data.error) {
+              toast.error(data.error);
+            }
+            toast.success(data.success);
+            route.refresh();
+          });
         }
       });
     } catch (error) {
@@ -65,48 +86,53 @@ const ChangeDeliveryStatusForm = ({
   };
 
   return (
-    <div>
+    <div className=" flex justify-start">
       <Form {...form}>
-        <form className=" space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-          <FormField
-            control={form.control}
-            name="deliveryStatus"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Delivery Status:</FormLabel>
-                <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder={order?.deliveryStatus} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="PENDING">Pending</SelectItem>
-                        <SelectItem value="DISPATCHED">Dispatched</SelectItem>
-                        <SelectItem value="DELIVERED">Delivered</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="orderId"
-            render={({ field }) => (
-              <FormItem hidden>
-                <FormControl>
-                  <Input {...field} defaultValue={order?.id} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="flex items-center flex-col justify-center gap-3">
+            <FormField
+              control={form.control}
+              name="deliveryStatus"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Delivery Status:</FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder={order?.deliveryStatus} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="PENDING">Pending</SelectItem>
+                          <SelectItem value="DISPATCHED">Dispatched</SelectItem>
+                          <SelectItem value="DELIVERED">Delivered</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="orderId"
+              render={({ field }) => (
+                <FormItem hidden>
+                  <FormControl>
+                    <Input {...field} defaultValue={order?.id} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit" size={"sm"}>
+              Save
+            </Button>
+          </div>
         </form>
       </Form>
     </div>

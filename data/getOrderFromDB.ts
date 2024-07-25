@@ -16,7 +16,7 @@ export const getOrderFromDB = async () => {
       },
     },
     orderBy: {
-      status: "desc",
+      updatedAt: "desc",
     },
   });
   return products;
