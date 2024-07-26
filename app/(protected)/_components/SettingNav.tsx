@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { AiOutlineMenu } from "react-icons/ai";
+import { currentUser } from "@/lib/auth";
 
 const SettingNav = () => {
   const pathname = usePathname();
@@ -27,10 +28,21 @@ const SettingNav = () => {
     setPosition(pathname);
   }, [pathname]);
 
+  const [superAdmin, setSuperAdmin] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const user = await currentUser();
+      if (user?.isSuperAdmin) {
+        setSuperAdmin(!superAdmin);
+      }
+    })();
+  }, []);
+
   return (
-    <MaxWidthWrapper className=" flex sm:justify-center justify-start p-3">
-      <nav className=" bg-secondary hidden sm:flex justify-center items-center p-4 rounded-xl w-auto shadow-sm">
-        <div className=" sm:flex gap-2 hidden">
+    <MaxWidthWrapper className="flex justify-start p-3 sm:justify-center">
+      <nav className="hidden w-auto items-center justify-center rounded-xl bg-secondary p-4 shadow-sm sm:flex">
+        <div className="hidden gap-2 sm:flex">
           <Button
             asChild
             variant={pathname === "/admin" ? "default" : "outline"}
@@ -58,19 +70,14 @@ const SettingNav = () => {
           <Button
             asChild
             variant={pathname === "/admin/superAdmin" ? "default" : "outline"}
+            className={!superAdmin ? "hidden" : ""}
           >
             <Link href="/admin/superAdmin">superAdmin</Link>
-          </Button>
-          <Button
-            asChild
-            variant={pathname === "/admin//table" ? "default" : "outline"}
-          >
-            <Link href="/admin/table">table</Link>
           </Button>
         </div>
       </nav>
 
-      <div className="sm:hidden flex justify-start">
+      <div className="flex justify-start sm:hidden">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant={"outline"} asChild>
@@ -103,6 +110,7 @@ const SettingNav = () => {
               <DropdownMenuRadioItem
                 value="/admin/products"
                 onClick={() => route.push("/admin/superAdmin")}
+                className={!superAdmin ? "hidden" : ""}
               >
                 superAdmin
               </DropdownMenuRadioItem>

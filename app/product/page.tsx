@@ -142,16 +142,18 @@ const ProductPage = () => {
 
   return (
     <div>
-      <MaxWidthWrapper className="flex flex-col items-center justify-center h-full pt-44">
-        <Card className="flex flex-col items-center justify-end m-4 max-w-[600px]">
+      <MaxWidthWrapper className="flex h-full flex-col items-center justify-center pt-44">
+        <Card className="m-4 flex max-w-[600px] flex-col items-center justify-end">
           <CardHeader className="mb-auto">
-            <CardTitle className="text-orange-500">{product.name}</CardTitle>
+            <CardTitle className="mb-10 text-orange-500">
+              {product.name}
+            </CardTitle>
             <CardDescription>{product.description}</CardDescription>
           </CardHeader>
           <CardContent className="flex items-center justify-around">
             <img
               src={product.image || undefined}
-              className="max-w-[250px] h-auto object-cover rounded-xl flex-grow"
+              className="h-auto max-w-[250px] flex-grow rounded-xl object-cover"
             />
           </CardContent>
           {product.category.includes("salad") ||
@@ -177,7 +179,7 @@ const ProductPage = () => {
                             <FormControl>
                               <RadioGroupItem value="standard" />
                             </FormControl>
-                            <FormLabel className="font-normal flex gap-3">
+                            <FormLabel className="flex gap-3 font-normal">
                               Standard:
                               {formatPrice(ADDONSPRICE.size.standard)}
                             </FormLabel>
@@ -186,7 +188,7 @@ const ProductPage = () => {
                             <FormControl>
                               <RadioGroupItem value="large" />
                             </FormControl>
-                            <FormLabel className="font-normal flex gap-3">
+                            <FormLabel className="flex gap-3 font-normal">
                               Large :{formatPrice(ADDONSPRICE.size.large)}
                             </FormLabel>
                           </FormItem>
@@ -215,7 +217,7 @@ const ProductPage = () => {
                             <FormControl>
                               <RadioGroupItem value="brownToast" />
                             </FormControl>
-                            <FormLabel className="font-normal flex gap-3">
+                            <FormLabel className="flex gap-3 font-normal">
                               Brown Toast:
                               {formatPrice(ADDONSPRICE.addOns.brownToast)}
                             </FormLabel>
@@ -224,7 +226,7 @@ const ProductPage = () => {
                             <FormControl>
                               <RadioGroupItem value="redRice" />
                             </FormControl>
-                            <FormLabel className="font-normal flex gap-3">
+                            <FormLabel className="flex gap-3 font-normal">
                               Red Rice :
                               {formatPrice(ADDONSPRICE.addOns.redRice)}
                             </FormLabel>
@@ -233,7 +235,7 @@ const ProductPage = () => {
                             <FormControl>
                               <RadioGroupItem value="potatoSalad" />
                             </FormControl>
-                            <FormLabel className="font-normal flex gap-3">
+                            <FormLabel className="flex gap-3 font-normal">
                               Potato Salad :
                               {formatPrice(ADDONSPRICE.addOns.potatoSalad)}
                             </FormLabel>
@@ -267,7 +269,7 @@ const ProductPage = () => {
                             <FormControl>
                               <RadioGroupItem value="standard" />
                             </FormControl>
-                            <FormLabel className="font-normal flex gap-3">
+                            <FormLabel className="flex gap-3 font-normal">
                               Standard:
                               {formatPrice(ADDONSPRICE.size.standard)}
                             </FormLabel>
@@ -307,7 +309,7 @@ const ProductPage = () => {
             </Form>
           )}
 
-          <CardFooter className="flex flex-col mt-5 gap-2">
+          <CardFooter className="mt-5 flex flex-col gap-2">
             <FormError message={error} />
             <FormSuccess message={success} />
             {product.category.includes("salad") ||

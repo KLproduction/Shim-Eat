@@ -27,5 +27,9 @@ export const config = {
     "/checkout",
     "/stripe/purchase-success",
     "/order",
+    "/admin/order/order-details",
+    "/admin/order",
+    "/admin/products",
+    "/admin/products/product-details",
   ],
 };

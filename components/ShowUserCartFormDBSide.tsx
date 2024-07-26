@@ -40,7 +40,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
         setUserProduct(data);
         const orderTotal = data.items.reduce(
           (acc, item) => acc + (Number(item.itemTotal) || 0),
-          0
+          0,
         );
         setTotal(orderTotal);
       }
@@ -53,7 +53,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
     productId: string,
     sizeOption: Size,
     sideOption: AddOns,
-    newQuantity: number
+    newQuantity: number,
   ) => {
     startTransition(async () => {
       await cartQuantityUpdate(
@@ -61,7 +61,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
         productId,
         sizeOption,
         sideOption,
-        newQuantity
+        newQuantity,
       );
     });
     setUpdateCount((c) => c + 1);
@@ -71,7 +71,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
     cartId: string,
     productId: string,
     sizeOption: Size,
-    sideOption: AddOns
+    sideOption: AddOns,
   ) => {
     startTransition(async () => {
       if (cartId) {
@@ -80,7 +80,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
           cartId,
           productId,
           sizeOption,
-          sideOption
+          sideOption,
         );
 
         setUpdateCount((count) => count + 1);
@@ -92,23 +92,23 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
   };
 
   return (
-    <div className="flex justify-start items-center w-full h-auto">
+    <div className="flex h-auto w-full items-center justify-start">
       <div className="mx-auto p-3">
         {user.id && userProduct?.items.length! > 0 ? (
           <>
             <div>
               {userProduct?.items.map((item, index) => (
                 <div
-                  className="p-3 "
+                  className="p-3"
                   key={`${item?.id}-${item.cartId}-${item?.sizeOption}-${item?.sideOption}`}
                 >
-                  <div className="flex flex-col justify-center gap-4 items-center bg-white rounded-md shadow p-3">
+                  <div className="flex flex-col items-center justify-center gap-4 rounded-md bg-white p-3 shadow">
                     <img
                       src={item?.product?.image || undefined}
-                      className="max-w-[60px] h-auto object-cover rounded-full items-center"
+                      className="h-auto max-w-[60px] items-center rounded-full object-cover"
                     />
                     <div className="flex flex-col items-center gap-2">
-                      <h1 className="text-md font-bold ">
+                      <h1 className="text-md font-bold">
                         {item?.product.name}
                       </h1>
                       <div className="text-sm">
@@ -117,7 +117,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
                           {formatPrice(
                             ADDONSPRICE.size[
                               item?.sizeOption as keyof typeof ADDONSPRICE.size
-                            ]
+                            ],
                           )}
                           )
                         </h2>
@@ -126,7 +126,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
                           {formatPrice(
                             ADDONSPRICE.addOns[
                               item?.sideOption as keyof typeof ADDONSPRICE.addOns
-                            ]
+                            ],
                           )}
                           )
                         </h2>
@@ -135,7 +135,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
 
                     <div className="flex flex-col items-center">
                       <input
-                        className="w-16 border border-zinc-400 rounded-lg text-center"
+                        className="w-16 rounded-lg border border-zinc-400 text-center"
                         type="number"
                         value={item?.quantity!}
                         onChange={(e) =>
@@ -144,7 +144,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
                             item?.product.id!,
                             item?.sizeOption!,
                             item?.sideOption!,
-                            parseInt(e.target.value)
+                            parseInt(e.target.value),
                           )
                         }
                         min={1}
@@ -153,11 +153,11 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
                         Total:{" "}
                         {formatPrice(
                           item?.quantity! *
-                            (item?.product.price! + item?.extraPrice!)
+                            (item?.product.price! + item?.extraPrice!),
                         )}
                       </h1>
                     </div>
-                    <div className="sm:col-span-1 sm:justify-center sm:ml-auto">
+                    <div className="sm:col-span-1 sm:ml-auto sm:justify-center">
                       <Button
                         size={"sm"}
                         onClick={() =>
@@ -165,10 +165,10 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
                             item.cartId,
                             item?.product.id,
                             item?.sizeOption!,
-                            item?.sideOption!
+                            item?.sideOption!,
                           )
                         }
-                        className="m-2 bg-red-500 text-white p-2 rounded"
+                        className="m-2 rounded bg-red-500 p-2 text-white"
                       >
                         Cancel
                       </Button>
@@ -177,12 +177,12 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
                 </div>
               ))}
             </div>
-            <div className=" sticky inset-x-0 bottom-0 bg-white h-30 p-3 w-full border-orange-100 border rounded-lg">
+            <div className="h-30 sticky inset-x-0 bottom-0 w-full rounded-lg border border-orange-100 bg-white p-3">
               <h1>Total: {formatPrice(total)}</h1>
             </div>
           </>
         ) : (
-          <div className="flex flex-col justify-center items-center gap-5 mt-[70%] ">
+          <div className="mt-[70%] flex flex-col items-center justify-center gap-5">
             <h1 className="text-sm">Your shopping cart is empty</h1>
             <Button>
               <Link href={"/menu"}>Continue Shopping</Link>

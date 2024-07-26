@@ -17,171 +17,134 @@ export const ADDONSPRICE = {
 export const products = [
   {
     name: "Garden Delight Steak Salad",
-    description:
-      "Dive into freshness with our Garden Delight Steak Salad! Juicy steak bites, crisp greens, and a sprinkle of seeds create a perfect harmony of flavors and textures, making it a must-try for salad lovers seeking a hearty yet refreshing meal.",
-    image: "https://i.ibb.co/r4YjXMp/Garden-Delight-Steak-Salad.png",
+    image: "https://utfs.io/f/04cdb851-77ba-4d06-9ecc-e1df48d20996-6d8bo9.png",
     category: "salad" as ProductCategory,
     price: 8.99,
+    description:
+      "Fresh greens topped with grilled steak, cherry tomatoes, and a balsamic glaze.",
   },
   {
     name: "Rainbow Tofu Power Bowl",
-    description:
-      "Energize your day with our Rainbow Tofu Power Bowl! Packed with vibrant veggies, protein-rich tofu, and eggs, it's a colorful feast that’s as nutritious as it is delicious. Perfect for fueling your adventures with taste and health!",
-    image: "https://i.ibb.co/RSMnWcN/Rainbow-Tofu-Power-Bowl.png",
+    image: "https://utfs.io/f/6ea94a36-087a-4d4b-b5f6-e13a3f082e15-flccuh.png",
     category: "main" as ProductCategory,
     price: 8.99,
+    description:
+      "Marinated tofu with quinoa, kale, beets, and a citrus dressing.",
   },
   {
     name: "Chickpea Avocado Curry Box",
-    description:
-      "Savor the zest of our Chickpea Avocado Curry Box! A delightful blend of spicy curry, creamy avocado slices, and hearty chickpeas, served over fluffy rice. It’s a tasteful choice for a satisfying lunch that packs a punch of flavor and nutrients.",
-    image: "https://i.ibb.co/b3vBbKw/Chickpea-Avocado-Curry-Box.png",
+    image: "https://utfs.io/f/c097569d-d822-49a3-87a3-767291caa782-jouzt7.png",
     category: "main" as ProductCategory,
     price: 11.99,
+    description: "Creamy chickpea and avocado curry served with jasmine rice.",
   },
   {
     name: "Mediterranean Tuna Pasta Salad",
-    description:
-      "Enjoy a taste of the Mediterranean with our Tuna Pasta Salad! Loaded with flaky tuna, fresh veggies, and twirl-ready pasta, this salad is a delightful mix of textures and flavors, perfect for a light lunch or a satisfying side dish.",
-    image: "https://i.ibb.co/K6W4ZKf/Mediterranean-Tuna-Pasta-Salad.png",
+    image: "https://utfs.io/f/b4e675be-ffad-4ebd-a70e-c12678795bed-676t3h.png",
     category: "salad" as ProductCategory,
     price: 8.99,
+    description:
+      "Cold pasta salad with flaked tuna, olives, and a light olive oil dressing.",
   },
   {
     name: "Avocado Lentil Harvest Salad",
-    description:
-      "Delight in the wholesome goodness of our Avocado Lentil Harvest Salad! A hearty mix of fresh greens, creamy avocado, roasted sweet potatoes, and protein-packed lentils, topped with a sprinkle of pomegranate seeds for a burst of flavor. Perfect for a nourishing meal any time of day!",
-    image: "https://i.ibb.co/ZLj8zr3/Avocado-Lentil-Harvest-Salad.png",
+    image: "https://utfs.io/f/34938dad-6a68-4ede-8be5-5882f1dd2713-l1pwtz.png",
     category: "salad" as ProductCategory,
     price: 8.99,
+    description:
+      "Lentils and avocado with a mix of arugula, nuts, and a lemon vinaigrette.",
   },
   {
     name: "Grilled Asparagus Parmesan Salad",
-    description:
-      "Experience the elegance of our Grilled Asparagus Parmesan Salad! This dish features tender grilled asparagus, crisp mixed greens, and shaved Parmesan, all sprinkled with a nutty crunch. It's a sophisticated salad that's perfect for impressing guests or enjoying a luxurious lunch.",
-    image: "https://i.ibb.co/7rw28bg/Grilled-Asparagus-Parmesan-Salad.png",
+    image: "https://utfs.io/f/927ed394-1e1d-4719-ad5e-52676edfd863-9uvq2w.png",
     category: "salad" as ProductCategory,
     price: 8.99,
+    description:
+      "Grilled asparagus with shaved parmesan, rocket, and a squeeze of lemon.",
   },
   {
     name: "Sesame Pork Bao",
-    description:
-      "Bite into the delightful Sesame Pork Bao! Soft, fluffy bao filled with succulent pork, topped with fresh cucumbers and a sprinkle of sesame seeds. It's a fusion of flavors that's sure to bring a touch of Asian flair to your meal.",
-    image: "https://i.ibb.co/pRrPRgQ/Sesame-Pork-Bao.png",
+    image: "https://utfs.io/f/3c2e38ae-3c38-458f-a6bf-3ceb8172a3c5-elgy8g.png",
     category: "main" as ProductCategory,
     price: 6.99,
+    description:
+      "Soft bao buns filled with sesame-flavored pork and crisp vegetables.",
   },
   {
     name: "Avocado Egg-Toast Supreme",
-    description:
-      "Start your morning right with our Avocado Egg-Toast Supreme! Creamy avocado spread on toasted bread, topped with a perfectly cooked sunny-side-up egg and a sprinkle of chili flakes for a little kick. It's the ultimate breakfast to kickstart your day with energy and flavor.",
-    image: "https://i.ibb.co/BVV1pPK/Avocado-Egg-Toast-Supreme.png",
+    image: "https://utfs.io/f/fe210e39-3d83-48ef-981a-0cae5ee55dc7-agso6z.png",
     category: "main" as ProductCategory,
     price: 5.99,
+    description:
+      "Toasted sourdough with mashed avocado, poached egg, and a sprinkle of chili flakes.",
   },
   {
     name: "Elegant Chicken Skewer Platter",
-    description:
-      "Presenting our Elegant Chicken Skewer Platter — a culinary masterpiece! Enjoy succulent grilled chicken skewers, served with a side of roasted vegetables, vibrant beetroot salad, and a zesty dip. Perfect for those who appreciate a beautifully balanced meal.",
-    image: "https://i.ibb.co/XCT5Fpg/Elegant-Chicken-Skewer-Platter.png",
+    image: "https://utfs.io/f/ccedf4a0-3817-4309-b014-b5efd3bb5d53-y7l2za.png",
     category: "main" as ProductCategory,
     price: 5.99,
+    description:
+      "Grilled chicken skewers served with a peanut dipping sauce and slaw.",
   },
   {
     name: "Fusion Feast Poke Bowl",
-    description:
-      "Explore the flavors of our Fusion Feast Poke Bowl! A delightful mix of shredded chicken, crispy wonton, fresh veggies, and avocado, all brought together with a dash of sesame seeds. It's a unique blend of textures and tastes that promises a culinary adventure in every bite!",
-    image: "https://i.ibb.co/NtZyz4g/Fusion-Feast-Poke-Bowl.png",
+    image: "https://utfs.io/f/8191d520-b7ad-4095-88d9-5a3c5b6565f2-k1ftzk.png",
     category: "main" as ProductCategory,
     price: 6.99,
+    description:
+      "A mix of fresh tuna, rice, avocado, and exotic fruits with a soy-sesame dressing.",
   },
   {
     name: "Asian Noodle Delight",
-    description:
-      "Taste the exotic with our Asian Noodle Delight! This dish combines delicate rice noodles with succulent shrimp, boiled eggs, and crispy toppings, all tossed in a savory sauce. It's a refreshing take on traditional Asian cuisine that's bursting with flavor.",
-    image: "https://i.ibb.co/qCKDjkW/Asian-Noodle-Delight.png",
+    image: "https://utfs.io/f/273882c3-c755-4ac5-a8f7-d7a5d2e4f256-uo7sg0.png",
     category: "main" as ProductCategory,
     price: 4.99,
+    description:
+      "Stir-fried noodles with vegetables and a hint of ginger and soy.",
   },
   {
     name: "Spicy Cucumber Sesame Salad",
-    description:
-      "Refresh your palate with our Spicy Cucumber Sesame Salad! Crisp cucumber slices tossed with sesame seeds, fresh herbs, and a kick of chili to spice things up. This light and flavorful salad is the perfect side to any meal, or a refreshing snack on its own.",
-    image: "https://i.ibb.co/9Wxhvw8/Spicy-Cucumber-Sesame-Salad.png",
+    image: "https://utfs.io/f/3e8382b8-5528-488e-ac83-f177a31b1212-ymt3cb.png",
     category: "salad" as ProductCategory,
     price: 4.99,
+    description: "Crisp cucumber salad with a spicy sesame dressing.",
   },
   {
     name: "Citrus Bliss Smoothie",
-    description:
-      "Quench your thirst with our Citrus Bliss Smoothie! A vibrant blend of fresh lemons and limes, this smoothie is not only refreshing but also packed with a zesty punch that will wake up your taste buds and revitalize your day. Perfect for a sunny afternoon or a healthy morning start!",
-    image: "https://i.ibb.co/WgKYwT3/Citrus-Bliss-Smoothie.png",
+    image: "https://utfs.io/f/523692c7-5039-4798-84e2-8f2a6ab57d2f-szggxj.png",
     category: "drinks" as ProductCategory,
     price: 4.99,
+    description:
+      "A refreshing blend of orange, lemon, and lime juices with a touch of mint.",
   },
   {
     name: "Tropical Mango Smoothie",
-    description:
-      "Indulge in the lush flavors of our Tropical Mango Smoothie! Made with ripe, juicy mangoes, this smoothie is a sweet retreat into a tropical paradise. Perfect for cooling off on a hot day or for a fruity breakfast boost.",
-    image: "https://i.ibb.co/k48VkKT/Tropical-Mango-Smoothie.png",
+    image: "https://utfs.io/f/19e22c31-fab5-4abc-a951-5896444202fe-n5kdc4.png",
     category: "drinks" as ProductCategory,
     price: 4.99,
+    description: "Ripe mangoes blended with coconut milk and a dash of lime.",
   },
   {
     name: "Strawberry Lime Mojito",
-    description:
-      "Sip on the sweet and tangy sensation of our Strawberry Lime Mojito! This refreshing drink combines the juiciness of strawberries with the zesty punch of lime, topped with a hint of mint for a cooling finish. It's the perfect blend for a vibrant and invigorating refreshment.",
-    image: "https://i.ibb.co/Fq8N8Mt/Strawberry-Lime-Mojito.png",
+    image: "https://utfs.io/f/9bd15f04-85a1-4f38-9d14-149662bb519e-sd7ai2.png",
     category: "drinks" as ProductCategory,
     price: 4.99,
+    description:
+      "A non-alcoholic mojito with fresh strawberries, lime, and sparkling water.",
   },
   {
     name: "Mango Magic Smoothie",
-    description:
-      "Delve into the lush sweetness of our Mango Magic Smoothie! This creamy delight is crafted from ripe mangoes, blending their rich, tropical flavor with a silky smooth texture. A healthy treat that's perfect for mango lovers looking to enjoy a piece of paradise in every sip.",
-    image: "https://i.ibb.co/6mCr0NB/Mango-Magic-Smoothie.png",
+    image: "https://utfs.io/f/a93d8cc5-e3b5-4ccf-802b-a5dea947592f-2z4rf.png",
     category: "drinks" as ProductCategory,
     price: 4.99,
+    description: "A creamy smoothie made with mango, banana, and yogurt.",
   },
   {
     name: "Berry Breakfast Smoothie",
-    description:
-      "Jumpstart your morning with our Berry Breakfast Smoothie! Packed with mixed berries, a splash of yogurt, and a sprinkle of crunchy granola, this smoothie is a deliciously balanced meal in a glass. Ideal for a nutritious start or a sweet midday pick-me-up.",
-    image: "https://i.ibb.co/bR2LHgj/Berry-Breakfast-Smoothie.png",
+    image: "https://utfs.io/f/0f974546-a61c-45e9-b7f2-290b017424c4-1d6eu1.png",
     category: "drinks" as ProductCategory,
     price: 5.99,
+    description:
+      "A nutritious smoothie with mixed berries, oats, and almond milk.",
   },
 ];
-
-export async function createProducts() {
-  try {
-    for (const product of products) {
-      const existingProduct = await db.product.findFirst({
-        where: {
-          name: product.name,
-        },
-      });
-
-      if (!existingProduct) {
-        await db.product.createMany({
-          data: products,
-          skipDuplicates: true, // This prevents errors in case some products already exist
-        });
-        return { message: "Products successfully created." };
-      }
-    }
-  } catch (error) {
-    console.error(error);
-    return { message: "Error creating products:" };
-  }
-}
-
-export async function deleProducts() {
-  try {
-    await db.product.deleteMany();
-    return { message: "Products successfully deleted." };
-  } catch (error) {
-    console.error(error);
-    return { message: "Error deleting products:" };
-  }
-}

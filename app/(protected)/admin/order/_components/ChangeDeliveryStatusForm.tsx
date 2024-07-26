@@ -25,7 +25,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { changeDeliveryStatus } from "@/actions/changeDeliveryStatus";
-import { startTransition, useEffect, useState } from "react";
+import { startTransition, useEffect, useState, useTransition } from "react";
 import { getOrderByOrderID } from "@/data/getOrderByOrderID";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -39,6 +39,7 @@ const ChangeDeliveryStatusForm = ({
   orderId,
 }: ChangeDeliveryStatusFormProps) => {
   const [order, setOrder] = useState<TUserOrder | null>(null);
+  const [pending, startTransition] = useTransition();
   const route = useRouter();
   useEffect(() => {
     const fetchProduct = async () => {
@@ -76,7 +77,6 @@ const ChangeDeliveryStatusForm = ({
               toast.error(data.error);
             }
             toast.success(data.success);
-            route.refresh();
           });
         }
       });
@@ -86,10 +86,10 @@ const ChangeDeliveryStatusForm = ({
   };
 
   return (
-    <div className=" flex justify-start">
+    <div className="flex justify-start">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex items-center flex-col justify-center gap-3">
+          <div className="flex flex-col items-center justify-center gap-3">
             <FormField
               control={form.control}
               name="deliveryStatus"
@@ -129,7 +129,7 @@ const ChangeDeliveryStatusForm = ({
                 </FormItem>
               )}
             />
-            <Button type="submit" size={"sm"}>
+            <Button type="submit" size={"sm"} disabled={pending}>
               Save
             </Button>
           </div>

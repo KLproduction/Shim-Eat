@@ -24,8 +24,8 @@ const ProductCategoryMenu = ({
 }: TProductCategoryMenu) => {
   return (
     <>
-      <div className="flex items-center justify-start ml-8">
-        <h1 className="text-5xl font-bold text-green-500 my-5">
+      <div className="ml-8 flex items-center justify-start">
+        <h1 className="my-5 text-5xl font-bold text-green-500">
           {categoryName.toUpperCase()}
         </h1>
       </div>
@@ -33,20 +33,22 @@ const ProductCategoryMenu = ({
         {menuItems?.map((product) => (
           <Card
             key={product.name}
-            className="flex flex-col items-center justify-end m-4 duration-500"
+            className="m-4 flex flex-col items-center justify-end duration-500"
           >
             <CardHeader className="mb-auto">
-              <CardTitle className="text-orange-500">{product.name}</CardTitle>
+              <CardTitle className="mb-10 text-orange-500">
+                {product.name}
+              </CardTitle>
               <CardDescription>{product.description}</CardDescription>
             </CardHeader>
             <CardContent>
               <img
                 src={product.image || undefined}
-                className="max-w-[250px] h-auto object-cover rounded-xl flex-grow"
+                className="h-auto max-w-[250px] flex-grow rounded-xl object-cover"
               />
             </CardContent>
             <CardFooter>
-              <Button asChild className="hover:scale-110 duration-500">
+              <Button asChild className="duration-500 hover:scale-110">
                 <Link
                   href={`http://localhost:3000/product?product=${product.id}`}
                   className="flex gap-5"

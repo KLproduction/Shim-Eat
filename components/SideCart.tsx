@@ -12,10 +12,6 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "./ui/button";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-
-import ShowUserCartFromStoageSide, {
-  UserT,
-} from "./ShowUserCartFormStoageSide";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
 import { useCurrentUser } from "@/hooks/use-current-user";
@@ -57,7 +53,7 @@ const SideCart = () => {
               <SheetTitle>My Shopping Basket</SheetTitle>
               <SheetDescription>Enjoy shopping!</SheetDescription>
             </SheetHeader>
-            <ScrollArea className="w-full h-[50%] sm:h-[70%] rounded-md border">
+            <ScrollArea className="h-[50%] w-full rounded-md border sm:h-[70%]">
               <div>
                 <ShowUserCartFromDBSide user={user!} />
               </div>

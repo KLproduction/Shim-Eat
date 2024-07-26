@@ -82,7 +82,7 @@ export const generateDummyUserOrderToDB = async () => {
 
   const orderPrice = cartItems.reduce(
     (totalPrice, item) => totalPrice + item.itemTotal,
-    0
+    0,
   );
   const formattedPrice = parseFloat(orderPrice.toFixed(2));
   function generateDummyUKAddress() {
@@ -142,6 +142,17 @@ export const generateDummyUserOrderToDB = async () => {
       status: "PAID",
       clientEmail: user?.email,
       amountReceived: amountReceived,
+    },
+  });
+
+  const existingUser = await db.user.findUnique({
+    where: { id: user?.id },
+  });
+
+  await db.user.update({
+    where: { id: existingUser?.id },
+    data: {
+      totalSpend: existingUser?.totalSpend! + amountReceived,
     },
   });
 

@@ -33,35 +33,38 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!);
 
 const CheckOutForm = ({ products, clientSecret }: CheckOutFormProps) => {
   return (
-    <div className="max-w-5xl w-full mx-auto space-y-8">
-      <div key={products.id}>
+    <div className="mx-auto w-full max-w-5xl space-y-8">
+      <div>
         {products.orderItems.map((product) => (
-          <div className="flex flex-col items-center gap-5 m-5">
-            <div className=" grid grid-cols-6 items-center gap-5">
+          <div
+            className="m-5 flex flex-col items-center gap-5"
+            key={product.id}
+          >
+            <div className="grid grid-cols-6 items-center gap-5">
               <img
                 src={product.product.image || undefined}
                 alt=""
-                className="max-w-[100px] rounded-full col-span-1"
+                className="col-span-1 max-w-[100px] rounded-full"
               />
-              <h1 className=" col-span-2">{product.product.name}</h1>
+              <h1 className="col-span-2">{product.product.name}</h1>
               <div className="flex flex-col justify-start">
                 <h3>{product.sizeOption}</h3>
                 <h3>{product.sideOption}</h3>
               </div>
-              <h1 className=" col-span-2">
+              <h1 className="col-span-2">
                 Price:
                 {formatPrice(
-                  (product.price + product.extraPrice) * product.quantity
+                  (product.price + product.extraPrice) * product.quantity,
                 )}
               </h1>
             </div>
           </div>
         ))}
-        <h1 className="text-xl flex justify-end">
+        <h1 className="flex justify-end text-xl">
           Order Total:{formatPrice(products.orderPrice)}{" "}
         </h1>
       </div>
-      <div className="flex gap-4 items-center"></div>
+      <div className="flex items-center gap-4"></div>
       <Elements options={{ clientSecret }} stripe={stripePromise}>
         <Form orderPrice={products.orderPrice} />
       </Elements>
@@ -107,11 +110,11 @@ const Form = ({ orderPrice }: FormProps) => {
         </CardDescription>
         <CardContent>
           <PaymentElement />
-          <div className=" my-4">
+          <div className="my-4">
             <LinkAuthenticationElement />
           </div>
         </CardContent>
-        <CardFooter className="flex justify-center items-center">
+        <CardFooter className="flex items-center justify-center">
           <Button
             type="submit"
             className="w-full"

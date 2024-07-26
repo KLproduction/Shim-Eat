@@ -35,6 +35,7 @@ import {
 } from "@/components/ui/select";
 import { UserRole } from "@prisma/client";
 import { ExtenderUser } from "@/next-auth";
+import { currentUser } from "@/lib/auth";
 
 interface SettingFormProps {
   user: ExtenderUser;
@@ -45,12 +46,16 @@ const Settingform = ({ user }: SettingFormProps) => {
   const { update } = useSession();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
+  const route = useRouter();
 
-  const checkSession = async () => {
-    await checkServerSession();
-  };
-
-  checkSession();
+  useEffect(() => {
+    (async () => {
+      const user = await currentUser();
+      if (!user?.isSuperAdmin) {
+        route.push("/admin");
+      }
+    })();
+  }, []);
 
   const form = useForm<z.infer<typeof SettingSchema>>({
     resolver: zodResolver(SettingSchema),
@@ -83,11 +88,11 @@ const Settingform = ({ user }: SettingFormProps) => {
   };
 
   return (
-    <Card className=" sm:w-[600px] w-[300px]">
+    <Card className="w-[300px] sm:w-[600px]">
       <CardHeader>Setting</CardHeader>
       <CardContent>
         <Form {...form}>
-          <form className=" space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+          <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-4">
               <FormField
                 control={form.control}
@@ -179,8 +184,8 @@ const Settingform = ({ user }: SettingFormProps) => {
                   control={form.control}
                   name="isTwoFactorEnabled"
                   render={({ field }) => (
-                    <FormItem className=" flex items-center justify-between rounded-lg border p-3 shadow-sm">
-                      <div className=" space-y-0.5">
+                    <FormItem className="flex items-center justify-between rounded-lg border p-3 shadow-sm">
+                      <div className="space-y-0.5">
                         <FormLabel>Two Factor Authentication</FormLabel>
                         <FormDescription>
                           Enable two factor Authenticationfor your account
@@ -225,7 +230,7 @@ const Settingform = ({ user }: SettingFormProps) => {
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
-            <div className=" flex justify-center">
+            <div className="flex justify-center">
               <Button type="submit">Save</Button>
             </div>
           </form>

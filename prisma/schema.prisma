@@ -59,7 +59,8 @@ model User {
   accounts              Account[]
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
-  todos                 Todo[]
+  isSuperAdmin          Boolean                @default(false)
+  totalSpend            Float                  @default(0)
   Cart                  Cart?
   userOrder             UserOrder[]
 
@@ -136,16 +137,6 @@ model UserOrder {
   user            User           @relation(fields: [userId], references: [id])
 
   @@map("orders")
-}
-
-model Todo {
-  id       String   @id @default(cuid())
-  content  String
-  postDate DateTime @default(now())
-  userId   String   @map("user_id")
-  user     User     @relation(fields: [userId], references: [id])
-
-  @@map("todos")
 }
 
 model Account {

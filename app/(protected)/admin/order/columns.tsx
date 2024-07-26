@@ -31,13 +31,13 @@ import {
 } from "@/components/ui/dialog";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Card } from "@/components/ui/card";
+import { NavigateButton } from "./_components/NavigateButton";
 
 export const columns: ColumnDef<TUserOrder>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
       const order = row.original;
-      const route = useRouter();
 
       return (
         <DropdownMenu>
@@ -49,12 +49,13 @@ export const columns: ColumnDef<TUserOrder>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() =>
-                route.push(`/admin/order/order-details?order=${order.id}`)
-              }
-            >
-              <span className="text-orange-500">View order details</span>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="flex justify-start">
+              <NavigateButton
+                to={`/admin/order/order-details?order=${order.id}`}
+              >
+                <span className="text-orange-500">View order details</span>
+              </NavigateButton>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
@@ -82,7 +83,7 @@ export const columns: ColumnDef<TUserOrder>[] = [
           {isSortedAsc === "asc" && <AiOutlineCaretUp />}
           {isSortedAsc === "desc" && <AiOutlineCaretDown />}
           {!isSortedAsc && (
-            <div className=" rotate-">
+            <div className="rotate-">
               <BsChevronExpand />
             </div>
           )}
@@ -105,7 +106,7 @@ export const columns: ColumnDef<TUserOrder>[] = [
             column.toggleSorting(column.getIsSorted() === "asc");
           }}
         >
-          <div className="flex gap-1 items-center justify-center">
+          <div className="flex items-center justify-center gap-1">
             <div>Status</div>
             <div>
               {isSortedAsc === "asc" && <AiOutlineCaretUp />}
@@ -123,10 +124,10 @@ export const columns: ColumnDef<TUserOrder>[] = [
           <span
             className={
               data === "COMPLETE"
-                ? "text-green-500 font-bold"
+                ? "font-bold text-green-500"
                 : data === "CANCELLED"
-                ? "text-red-500 font-bold"
-                : ""
+                  ? "font-bold text-red-500"
+                  : ""
             }
           >
             {data}
@@ -146,7 +147,7 @@ export const columns: ColumnDef<TUserOrder>[] = [
             column.toggleSorting(column.getIsSorted() === "asc");
           }}
         >
-          <div className="flex justify-start gap-1 items-center">
+          <div className="flex items-center justify-start gap-1">
             <div>Delivery Status</div>
             <div>
               {isSortedAsc === "asc" && <AiOutlineCaretUp />}
@@ -164,10 +165,10 @@ export const columns: ColumnDef<TUserOrder>[] = [
           <span
             className={
               data === "DELIVERED"
-                ? "text-green-500 font-bold"
+                ? "font-bold text-green-500"
                 : data === "DISPATCHED"
-                ? "text-orange-500 font-bold"
-                : ""
+                  ? "font-bold text-orange-500"
+                  : ""
             }
           >
             {data}
@@ -187,7 +188,7 @@ export const columns: ColumnDef<TUserOrder>[] = [
             column.toggleSorting(column.getIsSorted() === "asc");
           }}
         >
-          <div className="flex justify-start gap-1 items-center">
+          <div className="flex items-center justify-start gap-1">
             <div>First Create</div>
             <div>
               {isSortedAsc === "asc" && <AiOutlineCaretUp />}
@@ -236,7 +237,7 @@ export const columns: ColumnDef<TUserOrder>[] = [
             column.toggleSorting(column.getIsSorted() === "asc");
           }}
         >
-          <div className="flex justify-start gap-1 items-center">
+          <div className="flex items-center justify-start gap-1">
             <div>Lastest Update</div>
             <div>
               {isSortedAsc === "asc" && <AiOutlineCaretUp />}

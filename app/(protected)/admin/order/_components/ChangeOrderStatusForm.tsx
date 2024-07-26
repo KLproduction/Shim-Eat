@@ -25,7 +25,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { startTransition, useEffect, useState } from "react";
+import { startTransition, useEffect, useState, useTransition } from "react";
 import { getOrderByOrderID } from "@/data/getOrderByOrderID";
 import { changeOrderStatus } from "@/actions/changeOrderStatus";
 import { toast } from "sonner";
@@ -38,6 +38,7 @@ interface ChangeStatusFormProps {
 
 const ChangeOrderStatusForm = ({ orderId }: ChangeStatusFormProps) => {
   const [order, setOrder] = useState<TUserOrder | null>(null);
+  const [pending, startTransition] = useTransition();
   const route = useRouter();
   useEffect(() => {
     const fetchProduct = async () => {
@@ -68,7 +69,6 @@ const ChangeOrderStatusForm = ({ orderId }: ChangeStatusFormProps) => {
   }, [order, form]);
 
   const onSubmit = (values: z.infer<typeof ChangeOrderStatusSchema>) => {
-    console.log("Submitting form", values);
     try {
       startTransition(async () => {
         if (values.orderId) {
@@ -77,7 +77,6 @@ const ChangeOrderStatusForm = ({ orderId }: ChangeStatusFormProps) => {
               toast.error(data.error);
             }
             toast.success(data.success);
-            route.refresh();
           });
         }
       });
@@ -91,7 +90,7 @@ const ChangeOrderStatusForm = ({ orderId }: ChangeStatusFormProps) => {
       <div></div>
       <Form {...form}>
         <form
-          className="flex items-center flex-col justify-center gap-3"
+          className="flex flex-col items-center justify-center gap-3"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <FormField
@@ -135,7 +134,9 @@ const ChangeOrderStatusForm = ({ orderId }: ChangeStatusFormProps) => {
             )}
           />
           <div>
-            <Button size={"sm"}>Save</Button>
+            <Button size={"sm"} disabled={pending}>
+              Save
+            </Button>
           </div>
         </form>
       </Form>

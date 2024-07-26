@@ -30,7 +30,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { getOrderByOrderID } from "@/data/getOrderByOrderID";
 import ChangeDeliveryStatusForm from "../_components/ChangeDeliveryStatusForm";
-import { DeliveryStatus, OrderStatus } from "@prisma/client";
+import { DeliveryStatus, OrderStatus, Product } from "@prisma/client";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 import ChangeOrderStatusForm from "../_components/ChangeOrderStatusForm";
@@ -42,26 +42,26 @@ const OrderPage = () => {
   const [product, setProduct] = useState<TUserOrder | null>();
   const searchParams = useSearchParams();
   const orderId = searchParams.get("order");
-  const [orderStatus, setOrderStatus] = useState<OrderStatus | null>();
   const [pending, startTransition] = useTransition();
   const route = useRouter();
 
   useEffect(() => {
     (async () => {
       if (orderId) {
-        const products = await getOrderByOrderID(orderId);
-        setProduct(products);
-        setOrderStatus(products?.status);
+        const data = await getOrderByOrderID(orderId);
+        setProduct(data);
       }
     })();
   }, []);
 
   if (!product) {
     return (
-      <div className="flex flex-col justify-center items-center min-h-full gap-3">
+      <div className="flex min-h-full flex-col items-center justify-center gap-3">
         <MySpinner />
         <Button asChild variant={"link"} size={"sm"}>
-          <Link href={"/"}>Back</Link>
+          <div className="mt-10">
+            <Link href={"/admin/order"}>Back</Link>
+          </div>
         </Button>
       </div>
     );
@@ -78,9 +78,9 @@ const OrderPage = () => {
   };
 
   return (
-    <MaxWidthWrapper className="flex justify-center flex-col gap-5">
+    <MaxWidthWrapper className="flex flex-col justify-center gap-5">
       <div className="flex justify-center p-5">
-        <h1 className=" font-bold text-orange-500 text-3xl">Order Details</h1>
+        <h1 className="text-3xl font-bold text-orange-500">Order Details</h1>
       </div>
       <Card className="m-5 p-5">
         <div className="flex justify-end">
@@ -88,11 +88,11 @@ const OrderPage = () => {
             <DialogTrigger className="flex justify-end" asChild>
               <Button variant={"destructive"}>Delete</Button>
             </DialogTrigger>
-            <DialogContent className="p-0 w-auto h-[150px] bg-white bg-transparent border-none shadow-lg">
+            <DialogContent className="h-[150px] w-auto border-none bg-transparent bg-white p-0 shadow-lg">
               <Card>
                 <DialogHeader>
                   <DialogTitle>
-                    <div className="p-5 mt-6 flex items-center justify-center gap-3 text-red-700 border-red-700">
+                    <div className="mt-6 flex items-center justify-center gap-3 border-red-700 p-5 text-red-700">
                       <ExclamationTriangleIcon />
                       Warning: Deleted Order Data is Unrecoverable
                     </div>
@@ -100,7 +100,7 @@ const OrderPage = () => {
                   <DialogDescription></DialogDescription>
                 </DialogHeader>
                 <DialogTrigger asChild>
-                  <div className="flex items-center justify-center gap-5 my-auto">
+                  <div className="my-auto flex items-center justify-center gap-5">
                     <Button variant={"outline"}>Cancel</Button>
                     <Button
                       onClick={() => onClickDeleteHandler(product.id)}
@@ -119,9 +119,9 @@ const OrderPage = () => {
 
         {product && (
           <div>
-            <div className=" flex justify-center min-h-full flex-col text-md text-zinc-500 font-bold p-3">
-              <div>Ordered:</div>
-              <div className=" flex justify-between">
+            <div className="text-md flex min-h-full flex-col justify-center p-3 font-bold text-zinc-500">
+              <div>Order:</div>
+              <div className="flex justify-between">
                 <div className="flex gap-6">
                   <div>
                     {`${product.updatedAt.getDate()}/${
@@ -129,41 +129,51 @@ const OrderPage = () => {
                     }/${product.updatedAt.getFullYear()}`}
                   </div>
                   <div>
-                    {`${product.updatedAt.getHours()}:${product.updatedAt.getMinutes()}`}
+                    {`${product.updatedAt.getHours()}:${product.updatedAt.getMinutes().toString().padStart(2, "0")}`}
                   </div>
                 </div>
                 <div>{formatPrice(product.orderPrice)}</div>
               </div>
             </div>
 
-            <div className="flex justify-between p-3 ">
-              <div className="text-zinc-500 font-bold">
+            <div className="flex justify-between p-3">
+              <div className="font-bold text-zinc-500">
                 Order reference: {product?.id}
               </div>
-              <div className={`text-green-500 font-bold`}>{product.status}</div>
+              <span
+                className={
+                  product.status === "PENDING"
+                    ? "text-orange-500"
+                    : product.status === "CANCELLED"
+                      ? "text-red-500"
+                      : "text-green-500"
+                }
+              >
+                {product.status}
+              </span>
             </div>
 
-            <div className="max-w-5xl w-full mx-auto space-y-8">
+            <div className="mx-auto w-full max-w-5xl space-y-8">
               <div>
                 {product?.orderItems.map((product) => (
                   <Card
-                    className="grid grid-cols-1 items-center justify-around gap-5 m-5 p-8"
+                    className="m-5 grid grid-cols-1 items-center justify-around gap-5 p-8"
                     key={product.id}
                   >
-                    <div className="flex flex-col sm:grid sm:grid-cols-2 items-center gap-5">
+                    <div className="flex flex-col items-center gap-5 sm:grid sm:grid-cols-2">
                       <img
                         src={product.product.image || undefined}
                         alt=""
-                        className="max-w-[100px] rounded-full col-span-1"
+                        className="col-span-1 max-w-[100px] rounded-full"
                       />
-                      <h1 className=" col-span-1">{product.product.name}</h1>
-                      <div className="text-sm col-span-1">
+                      <h1 className="col-span-1">{product.product.name}</h1>
+                      <div className="col-span-1 text-sm">
                         <h2>
                           Size: {product?.sizeOption?.toUpperCase()} <br />+ (
                           {formatPrice(
                             ADDONSPRICE.size[
                               product?.sizeOption as keyof typeof ADDONSPRICE.size
-                            ]
+                            ],
                           )}
                           )
                         </h2>
@@ -173,7 +183,7 @@ const OrderPage = () => {
                           {formatPrice(
                             ADDONSPRICE.addOns[
                               product?.sideOption as keyof typeof ADDONSPRICE.addOns
-                            ]
+                            ],
                           )}
                           )
                         </h2>
@@ -181,29 +191,29 @@ const OrderPage = () => {
                       <h1 className="col-span-1">
                         Quantity: {product.quantity}
                       </h1>
-                      <h1 className=" col-span-2 ml-auto">
+                      <h1 className="col-span-2 ml-auto">
                         Price:
                         {formatPrice(
                           (product.price + product.extraPrice) *
-                            product.quantity
+                            product.quantity,
                         )}
                       </h1>
                     </div>
                   </Card>
                 ))}
-                <h2 className="text-xl flex justify-end text-zinc-600">
+                <h2 className="flex justify-end text-xl text-zinc-600">
                   Order Total:{formatPrice(product?.orderPrice!)}{" "}
                 </h2>
               </div>
             </div>
-            <Card className="mt-5 justify-center grid">
+            <Card className="mt-5 grid justify-center">
               <CardHeader>
                 <CardTitle>Order Details</CardTitle>
                 <CardDescription>Order ID: {product.id}</CardDescription>
                 <CardDescription>User ID: {product.userId}</CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col gap-3">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   <div>
                     <Label>Email:</Label>
                     <h2 className="text-zinc-600">{product.clientEmail}</h2>
@@ -239,7 +249,7 @@ const OrderPage = () => {
                     </h2>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   <ChangeDeliveryStatusForm orderId={product.id} />
                   <ChangeOrderStatusForm orderId={product.id} />
                 </div>
@@ -248,7 +258,12 @@ const OrderPage = () => {
           </div>
         )}
         <div className="flex justify-center p-5">
-          <Button asChild variant={"outline"} size={"lg"}>
+          <Button
+            asChild
+            variant={"outline"}
+            size={"lg"}
+            onClick={() => route.refresh()}
+          >
             <Link href={"/admin/order"}>Back</Link>
           </Button>
         </div>

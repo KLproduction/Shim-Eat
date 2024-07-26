@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
   const event = stripe.webhooks.constructEvent(
     await req.text(),
     req.headers.get("stripe-signature") as string,
-    process.env.STRIPE_WEBHOOK_SECRET as string
+    process.env.STRIPE_WEBHOOK_SECRET as string,
   );
 
   if (event.type === "charge.succeeded") {
@@ -56,6 +56,20 @@ export async function POST(req: NextRequest) {
       });
 
       if (userCart) {
+        const existingUser = await db.user.findUnique({
+          where: {
+            id: userCart.userId,
+          },
+        });
+
+        await db.user.update({
+          where: {
+            id: existingUser?.id,
+          },
+          data: {
+            totalSpend: existingUser?.totalSpend! + pricePaid,
+          },
+        });
         await db.cartItem.deleteMany({
           where: { cartId: userCart.id },
         });

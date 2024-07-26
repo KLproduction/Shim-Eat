@@ -1,15 +1,29 @@
 "use client";
 
+import { createAllProducts } from "@/actions/createAllProduct";
+import { deleteAllProduct } from "@/actions/deleteAllProducts";
 import { deleteAlluserOrder } from "@/actions/deleteAlluserOrder";
 import { Button } from "@/components/ui/button";
 import { generateDummyUserOrderToDB } from "@/data/generateDummyUserOrderToDB";
 import { generateDummyUserToDB } from "@/data/generateDummyUserToDB";
-import { createProducts, deleProducts } from "@/data/products";
-import { startTransition, useTransition } from "react";
+import { currentUser } from "@/lib/auth";
+import { ExtenderUser } from "@/next-auth";
+import { useRouter } from "next/navigation";
+import { useEffect, useState, useTransition } from "react";
 import { toast } from "sonner";
 
-const superAdminPage = () => {
+const SuperAdminPage = () => {
   const [pending, startTransition] = useTransition();
+  const route = useRouter();
+  useEffect(() => {
+    (async () => {
+      const user = await currentUser();
+      if (!user?.isSuperAdmin) {
+        route.push("/admin");
+      }
+    })();
+  }, []);
+
   const generateDummyOrder = () => {
     startTransition(async () => {
       await generateDummyUserOrderToDB().then((data) => {
@@ -21,7 +35,7 @@ const superAdminPage = () => {
   };
   const createProudct = () => {
     startTransition(async () => {
-      await createProducts().then((data) => {
+      await createAllProducts().then((data) => {
         if (data?.message) {
           toast.success(data.message);
         }
@@ -30,7 +44,7 @@ const superAdminPage = () => {
   };
   const deleteProudct = () => {
     startTransition(async () => {
-      await deleProducts().then((data) => {
+      await deleteAllProduct().then((data) => {
         if (data?.message) {
           toast.success(data.message);
         }
@@ -67,7 +81,7 @@ const superAdminPage = () => {
       <Button onClick={() => createUser()} disabled={pending}>
         Create Dummy User
       </Button>
-      <div className=" border-b-2 border-zinc-600" />
+      <div className="border-b-2 border-zinc-600" />
       <Button
         variant={"destructive"}
         onClick={() => deleteProudct()}
@@ -86,4 +100,4 @@ const superAdminPage = () => {
   );
 };
 
-export default superAdminPage;
+export default SuperAdminPage;

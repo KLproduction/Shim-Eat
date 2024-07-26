@@ -1,5 +1,4 @@
 import ShowUserCartFromDB from "@/components/ShowUserCartFormDB";
-import ShowUserCartFromStoage from "@/components/ShowUserCartFormStoage";
 import { currentUser } from "@/lib/auth";
 
 import React from "react";
