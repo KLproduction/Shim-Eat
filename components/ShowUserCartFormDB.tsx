@@ -25,7 +25,7 @@ export type UserT = {
 
 const ShowUserCartFromDB = ({ user }: UserT) => {
   const [pending, startTransition] = useTransition();
-  const [updateCount, setUpdateCount] = useState(0);
+  const [updateCount, setUpdateCount] = useState<number>(0);
   const [userProduct, setUserProduct] = useState<userCart>();
   const [total, setTotal] = useState(0);
 
@@ -201,7 +201,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
               ))}
               <div className="flex items-center justify-between p-3">
                 <h1>Total:{formatPrice(total)}</h1>
-                <AddCartitemToOrderBtn orderPrice={total as number} />
+                {total > 0 && <AddCartitemToOrderBtn orderPrice={total || 0} />}
               </div>
             </div>
           </>

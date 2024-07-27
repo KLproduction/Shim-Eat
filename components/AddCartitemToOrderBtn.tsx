@@ -10,10 +10,10 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 interface AddCartitemToOrderBtnProps {
-  orderPrice: number;
+  orderPrice?: number;
 }
 
-const AddCartitemToOrderBtn = ({ orderPrice }: AddCartitemToOrderBtnProps) => {
+const AddCartitemToOrderBtn = (props: AddCartitemToOrderBtnProps) => {
   const [data, setData] = useState<userCart | null>();
   const route = useRouter();
 
@@ -29,17 +29,19 @@ const AddCartitemToOrderBtn = ({ orderPrice }: AddCartitemToOrderBtnProps) => {
   const onClickhandler = async () => {
     if (data) {
       startTransition(async () => {
-        await addCartToOrder(orderPrice as number).then((data) => {
-          if (data?.error) {
-            toast.error(data.error);
-            console.log(data.error);
-          }
-          if (data?.success) {
-            console.log(data.success);
-            console.log(data.orderId);
-            route.push(`/checkout/${data.orderId}`);
-          }
-        });
+        if (props.orderPrice) {
+          await addCartToOrder(props.orderPrice).then((data) => {
+            if (data?.error) {
+              toast.error(data.error);
+              console.log(data.error);
+            }
+            if (data?.success) {
+              console.log(data.success);
+              console.log(data.orderId);
+              route.push(`/checkout/${data.orderId}`);
+            }
+          });
+        }
       });
     }
   };
