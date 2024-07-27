@@ -9,7 +9,11 @@ import { addCartToOrder } from "@/actions/addCartToOrder";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-const AddCartitemToOrderBtn = () => {
+interface AddCartitemToOrderBtnProps {
+  orderPrice: number;
+}
+
+const AddCartitemToOrderBtn = ({ orderPrice }: AddCartitemToOrderBtnProps) => {
   const [data, setData] = useState<userCart | null>();
   const route = useRouter();
 
@@ -25,7 +29,7 @@ const AddCartitemToOrderBtn = () => {
   const onClickhandler = async () => {
     if (data) {
       startTransition(async () => {
-        await addCartToOrder([data]).then((data) => {
+        await addCartToOrder(orderPrice as number).then((data) => {
           if (data?.error) {
             toast.error(data.error);
             console.log(data.error);
@@ -33,7 +37,7 @@ const AddCartitemToOrderBtn = () => {
           if (data?.success) {
             console.log(data.success);
             console.log(data.orderId);
-            route.push("/checkout");
+            route.push(`/checkout/${data.orderId}`);
           }
         });
       });

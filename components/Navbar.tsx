@@ -22,6 +22,7 @@ import GitSignInBtn from "./auth/GitSignInBtn";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { ExtenderUser } from "@/next-auth";
 import { AiOutlineGoogle } from "react-icons/ai";
+import ShowUserCartFromDBSideTest from "./ShowUserCartFormDBSideTest";
 
 const navList = [
   {
@@ -42,13 +43,13 @@ const Navbar = async () => {
   const user = await currentUser();
 
   return (
-    <nav className="sticky z-[9999] h-30 inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
+    <nav className="h-30 sticky inset-x-0 top-0 z-[9999] w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
       <MaxWidthWrapper>
         <div className="flex items-center justify-between px-4 text-lg">
           <div className="">
-            <p className=" font-bold text-xl ">SHIM EAT</p>
+            <p className="text-xl font-bold">SHIM EAT</p>
           </div>
-          <ul className="flex items-center justify-around gap-4 flex-1 text-orange-500">
+          <ul className="flex flex-1 items-center justify-around gap-4 text-orange-500">
             {navList.map(({ label, path }) => (
               <li key={label} className="font-bold hover:text-orange-200">
                 <Link href={path}>{label}</Link>
@@ -56,15 +57,15 @@ const Navbar = async () => {
             ))}
           </ul>
           {!user?.id ? (
-            <div className="flex gap-3 items-center p-3">
+            <div className="flex items-center gap-3 p-3">
               <DropdownMenu>
                 <DropdownMenuTrigger>
-                  <h1 className=" rounded-2xl bg-orange-500 py-2 px-3 text-white text-sm">
+                  <h1 className="rounded-2xl bg-orange-500 px-3 py-2 text-sm text-white">
                     Signin
                   </h1>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                  className=" w-40 pt-4 flex flex-col justify-center"
+                  className="flex w-40 flex-col justify-center pt-4"
                   align="center"
                 >
                   <DropdownMenuItem className="flex items-center justify-around">
@@ -77,16 +78,16 @@ const Navbar = async () => {
                       <FaUser />
                     </Avatar>
                   </DropdownMenuItem>
-                  <div className=" h-px w-full bg-zinc-200" />
-                  <DropdownMenuItem className=" flex items-center justify-around">
+                  <div className="h-px w-full bg-zinc-200" />
+                  <DropdownMenuItem className="flex items-center justify-around">
                     <GoogleSignInBtn />
-                    <div className=" text-xl">
+                    <div className="text-xl">
                       <AiOutlineGoogle />
                     </div>
                   </DropdownMenuItem>
-                  <div className=" h-px w-full bg-zinc-200" />
+                  <div className="h-px w-full bg-zinc-200" />
 
-                  <DropdownMenuItem className=" flex items-center justify-around">
+                  <DropdownMenuItem className="flex items-center justify-around">
                     <GitSignInBtn />
                     <div className="text-xl">
                       <AiFillGithub />
@@ -94,13 +95,13 @@ const Navbar = async () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-              <div className=" h-8 w-px bg-zinc-200" />
-              <Link href={"/auth/register"} className=" text-gray-500 text-sm">
+              <div className="h-8 w-px bg-zinc-200" />
+              <Link href={"/auth/register"} className="text-sm text-gray-500">
                 Sign up
               </Link>
             </div>
           ) : (
-            <div className="flex gap-3 items-center p-3">
+            <div className="flex items-center gap-3 p-3">
               <DropdownMenu>
                 <DropdownMenuTrigger>
                   <Avatar>
@@ -108,30 +109,31 @@ const Navbar = async () => {
                       src={user?.image || ""}
                       className="max-w-[30px] rounded-full ring-2 ring-orange-500"
                     />
-                    <AvatarFallback className=" bg-orange-300">
+                    <AvatarFallback className="bg-orange-300">
                       <FaUser />
                     </AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                  className=" w-40 pt-4 flex flex-col justify-center"
+                  className="flex w-40 flex-col justify-center pt-4"
                   align="center"
                 >
                   <DropdownMenuItem className="flex items-center justify-around">
                     <Link href={"/order"}>My Order</Link>
                   </DropdownMenuItem>
-                  <div className=" h-px w-full bg-zinc-200" />
-                  <DropdownMenuItem className=" flex items-center justify-around">
+                  <div className="h-px w-full bg-zinc-200" />
+                  <DropdownMenuItem className="flex items-center justify-around">
                     <Link href={"/setting"}>Setting</Link>
                   </DropdownMenuItem>
-                  <div className=" h-px w-full bg-zinc-200" />
+                  <div className="h-px w-full bg-zinc-200" />
 
-                  <DropdownMenuItem className=" flex items-center justify-around">
+                  <DropdownMenuItem className="flex items-center justify-around">
                     <SignOutBtn />
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
               <SideCart />
+              {/* <ShowUserCartFromDBSideTest /> */}
             </div>
           )}
         </div>

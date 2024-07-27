@@ -1,4 +1,5 @@
 import ShowUserCartFromDB from "@/components/ShowUserCartFormDB";
+import ShowUserCartFromDBTest from "@/components/ShowUserCartFormDBTest";
 import { currentUser } from "@/lib/auth";
 
 import React from "react";
@@ -8,6 +9,7 @@ const CartPage = async () => {
   return (
     <div>
       <ShowUserCartFromDB user={user!} />
+      {/* <ShowUserCartFromDBTest /> */}
     </div>
   );
 };

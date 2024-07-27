@@ -17,15 +17,14 @@ import Link from "next/link";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import React, { useEffect, useState } from "react";
 import ShowUserCartFromDBSide from "./ShowUserCartFormDBSide";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
 const SideCart = () => {
   const user = useCurrentUser();
   const [isCart, setIsCart] = useState(true);
-  const [currentPath, setCurrentPath] = useState();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+
   useEffect(() => {
     const paths = [
       "/cart",
@@ -53,9 +52,10 @@ const SideCart = () => {
               <SheetTitle>My Shopping Basket</SheetTitle>
               <SheetDescription>Enjoy shopping!</SheetDescription>
             </SheetHeader>
-            <ScrollArea className="h-[50%] w-full rounded-md border sm:h-[70%]">
+            <ScrollArea className="h-[70%] w-full rounded-md border">
               <div>
                 <ShowUserCartFromDBSide user={user!} />
+                {/* <ShowUserCartFromDBSideTest user={user!} /> */}
               </div>
             </ScrollArea>
             <SheetFooter>

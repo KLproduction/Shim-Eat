@@ -9,6 +9,7 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
+import MySpinner from "@/components/ui/MySpinner";
 import { ADDONSPRICE } from "@/data/products";
 import { formatPrice } from "@/lib/formatPrice";
 import { TUserOrder, userCart } from "@/lib/type";
@@ -35,24 +36,24 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!);
 
 const CheckOutForm = ({ products, clientSecret }: CheckOutFormProps) => {
   return (
-    <div className="max-w-5xl w-full mx-auto space-y-8">
+    <div className="mx-auto w-full max-w-5xl space-y-8">
       <div>
         {products.orderItems.map((product, index) => (
-          <div className="flex flex-col items-center gap-5 m-5 " key={index}>
-            <div className=" grid grid-cols-1 sm:grid-cols-10 items-center gap-5 text-zinc-600">
+          <div className="m-5 flex flex-col items-center gap-5" key={index}>
+            <Card className="flex min-w-[300px] flex-col items-center justify-center gap-5 p-3 text-zinc-600 transition-all sm:grid sm:grid-cols-6 sm:gap-5">
               <img
                 src={product.product.image || undefined}
                 alt=""
-                className="max-w-[100px] rounded-full col-span-2"
+                className="mx-auto max-w-[100px] rounded-full sm:col-span-2"
               />
-              <h1 className=" col-span-2">{product.product.name}</h1>
-              <div className="text-sm col-span-2">
+              <h1 className="sm:col-span-1">{product.product.name}</h1>
+              <div className="text-sm sm:col-span-1">
                 <h2>
                   Size: {product?.sizeOption?.toUpperCase()} <br />+ (
                   {formatPrice(
                     ADDONSPRICE.size[
                       product?.sizeOption as keyof typeof ADDONSPRICE.size
-                    ]
+                    ],
                   )}
                   )
                 </h2>
@@ -62,26 +63,26 @@ const CheckOutForm = ({ products, clientSecret }: CheckOutFormProps) => {
                   {formatPrice(
                     ADDONSPRICE.addOns[
                       product?.sideOption as keyof typeof ADDONSPRICE.addOns
-                    ]
+                    ],
                   )}
                   )
                 </h2>
               </div>
               <h1>Quantity: {product.quantity}</h1>
-              <h1 className=" col-span-2">
+              <h1 className="sm:col-span-1">
                 Price:
                 {formatPrice(
-                  (product.price + product.extraPrice) * product.quantity
+                  (product.price + product.extraPrice) * product.quantity,
                 )}
               </h1>
-            </div>
+            </Card>
           </div>
         ))}
-        <h1 className="text-xl flex justify-center sm:justify-end p-3 text-zinc-600">
+        <h1 className="flex justify-center p-3 text-xl text-zinc-600 sm:justify-end">
           Order Total:{formatPrice(products.orderPrice)}{" "}
         </h1>
       </div>
-      <div className="flex gap-4 items-center"></div>
+      <div className="flex items-center gap-4"></div>
       <Elements options={{ clientSecret }} stripe={stripePromise}>
         <Form orderPrice={products.orderPrice} />
       </Elements>
@@ -120,30 +121,37 @@ const Form = ({ orderPrice }: FormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Card>
-        <CardHeader>Confirm Payment</CardHeader>
-        <CardDescription>
-          <FormError />
-        </CardDescription>
-        <CardContent>
-          <PaymentElement />
-          <div className=" my-4">
-            <LinkAuthenticationElement />
-            <AddressElement options={{ mode: "shipping" }} />
-          </div>
-        </CardContent>
-        <CardFooter className="flex justify-center items-center">
-          <Button
-            type="submit"
-            className="w-full"
-            disabled={stripe == null || elements == null || pending}
-          >
-            {loading ? "Purchasing" : `Check Out ${formatPrice(orderPrice)}`}
-          </Button>
-        </CardFooter>
-      </Card>
-    </form>
+    <>
+      <div className={!loading ? "hidden" : ""}>
+        <MySpinner />
+      </div>
+      <form onSubmit={handleSubmit}>
+        <Card>
+          <CardHeader>Confirm Payment</CardHeader>
+          <CardDescription>
+            <FormError />
+          </CardDescription>
+          <CardContent>
+            <PaymentElement />
+            <div className="my-4">
+              <LinkAuthenticationElement />
+              <AddressElement options={{ mode: "shipping" }} />
+            </div>
+          </CardContent>
+          <CardFooter className="flex items-center justify-center">
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={stripe == null || elements == null || pending}
+            >
+              {loading
+                ? "Purchasing..."
+                : `Check Out ${formatPrice(orderPrice)}`}
+            </Button>
+          </CardFooter>
+        </Card>
+      </form>
+    </>
   );
 };
 

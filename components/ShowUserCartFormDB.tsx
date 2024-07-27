@@ -43,12 +43,11 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
     getData();
   }, [updateCount]);
 
-  //TODO find out the ordertotal match with the db
   useEffect(() => {
     if (userProduct?.items.length) {
       const orderTotal = userProduct.items.reduce(
         (acc, item) => acc + (item.itemTotal || 0),
-        0
+        0,
       );
       setTotal(orderTotal);
     }
@@ -59,7 +58,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
     productId: string,
     sizeOption: Size,
     sideOption: AddOns,
-    newQuantity: number
+    newQuantity: number,
   ) => {
     startTransition(async () => {
       await cartQuantityUpdate(
@@ -67,7 +66,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
         productId,
         sizeOption,
         sideOption,
-        newQuantity
+        newQuantity,
       )
         .then((result) => {
           if (result.error) {
@@ -84,7 +83,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
     cartId: string,
     productId: string,
     sizeOption: Size,
-    sideOption: AddOns
+    sideOption: AddOns,
   ) => {
     startTransition(async () => {
       console.log(cartId, productId, sizeOption, sideOption);
@@ -93,7 +92,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
           cartId,
           productId,
           sizeOption,
-          sideOption
+          sideOption,
         );
         result.success
           ? toast.success(result.success)
@@ -107,8 +106,8 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
 
   if (!user || userProduct?.items.length === 0)
     return (
-      <Card className="flex flex-col justify-center min-h-screen">
-        <div className="flex flex-col justify-center items-center gap-5 h-full ">
+      <Card className="flex min-h-screen flex-col justify-center">
+        <div className="flex h-full flex-col items-center justify-center gap-5">
           <h1>Your shopping cart is empty</h1>
           <Button>
             <Link href={"/menu"}>Continue Shopping</Link>
@@ -118,19 +117,19 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
     );
 
   return (
-    <div className="flex justify-start items-center w-full h-auto">
+    <div className="flex h-auto w-full items-center justify-start">
       <div className="mx-auto p-3">
         {user.id ? (
           <>
             <div>
               {userProduct?.items.map((item) => (
-                <div className="p-3 " key={`${item.id}-${item.productId}`}>
-                  <div className="flex flex-col justify-center sm:grid sm:grid-cols-5 gap-4 items-center bg-white p-4 rounded-md shadow">
+                <div className="p-3" key={`${item.id}-${item.productId}`}>
+                  <div className="flex flex-col items-center justify-center gap-4 rounded-md bg-white p-4 shadow sm:grid sm:grid-cols-5">
                     <img
                       src={item?.product?.image || undefined}
-                      className="max-w-[100px] h-auto object-cover rounded-full col-span-1 items-center sm:items-start"
+                      className="col-span-1 h-auto max-w-[100px] items-center rounded-full object-cover sm:items-start"
                     />
-                    <div className="flex flex-col items-center sm:items-start gap-2 sm:col-span-2 ">
+                    <div className="flex flex-col items-center gap-2 sm:col-span-2 sm:items-start">
                       <h1 className="text-lg font-bold sm:col-span-2">
                         {item?.product.name}
                       </h1>
@@ -140,7 +139,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
                           {formatPrice(
                             ADDONSPRICE.size[
                               item?.sizeOption as keyof typeof ADDONSPRICE.size
-                            ]
+                            ],
                           )}
                           )
                         </h2>
@@ -149,7 +148,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
                           {formatPrice(
                             ADDONSPRICE.addOns[
                               item?.sideOption as keyof typeof ADDONSPRICE.addOns
-                            ]
+                            ],
                           )}
                           )
                         </h2>
@@ -158,7 +157,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
 
                     <div className="flex flex-col items-center">
                       <input
-                        className="w-16 border border-zinc-400 rounded-lg text-center"
+                        className="w-16 rounded-lg border border-zinc-400 text-center"
                         type="number"
                         value={item?.quantity!}
                         onChange={(e) =>
@@ -167,7 +166,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
                             item?.product.id!,
                             item?.sizeOption!,
                             item?.sideOption!,
-                            parseInt(e.target.value)
+                            parseInt(e.target.value),
                           )
                         }
                         min={1}
@@ -176,11 +175,11 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
                         Total:{" "}
                         {formatPrice(
                           item?.quantity! *
-                            (item?.product.price! + item?.extraPrice!)
+                            (item?.product.price! + item?.extraPrice!),
                         )}
                       </h1>
                     </div>
-                    <div className="sm:col-span-1 sm:justify-center sm:ml-auto">
+                    <div className="sm:col-span-1 sm:ml-auto sm:justify-center">
                       <Button
                         size={"sm"}
                         onClick={() =>
@@ -188,11 +187,11 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
                             item.cartId,
                             item?.product.id,
                             item?.sizeOption!,
-                            item?.sideOption!
+                            item?.sideOption!,
                           )
                         }
                         disabled={pending}
-                        className="m-2 bg-red-500 text-white p-2 rounded"
+                        className="m-2 rounded bg-red-500 p-2 text-white"
                       >
                         Cancel
                       </Button>
@@ -200,9 +199,9 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
                   </div>
                 </div>
               ))}
-              <div className="flex justify-between items-center p-3">
+              <div className="flex items-center justify-between p-3">
                 <h1>Total:{formatPrice(total)}</h1>
-                <AddCartitemToOrderBtn />
+                <AddCartitemToOrderBtn orderPrice={total as number} />
               </div>
             </div>
           </>

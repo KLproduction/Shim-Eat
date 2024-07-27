@@ -5,18 +5,11 @@ import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { userCart } from "@/lib/type";
 
-export const addCartToOrder = async (data: userCart[]) => {
+export const addCartToOrder = async (orderPrice: number) => {
   const user = await currentUser();
   if (!user?.id) return null;
 
-  const orderPrice = data.reduce((totalPrice, cartItem) => {
-    return cartItem.items.reduce((total, item) => {
-      const subtotal = total + item.itemTotal;
-      return totalPrice + subtotal;
-    }, 0);
-  }, 0);
-  const orderPriceToTwo = orderPrice.toFixed(2);
-  const formattedPrice = parseFloat(orderPriceToTwo);
+  const formattedPrice = parseFloat(orderPrice.toFixed(2));
   try {
     const order = await db.userOrder.create({
       data: {

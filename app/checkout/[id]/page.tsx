@@ -1,32 +1,24 @@
 import Stripe from "stripe";
 import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
-import CheckOutForm from "./_component/CheckOutForm";
+import CheckOutForm from "../_component/CheckOutForm";
 import MySpinner from "@/components/ui/MySpinner";
 import { revalidatePath } from "next/cache";
+import { getOrderByOrderID } from "@/data/getOrderByOrderID";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
-const CheckOutPage = async () => {
+const CheckOutPage = async ({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) => {
   const user = await currentUser();
   if (!user) revalidatePath("/auth/login");
 
-  const products = await db.userOrder.findFirst({
-    where: {
-      userId: user?.id,
-      status: "PENDING",
-    },
-    orderBy: {
-      updatedAt: "desc",
-    },
-    include: {
-      orderItems: {
-        include: {
-          product: true,
-        },
-      },
-    },
-  });
+  const products = await getOrderByOrderID(params.id);
   if (!products) {
     <MySpinner />;
     revalidatePath("/cart");

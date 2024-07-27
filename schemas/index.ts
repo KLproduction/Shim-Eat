@@ -1,6 +1,9 @@
 import { ProductCategory, UserRole } from "@prisma/client";
 import * as z from "zod";
 
+export const HandleQuantityChangeSchema = z.object({
+  quantity: z.number().min(1),
+});
 export const ChangeOrderStatusSchema = z.object({
   status: z.enum(["PENDING", "PAID", "COMPLETE", "CANCELLED"]),
   orderId: z.string(),
@@ -78,7 +81,7 @@ export const SettingSchema = z
     {
       message: "New password is required",
       path: ["newPassword"],
-    }
+    },
   )
 
   .refine(
@@ -92,7 +95,7 @@ export const SettingSchema = z
     {
       message: "Password is required",
       path: ["password"],
-    }
+    },
   );
 
 export const LoginSchema = z.object({
