@@ -98,7 +98,7 @@ const Form = ({ orderPrice }: FormProps) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setLoading(!loading);
+    setLoading(true);
     if (stripe == null || elements == null) return;
     stripe
       .confirmPayment({
@@ -117,12 +117,12 @@ const Form = ({ orderPrice }: FormProps) => {
           setError("An unknown error occurred");
         }
       });
-    setLoading(!loading);
+    setLoading(false);
   };
 
   return (
     <>
-      <div className={!loading ? "hidden" : ""}>
+      <div className={loading === false ? "hidden" : ""}>
         <MySpinner />
       </div>
       <form onSubmit={handleSubmit}>

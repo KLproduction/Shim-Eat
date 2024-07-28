@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { addCartToOrder } from "@/actions/addCartToOrder";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import MySpinner from "./ui/MySpinner";
 
 interface AddCartitemToOrderBtnProps {
   orderPrice?: number;
@@ -38,6 +39,7 @@ const AddCartitemToOrderBtn = (props: AddCartitemToOrderBtnProps) => {
             if (data?.success) {
               console.log(data.success);
               console.log(data.orderId);
+              <MySpinner />;
               route.push(`/checkout/${data.orderId}`);
             }
           });
