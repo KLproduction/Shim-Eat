@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   });
   const event = stripe.webhooks.constructEvent(
     await req.text(),
-    req.headers.get("stripe-signature") as string,
+    req.headers.get("Stripe-Signature") as string,
     process.env.STRIPE_WEBHOOK_SECRET as string,
   );
 
