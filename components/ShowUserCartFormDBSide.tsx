@@ -17,6 +17,7 @@ import Link from "next/link";
 import { userCart } from "@/lib/type";
 import addToCartDB from "@/actions/addToCartDB";
 import { cartQuantityUpdate } from "@/actions/cartQuantityUpdate";
+import { Input } from "./ui/input";
 
 export type UserT = {
   user: ExtenderUser;
@@ -134,7 +135,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
                     </div>
 
                     <div className="flex flex-col items-center">
-                      <input
+                      <Input
                         className="w-16 rounded-lg border border-zinc-400 text-center"
                         type="number"
                         value={item?.quantity!}

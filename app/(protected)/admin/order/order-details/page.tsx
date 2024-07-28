@@ -250,8 +250,8 @@ const OrderPage = () => {
                   </div>
                 </div>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  <ChangeDeliveryStatusForm orderId={product.id} />
                   <ChangeOrderStatusForm orderId={product.id} />
+                  <ChangeDeliveryStatusForm orderId={product.id} />
                 </div>
               </CardContent>
             </Card>

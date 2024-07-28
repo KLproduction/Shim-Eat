@@ -123,11 +123,11 @@ export const columns: ColumnDef<TUserOrder>[] = [
         <div className="flex justify-center">
           <span
             className={
-              data === "COMPLETE"
-                ? "font-bold text-green-500"
-                : data === "CANCELLED"
-                  ? "font-bold text-red-500"
-                  : ""
+              data === "CANCELLED"
+                ? "font-bold text-red-800"
+                : data === "PENDING"
+                  ? "font-bold text-zinc-600"
+                  : "font-bold text-green-500"
             }
           >
             {data}
@@ -168,7 +168,7 @@ export const columns: ColumnDef<TUserOrder>[] = [
                 ? "font-bold text-green-500"
                 : data === "DISPATCHED"
                   ? "font-bold text-orange-500"
-                  : ""
+                  : "font-bold text-zinc-500"
             }
           >
             {data}

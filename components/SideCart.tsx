@@ -52,7 +52,7 @@ const SideCart = () => {
               <SheetTitle>My Shopping Basket</SheetTitle>
               <SheetDescription>Enjoy shopping!</SheetDescription>
             </SheetHeader>
-            <ScrollArea className="h-[70%] w-full rounded-md border">
+            <ScrollArea className="h-[60%] w-full rounded-md border sm:h-[70%]">
               <div>
                 <ShowUserCartFromDBSide user={user!} />
                 {/* <ShowUserCartFromDBSideTest user={user!} /> */}
