@@ -108,7 +108,7 @@ const SettingNav = () => {
                 Products
               </DropdownMenuRadioItem>
               <DropdownMenuRadioItem
-                value="/admin/products"
+                value="/admin/superAdmin"
                 onClick={() => route.push("/admin/superAdmin")}
                 className={!superAdmin ? "hidden" : ""}
               >

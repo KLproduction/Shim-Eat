@@ -160,26 +160,26 @@ const ProductDetailsPage = () => {
   }
 
   return (
-    <Card className=" sm:w-[600px] w-[300px] text-zinc-600">
-      <div className=" flex justify-end p-5">
+    <Card className="w-[300px] text-zinc-600 sm:w-[600px]">
+      <div className="flex justify-end p-5">
         <Dialog>
           <DialogTrigger asChild className="flex justify-start">
             <div>
               <Button variant={"destructive"}>Delete</Button>
             </div>
           </DialogTrigger>
-          <DialogContent className="p-0 w-auto h-[150px] bg-white bg-transparent border-none shadow-lg">
+          <DialogContent className="h-[150px] w-auto border-none bg-transparent bg-white p-0 shadow-lg">
             <Card>
               <DialogHeader>
                 <DialogTitle>
-                  <div className="p-5 mt-6 flex items-center justify-center gap-3 text-red-700 border-red-700">
+                  <div className="mt-6 flex items-center justify-center gap-3 border-red-700 p-5 text-red-700">
                     <ExclamationTriangleIcon />
                     Warning: Deleted Product Data is Unrecoverable
                   </div>
                 </DialogTitle>
               </DialogHeader>
               <DialogTrigger asChild>
-                <div className="flex items-center justify-center gap-5 my-auto">
+                <div className="my-auto flex items-center justify-center gap-5">
                   <Button variant={"outline"}>Cancel</Button>
                   <Button
                     onClick={() => deleteHandler(productId!)}
@@ -198,14 +198,14 @@ const ProductDetailsPage = () => {
       <CardHeader className="text-xl font-bold">Setting</CardHeader>
       <img
         src={product.image || undefined}
-        className=" relative rounded-full max-h-[150px] ml-5 my-3"
+        className="relative my-3 ml-5 max-h-[150px] rounded-full"
       />
       <CardContent>
         <div className="flex justify-end">
           <Label className="">Product ID: {product.id}</Label>
         </div>
         <Form {...form}>
-          <form className=" space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+          <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-4">
               <FormField
                 control={form.control}
@@ -264,7 +264,7 @@ const ProductDetailsPage = () => {
                         disabled={pending}
                         onChange={(e) =>
                           field.onChange(
-                            parseFloat(parseFloat(e.target.value).toFixed(2))
+                            parseFloat(parseFloat(e.target.value).toFixed(2)),
                           )
                         }
                       />
@@ -319,7 +319,7 @@ const ProductDetailsPage = () => {
                   <div>
                     <Label>Change Product Image (optional)</Label>
                     <UploadDropzone
-                      className=" cursor-pointer"
+                      className="cursor-pointer"
                       appearance={{
                         uploadIcon: {
                           color: "orange",
@@ -370,13 +370,13 @@ const ProductDetailsPage = () => {
             <FormError message={error} />
             <FormSuccess message={success} />
 
-            <div className=" flex justify-center">
+            <div className="flex justify-center">
               <Button type="submit">Save</Button>
             </div>
           </form>
         </Form>
       </CardContent>
-      <CardFooter className="flex justify-end">
+      <CardFooter className="flex justify-end pb-16 sm:pb-0">
         <Button asChild variant={"outline"}>
           <Link href={"/admin/products"}>Back</Link>
         </Button>

@@ -11,7 +11,7 @@ const ProductTablePage = async () => {
   const data: Product[] | undefined = await getProducts();
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto pb-20 sm:py-10">
       <div className="flex justify-start p-0">
         <Button className="p-3" asChild>
           <Link href={"/admin/products/add-product"}>Add Product</Link>

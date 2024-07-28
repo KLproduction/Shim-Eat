@@ -26,12 +26,12 @@ const MenuPage = () => {
 
   return (
     <>
-      <div className="fixed z-[9999] m-0 sm:min-h-[20px] top-[10%] sm:w-auto w-full left-1/2 -translate-x-[50%] sm:border sm:border-orange-500 bg-white/75 backdrop-blur-lg transition-all rounded-full p-3 opacity-80 sm:shadow-md">
-        <div className="flex gap-5 items-center justify-center ">
+      <div className="fixed left-1/2 top-[8%] z-[9999] m-0 w-[80%] -translate-x-[50%] rounded-full border border-orange-500 bg-white/75 p-3 opacity-80 backdrop-blur-lg transition-all sm:min-h-[20px] sm:w-auto sm:shadow-md">
+        <div className="flex items-center justify-center gap-5">
           <Button
             asChild
             variant={"ghost"}
-            className=" cursor-pointer hover:bg-orange-500 hover:text-zinc-50 rounded-full p-3"
+            className="cursor-pointer rounded-full p-3 hover:bg-orange-500 hover:text-zinc-50"
           >
             <Link to="Salads" smooth={true} offset={-150} duration={500}>
               Salads
@@ -41,7 +41,7 @@ const MenuPage = () => {
           <Button
             asChild
             variant={"ghost"}
-            className=" cursor-pointer hover:bg-orange-500 hover:text-zinc-50 rounded-full p-3"
+            className="cursor-pointer rounded-full p-3 hover:bg-orange-500 hover:text-zinc-50"
           >
             <Link to="Mains" smooth={true} offset={-150} duration={500}>
               Mains
@@ -50,7 +50,7 @@ const MenuPage = () => {
           <Button
             asChild
             variant={"ghost"}
-            className=" cursor-pointer hover:bg-orange-500 hover:text-zinc-50 rounded-full p-3"
+            className="cursor-pointer rounded-full p-3 hover:bg-orange-500 hover:text-zinc-50"
           >
             <Link to="Drinks" smooth={true} offset={-150} duration={500}>
               Drinks

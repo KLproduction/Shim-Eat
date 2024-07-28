@@ -94,7 +94,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
 
   return (
     <div className="flex h-auto w-full items-center justify-start">
-      <div className="mx-auto p-3">
+      <div className="mx-auto p-0">
         {user.id && userProduct?.items.length! > 0 ? (
           <>
             <div>
@@ -135,21 +135,53 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
                     </div>
 
                     <div className="flex flex-col items-center">
-                      <Input
-                        className="w-16 rounded-lg border border-zinc-400 text-center"
-                        type="number"
-                        value={item?.quantity!}
-                        onChange={(e) =>
-                          handleQuantityChange(
-                            item.cartId,
-                            item?.product.id!,
-                            item?.sizeOption!,
-                            item?.sideOption!,
-                            parseInt(e.target.value),
-                          )
-                        }
-                        min={1}
-                      />
+                      <div className="flex items-center">
+                        <Button
+                          className="px-2 text-2xl"
+                          variant={"ghost"}
+                          onClick={() =>
+                            handleQuantityChange(
+                              item.cartId,
+                              item.product.id,
+                              item.sizeOption,
+                              item.sideOption,
+                              Math.max(1, item.quantity - 1),
+                            )
+                          }
+                        >
+                          -
+                        </Button>
+                        <input
+                          className="mx-2 w-16 rounded-lg border border-zinc-400 text-center"
+                          type="number"
+                          value={item.quantity}
+                          onChange={(e) =>
+                            handleQuantityChange(
+                              item.cartId,
+                              item.product.id,
+                              item.sizeOption,
+                              item.sideOption,
+                              parseInt(e.target.value, 10),
+                            )
+                          }
+                          min="1"
+                        />
+                        <Button
+                          className="text-md px-2"
+                          variant={"ghost"}
+                          onClick={() =>
+                            handleQuantityChange(
+                              item.cartId,
+                              item.product.id,
+                              item.sizeOption,
+                              item.sideOption,
+                              item.quantity + 1,
+                            )
+                          }
+                        >
+                          +
+                        </Button>
+                      </div>
                       <h1 className="mt-2 text-lg">
                         Total:{" "}
                         {formatPrice(

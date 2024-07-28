@@ -29,7 +29,7 @@ const successPage = async ({
 }) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
   const paymentIntent = await stripe.paymentIntents.retrieve(
-    searchParams.payment_intent
+    searchParams.payment_intent,
   );
   if (paymentIntent.metadata.orderId == null) return notFound();
   const products = await db.userOrder.findUnique({
@@ -46,8 +46,8 @@ const successPage = async ({
   });
   if (!products?.id) {
     return (
-      <div className="flex flex-col justify-center items-center min-h-full gap-3">
-        <h1 className=" text-xl">No Order Found!</h1>
+      <div className="flex min-h-full flex-col items-center justify-center gap-3">
+        <h1 className="text-xl">No Order Found!</h1>
         <Button asChild variant={"link"} size={"sm"}>
           <Link href={"/"}>Back</Link>
         </Button>
@@ -60,42 +60,42 @@ const successPage = async ({
   }
 
   return (
-    <MaxWidthWrapper>
-      <Card className="m-5 p-5 max-w-[280px] sm:max-w-full">
+    <MaxWidthWrapper className="pb-12 sm:p-5">
+      <Card className="m-5 mx-auto max-w-[280px] p-5 sm:max-w-full">
         <CardHeader className="text-xl">
-          <div className="flex justify-center text-orange-500 font-bold">
+          <div className="flex justify-center font-bold text-orange-500">
             {isSuccess
               ? "Enjoy!".toUpperCase()
               : "Something went wrong, order not placed!"}
           </div>
         </CardHeader>
         <div className="text-sm">
-          <CardDescription className=" flex justify-center flex-col min-h-full">
-            <span className=" font-bold">Order reference: </span>
+          <CardDescription className="flex min-h-full flex-col justify-center">
+            <span className="font-bold">Order reference: </span>
             <span>{products?.id}</span>
           </CardDescription>
         </div>
-        <div className="max-w-5xl w-full mx-auto space-y-8">
+        <div className="mx-auto w-full max-w-5xl space-y-8">
           <div>
             {products?.orderItems.map((product) => (
-              <div
-                className="flex flex-col items-center gap-5 m-5"
+              <Card
+                className="my-5 flex flex-col items-center p-3"
                 key={product.id}
               >
-                <div className=" grid grid-cols-1 sm:grid-cols-10 items-center gap-5 text-zinc-600">
+                <div className="grid grid-cols-1 items-center gap-5 text-zinc-600 sm:grid-cols-10">
                   <img
                     src={product.product.image || undefined}
                     alt=""
-                    className="max-w-[100px] rounded-full col-span-2"
+                    className="col-span-2 max-w-[100px] rounded-full"
                   />
-                  <h1 className=" col-span-3">{product.product.name}</h1>
-                  <div className="text-sm col-span-2">
+                  <h1 className="col-span-3">{product.product.name}</h1>
+                  <div className="col-span-2 text-sm">
                     <h2>
                       Size: {product?.sizeOption?.toUpperCase()} <br />+ (
                       {formatPrice(
                         ADDONSPRICE.size[
                           product?.sizeOption as keyof typeof ADDONSPRICE.size
-                        ]
+                        ],
                       )}
                       )
                     </h2>
@@ -105,28 +105,28 @@ const successPage = async ({
                       {formatPrice(
                         ADDONSPRICE.addOns[
                           product?.sideOption as keyof typeof ADDONSPRICE.addOns
-                        ]
+                        ],
                       )}
                       )
                     </h2>
                   </div>
                   <h1 className="col-span-1">Quantity: {product.quantity}</h1>
-                  <h1 className=" col-span-2">
+                  <h1 className="col-span-2">
                     Price:
                     {formatPrice(
-                      (product.price + product.extraPrice) * product.quantity
+                      (product.price + product.extraPrice) * product.quantity,
                     )}
                   </h1>
                 </div>
-              </div>
+              </Card>
             ))}
-            <h1 className="text-xl flex justify-end text-zinc-600">
+            <h1 className="flex justify-end text-xl text-zinc-600">
               Order Total:{formatPrice(products?.orderPrice!)}{" "}
             </h1>
           </div>
         </div>
       </Card>
-      <div className="flex justify-end p-5">
+      <div className="flex justify-end p-5 pb-12">
         <Button asChild variant={"link"} size={"lg"}>
           <Link href={"/"}>Back</Link>
         </Button>

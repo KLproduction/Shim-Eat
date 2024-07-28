@@ -6,6 +6,7 @@ import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
 import AdminSwitch from "@/components/AdminSwitch";
+import NavbarMobile from "@/components/NavbarMobile";
 
 const inter = Inter({ subsets: ["latin"] });
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
@@ -26,7 +27,12 @@ export default async function RootLayout({
     <SessionProvider session={session}>
       <html lang="en" className="">
         <body className={roboto.className}>
-          <Navbar />
+          <div className="hidden sm:block">
+            <Navbar />
+          </div>
+          <div className="sm:hidden">
+            <NavbarMobile />
+          </div>
           <AdminSwitch />
           <Toaster />
           {children}

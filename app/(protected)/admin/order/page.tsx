@@ -8,7 +8,7 @@ const UserOrderTablePage = async () => {
   const data: TUserOrder[] | undefined = await getOrderFromDB();
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto pb-20 sm:py-10">
       {data && <DataTable columns={columns} data={data} />}
     </div>
   );

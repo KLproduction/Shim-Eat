@@ -9,7 +9,11 @@ const DrinkMenu = ({ products }: TMenuProps) => {
   const drinks = products?.filter((product) => product.category === "drinks");
   const categoryName = drinks?.forEach((drink) => drink.category);
 
-  return <ProductCategoryMenu menuItems={drinks!} categoryName="drinks" />;
+  return (
+    <div className="mb-14 sm:mb-0">
+      <ProductCategoryMenu menuItems={drinks!} categoryName="drinks" />
+    </div>
+  );
 };
 
 export default DrinkMenu;
