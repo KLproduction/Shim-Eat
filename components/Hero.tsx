@@ -8,34 +8,34 @@ import { BiChevronRight } from "react-icons/bi";
 const Hero = () => {
   return (
     <MaxWidthWrapper>
-      <section className="flex flex-col items-center justify-center h-full">
+      <section className="flex h-full flex-col items-center justify-center">
         <div className="flex items-center justify-around">
-          <div className="mt-[100px] flex flex-col gap-8 md:my-auto p-3">
-            <h1 className=" text-6xl font-bold text-green-600">
+          <div className="mt-[100px] flex flex-col gap-8 p-3 md:my-auto">
+            <h1 className="text-6xl font-bold text-green-600">
               Fresh,
               <br />
-              <span className="text-orange-600 uppercase">Fast,</span>
+              <span className="uppercase text-orange-600">Fast,</span>
               <br /> Flavorful
             </h1>
-            <h1 className=" text-orange-600 text-5xl font-bold">
-              Your <span className="text-green-600 uppercase">Salad</span> is
+            <h1 className="text-5xl font-bold text-orange-600">
+              Your <span className="uppercase text-green-600">Salad</span> is
               Ready!
             </h1>
-            <p className=" text-zinc-500 font-bold text-md">
+            <p className="text-md font-bold text-zinc-500">
               From Farm to Table – Taste the Freshness in Every Bite
             </p>
-            <div className=" flex items-center justify-center gap-5">
-              <Button asChild size="lg" className=" flex justify-center gap-3">
+            <div className="flex items-center justify-center gap-5">
+              <Button asChild size="lg" className="flex justify-center gap-3">
                 <Link href="/menu" className="uppercase">
                   <h1>Order Now</h1> <BiChevronRight className="text-3xl" />
                 </Link>
               </Button>
             </div>
           </div>
-          <div className=" ml-auto">
+          <div className="ml-auto">
             <img
-              src="https://i.ibb.co/LYK7mfm/hero-2.png"
-              className="mt-[50px] z-[-1] md:z-10 fixed top-3 right-0 opacity-30 md:relative md:opacity-100 md:p-0"
+              src="/hero-2.png"
+              className="fixed right-0 top-3 z-[-1] mt-[50px] opacity-30 md:relative md:z-10 md:p-0 md:opacity-100"
             />
           </div>
         </div>

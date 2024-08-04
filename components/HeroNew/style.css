@@ -1,0 +1,315 @@
+@import url("https://fonts.googleapis.com/css2?family=Aboreto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+  font-family: Poppins;
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+:root {
+  --border-color: #fff5;
+  --w-image: 500px;
+  --calculate: calc(3 / 2);
+}
+
+.carousel {
+  margin-top: 0px;
+  width: 100%;
+  height: 89vh;
+  overflow: hidden;
+}
+
+.carousel .list {
+  height: 100%;
+  position: relative;
+}
+
+.carousel .list::before {
+  position: absolute;
+  width: var(--w-image);
+  height: 100%;
+  content: "";
+  top: 0;
+  left: calc(100% - calc(var(--w-image) * var(--calculate)));
+  border-left: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.carousel .list::after {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  content: "";
+  background-color: rgb(249, 250, 246);
+  width: 800px;
+  height: 500px;
+  z-index: 10;
+  pointer-events: none;
+  border-radius: 20px 50px 110px 230px;
+  filter: blur(150px);
+  opacity: 0.3;
+}
+
+.carousel .list .item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel .list .item .image {
+  width: var(--w-image);
+  height: 80%;
+  position: absolute;
+  top: 0;
+  left: calc(100% - calc(var(--w-image) * var(--calculate)));
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  font-weight: 500;
+}
+
+.carousel .list .item .image figcaption {
+  font-family: "Aboreto";
+  font-weight: bold;
+  font-size: 1.3em;
+  text-align: right;
+  margin-bottom: 30px;
+  width: 70%;
+  display: none;
+}
+
+.carousel .list .item .image img {
+  width: 90%;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 10px 20px #18161655);
+}
+
+.carousel .list .item .image figcaption {
+  margin-bottom: 30px;
+  width: 70%;
+}
+.carousel .list .item .main-content {
+  height: 100%;
+  display: grid;
+  grid-template-columns: calc(100% - calc(var(--w-image) * var(--calculate)));
+}
+
+.carousel .list .main-content .content {
+  font-size: 2em;
+  padding: 150px 120px 20px 180px;
+}
+
+.carousel .list .main-content .content h2 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  font-family: "Aboreto";
+  font-weight: 800;
+  line-height: 1;
+}
+
+.carousel .list .main-content .content p {
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 600px;
+}
+
+.carousel .list .main-content .content .price {
+  font-size: 1.5em;
+  font-family: "Aboreto";
+}
+
+.arrows {
+  position: relative;
+  bottom: 50px;
+  right: -150px;
+  width: calc(90% - calc(var(--w-image) * var(--calculate)));
+  display: grid;
+  grid-template-columns: repeat(2, 50px);
+  grid-template-rows: 50px;
+  justify-content: end;
+  gap: 10px;
+  z-index: 10;
+}
+
+.carousel .list .item {
+  display: none;
+}
+
+.carousel .list .item.active,
+.carousel .list .item.other_1,
+.carousel .list .item.other_2 {
+  display: block;
+}
+
+.carousel .list .item.active {
+  z-index: 3;
+}
+
+.carousel .list .item.other_1,
+.carousel .list .item.other_2,
+.carousel .list .item.other_3 {
+  pointer-events: none;
+}
+
+.carousel .list .item.active .main-content {
+  animation: showContent 1s ease-in-out 1 forwards;
+}
+
+@keyframes showContent {
+  from {
+    clip-path: circle(0% at 70% 50%);
+  }
+  to {
+    clip-path: circle(100% at 70% 50%);
+  }
+}
+
+.next .item.other_1 {
+  z-index: 1;
+}
+
+.next .item .image img,
+.next .item .image figcaption {
+  will-change: transform;
+  animation: effectNext 0.5s ease-in-out 1 forwards;
+}
+
+@keyframes effectNext {
+  from {
+    transform: translateX(var(--transform-from));
+  }
+  to {
+    transform: translateX(calc(var(--transform-from) - var(--w-image)));
+  }
+}
+
+.next .item.active .image {
+  --transform-from: var(--w-image);
+}
+
+.next .item.other_1 .image {
+  z-index: 3;
+  --transform-from: 0px;
+  overflow: hidden;
+}
+.next .item.other_2 .image {
+  z-index: 4;
+  --transform-from: calc(var(--w-image) * 2);
+}
+
+.prev .list .image img,
+.prev .list .item .image figcaption {
+  animation: effectPrev 0.5s ease-in-out 1 forwards;
+}
+
+@keyframes effectPrev {
+  from {
+    transform: translateX(var(--transform-from));
+  }
+  to {
+    transform: translateX(calc(var(--transform-from) + var(--w-image)));
+  }
+}
+
+.prev .list .item.active .image {
+  --transform-from: calc(var(--w-image) * -1);
+  overflow: hidden;
+}
+.prev .list .item.other_1 .image {
+  --transform-from: 0px;
+  z-index: 4;
+}
+.prev .list .item.other_2 .image {
+  z-index: 1;
+  --transform-from: var(--w-image);
+  opacity: 0;
+}
+
+.prev .list .item.other_2 .main-content {
+  opacity: 0;
+}
+
+@media screen and (max-width: 1280px) {
+  .carousel .list .item .main-content .content {
+    padding: 3rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  :root {
+    --calculate: 1;
+    --w-image: 400px;
+  }
+
+  .carousel .list .item .main-content .content h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+  .carousel .list .item .main-content .content p {
+    font-size: 1.5rem;
+  }
+  .carousel .list .item .main-content .content .price {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+  .carousel .list .item .main-content .content {
+    padding: 3rem;
+  }
+
+  .arrows {
+    right: -100px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --w-image: 100vw;
+  }
+  .carousel .list::after {
+    display: none;
+  }
+
+  .item .image img {
+    max-width: 50%;
+  }
+  .carousel .list .item .image figcaption {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .carousel .list .item .image {
+    padding: 20px;
+  }
+
+  .carousel .list .item .main-content .content {
+    display: none;
+  }
+
+  .arrows {
+    left: 50%;
+    justify-content: center;
+    bottom: 100px;
+  }
+}
+
+@media screen and (max-width: 428px) {
+  .item .image img {
+    max-width: 100%;
+  }
+}

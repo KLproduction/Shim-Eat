@@ -4,6 +4,7 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Hero from "@/components/Hero";
 
 import AdminSwitch from "@/components/AdminSwitch";
+import HeroNew from "@/components/HeroNew/HeroNew";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -13,7 +14,7 @@ const font = Poppins({
 export default async function Home() {
   return (
     <div>
-      <Hero />
+      <HeroNew />
     </div>
   );
 }
