@@ -47,7 +47,9 @@ const Navbar = async () => {
       <MaxWidthWrapper>
         <div className="flex items-center justify-between px-4 text-lg">
           <div className="">
-            <p className="text-xl font-bold">SHIM EAT</p>
+            <Link href="/" className="text-xl font-bold">
+              SHIM EAT
+            </Link>
           </div>
           <ul className="flex flex-1 items-center justify-around gap-4 text-orange-500">
             {navList.map(({ label, path }) => (

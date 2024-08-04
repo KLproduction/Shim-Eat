@@ -282,6 +282,14 @@ body {
   .carousel .list::after {
     display: none;
   }
+  @keyframes showContent {
+    from {
+      clip-path: circle(0% at 50% 40%);
+    }
+    to {
+      clip-path: circle(100% at 70% 50%);
+    }
+  }
 
   .item .image img {
     max-width: 50%;
