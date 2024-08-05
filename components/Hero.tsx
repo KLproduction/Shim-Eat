@@ -8,7 +8,7 @@ import { BiChevronRight } from "react-icons/bi";
 const Hero = () => {
   return (
     <MaxWidthWrapper>
-      <section className="flex h-full flex-col items-center justify-center">
+      <section className="flex h-dvh flex-col items-center justify-center">
         <div className="flex items-center justify-around">
           <div className="mt-[100px] flex flex-col gap-8 p-3 md:my-auto">
             <h1 className="text-6xl font-bold text-green-600">
@@ -35,7 +35,7 @@ const Hero = () => {
           <div className="ml-auto">
             <img
               src="/hero-2.png"
-              className="fixed right-0 top-3 z-[-1] mt-[50px] opacity-30 md:relative md:z-10 md:p-0 md:opacity-100"
+              className="fixed right-0 top-[-100px] z-[-1] mt-[50px] opacity-30 md:relative md:z-10 md:p-0 md:opacity-100"
             />
           </div>
         </div>

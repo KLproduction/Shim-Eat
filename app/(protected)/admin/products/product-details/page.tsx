@@ -168,24 +168,29 @@ const ProductDetailsPage = () => {
               <Button variant={"destructive"}>Delete</Button>
             </div>
           </DialogTrigger>
-          <DialogContent className="h-[150px] w-auto border-none bg-transparent bg-white p-0 shadow-lg">
-            <Card>
+          <DialogContent className="min-h-[150px] w-auto border-none bg-transparent bg-white p-2 shadow-lg">
+            <Card className="p-3">
               <DialogHeader>
                 <DialogTitle>
                   <div className="mt-6 flex items-center justify-center gap-3 border-red-700 p-5 text-red-700">
-                    <ExclamationTriangleIcon />
-                    Warning: Deleted Product Data is Unrecoverable
+                    <ExclamationTriangleIcon className="hidden sm:block" />
+                    <span className="text-sm sm:text-lg">
+                      Warning: Deleted Product Data is Unrecoverable
+                    </span>
                   </div>
                 </DialogTitle>
               </DialogHeader>
               <DialogTrigger asChild>
                 <div className="my-auto flex items-center justify-center gap-5">
-                  <Button variant={"outline"}>Cancel</Button>
+                  <Button variant={"outline"} className="p-3" size={"sm"}>
+                    Cancel
+                  </Button>
                   <Button
+                    size={"sm"}
                     onClick={() => deleteHandler(productId!)}
                     variant={"destructive"}
                     disabled={pending}
-                    className="p-2"
+                    className="p-3"
                   >
                     Delete Product
                   </Button>
