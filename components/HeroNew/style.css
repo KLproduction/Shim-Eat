@@ -83,13 +83,15 @@ body {
 }
 
 .carousel .list .item .image figcaption {
-  font-family: "Aboreto";
   font-weight: bold;
   font-size: 1.3em;
   text-align: right;
   margin-bottom: 30px;
   width: 70%;
   display: none;
+}
+.carousel .list .item .image figcaption h2 {
+  font-family: "Aboreto";
 }
 
 .carousel .list .item .image img {

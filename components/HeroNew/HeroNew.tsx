@@ -177,7 +177,7 @@ const HeroNew = () => {
                   alt=""
                 />
                 <figcaption className="flex flex-col gap-5 text-white">
-                  <div>Elegant Chicken Skewer Platter</div>
+                  <h2>Elegant Chicken Skewer Platter</h2>
                   <div>
                     <Button asChild className="bg-green-500" size={"sm"}>
                       <Link href={`/product?product=${other1ID}`}>
@@ -217,7 +217,7 @@ const HeroNew = () => {
                   alt=""
                 />
                 <figcaption className="top-20 flex flex-col gap-1">
-                  <div>Garden Delight Steak Salad</div>
+                  <h2>Garden Delight Steak Salad</h2>
                   <div>
                     <Button asChild className="bg-green-500" size={"sm"}>
                       <Link href={`/product?product=${activeID}`}>
@@ -256,7 +256,7 @@ const HeroNew = () => {
                   alt=""
                 />
                 <figcaption className="flex flex-col gap-1 text-white">
-                  <div>Mediterranean Tuna Pasta Salad</div>
+                  <h2>Mediterranean Tuna Pasta Salad</h2>
                   <div>
                     <Button asChild className="bg-green-500" size={"sm"}>
                       <Link href={`/product?product=${other2ID}`}>
@@ -294,8 +294,8 @@ const HeroNew = () => {
                   }
                   alt=""
                 />
-                <figcaption className="flex flex-col gap-1 text-white">
-                  <div>Sesame Pork Bao</div>
+                <figcaption className="flex flex-col gap-1">
+                  <h2>Sesame Pork Bao</h2>
                   <div>
                     <Button asChild className="bg-green-500" size={"sm"}>
                       <Link href={`/product?product=${itemID}`}>Order Now</Link>

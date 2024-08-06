@@ -26,8 +26,11 @@ const Hero = () => {
             </p>
             <div className="flex items-center justify-center gap-5">
               <Button asChild size="lg" className="flex justify-center gap-3">
-                <Link href="/menu" className="uppercase">
-                  <h1>Order Now</h1> <BiChevronRight className="text-3xl" />
+                <Link
+                  href="/menu"
+                  className="flex items-center justify-around uppercase"
+                >
+                  <h1>See Menu</h1> <BiChevronRight className="text-xl" />
                 </Link>
               </Button>
             </div>

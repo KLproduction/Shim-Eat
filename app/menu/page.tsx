@@ -26,7 +26,7 @@ const MenuPage = () => {
 
   return (
     <>
-      <div className="fixed left-1/2 top-[12%] z-[9999] m-0 w-[80%] -translate-x-[50%] rounded-full border border-orange-500 bg-white/75 p-3 opacity-80 backdrop-blur-lg transition-all sm:min-h-[20px] sm:w-auto sm:shadow-md">
+      <div className="fixed left-1/2 top-[8%] z-[9999] m-0 w-[80%] -translate-x-[50%] rounded-full border border-orange-500 bg-white/75 p-3 opacity-80 backdrop-blur-lg transition-all sm:top-[12%] sm:min-h-[20px] sm:w-auto sm:shadow-md">
         <div className="flex items-center justify-center gap-5">
           <Button
             asChild

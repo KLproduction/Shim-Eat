@@ -11,7 +11,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "./ui/button";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { AiFillShopping } from "react-icons/ai";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
 import { useCurrentUser } from "@/hooks/use-current-user";
@@ -40,14 +40,15 @@ const SideCart = () => {
     <div>
       {isCart && (
         <Sheet>
-          <SheetTrigger asChild className={isCart ? "block" : "hidden"}>
-            <Button variant="outline">
-              <div>
-                <AiOutlineShoppingCart />
-              </div>
-            </Button>
+          <SheetTrigger
+            asChild
+            className={isCart ? "block" : "hidden border-none"}
+          >
+            <div className="cursor-pointer text-xl hover:text-green-500 sm:text-3xl">
+              <AiFillShopping />
+            </div>
           </SheetTrigger>
-          <SheetContent className="z-[999999] flex flex-col gap-5">
+          <SheetContent className="flex flex-col gap-5 sm:z-[999999]">
             <SheetHeader className="mt-12">
               <SheetTitle>My Shopping Basket</SheetTitle>
               <SheetDescription>Enjoy shopping!</SheetDescription>

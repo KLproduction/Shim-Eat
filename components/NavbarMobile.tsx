@@ -12,7 +12,12 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { FaUser } from "react-icons/fa";
 import { currentUser } from "@/lib/auth";
-import { AiFillGoogleCircle, AiFillGithub } from "react-icons/ai";
+import {
+  AiFillGoogleCircle,
+  AiFillGithub,
+  AiFillHome,
+  AiTwotoneBook,
+} from "react-icons/ai";
 import SideCart from "./SideCart";
 import { useEffect, useState } from "react";
 import AdminSwtich from "./AdminSwitch";
@@ -26,7 +31,7 @@ import ShowUserCartFromDBSideTest from "./ShowUserCartFormDBSideTest";
 
 const navList = [
   {
-    label: "Menu",
+    label: <AiTwotoneBook />,
     path: "/menu",
   },
 ];
@@ -38,14 +43,9 @@ const NavbarMobile = async () => {
     <nav className="h-30 fixed bottom-0 z-[9999] w-full border-t border-gray-200 bg-white/50 backdrop-blur-lg transition-all">
       <MaxWidthWrapper>
         <div className="flex items-center justify-between px-4 text-lg">
-          <div className="">
-            <Link href={"/"} className="text-xl font-bold">
-              SHIM EAT
-            </Link>
-          </div>
-          <ul className="flex flex-1 items-center justify-around gap-4 text-orange-500">
+          <ul className="flex flex-1 items-center justify-around gap-4 text-zinc-800">
             {navList.map(({ label, path }) => (
-              <li key={label} className="font-bold hover:text-orange-200">
+              <li key={path} className="font-bold hover:text-orange-200">
                 <Link href={path}>{label}</Link>
               </li>
             ))}

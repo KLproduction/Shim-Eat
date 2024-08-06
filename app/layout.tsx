@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
 import AdminSwitch from "@/components/AdminSwitch";
 import NavbarMobile from "@/components/NavbarMobile";
+import NavbarMobileNew from "@/components/NavbarMobileNew";
 
 const inter = Inter({ subsets: ["latin"] });
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
@@ -31,7 +32,8 @@ export default async function RootLayout({
             <Navbar />
           </div>
           <div className="sm:hidden">
-            <NavbarMobile />
+            {/* <NavbarMobile /> */}
+            <NavbarMobileNew />
           </div>
           <AdminSwitch />
           {children}

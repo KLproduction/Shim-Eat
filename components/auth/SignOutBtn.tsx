@@ -1,6 +1,7 @@
 "use client";
 import { signOutAction } from "@/actions/signOut";
 import { Button } from "../ui/button";
+import { CgLogOut } from "react-icons/cg";
 
 const SignOutBtn = () => {
   const onClickHandler = async () => {
@@ -8,9 +9,12 @@ const SignOutBtn = () => {
   };
 
   return (
-    <div className="m-0 p-0">
+    <div className="flex items-center">
       <Button onClick={() => onClickHandler()} variant={"ghost"} size={"sm"}>
-        Sign Out
+        <div className="mr-3 flex">Sign Out</div>
+        <div className="text-lg">
+          <CgLogOut />
+        </div>
       </Button>
     </div>
   );

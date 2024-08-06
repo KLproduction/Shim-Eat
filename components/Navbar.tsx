@@ -12,7 +12,11 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { FaUser } from "react-icons/fa";
 import { currentUser } from "@/lib/auth";
-import { AiFillGoogleCircle, AiFillGithub } from "react-icons/ai";
+import {
+  AiFillGoogleCircle,
+  AiFillGithub,
+  AiFillSetting,
+} from "react-icons/ai";
 import SideCart from "./SideCart";
 import { useEffect, useState } from "react";
 import AdminSwtich from "./AdminSwitch";
@@ -23,6 +27,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { ExtenderUser } from "@/next-auth";
 import { AiOutlineGoogle } from "react-icons/ai";
 import ShowUserCartFromDBSideTest from "./ShowUserCartFormDBSideTest";
+import { BsBagCheckFill } from "react-icons/bs";
 
 const navList = [
   {
@@ -103,7 +108,10 @@ const Navbar = async () => {
               </Link>
             </div>
           ) : (
-            <div className="flex items-center gap-3 p-3">
+            <div className="flex items-center gap-5 p-3">
+              <div className="text-orange-500">
+                <SideCart />
+              </div>
               <DropdownMenu>
                 <DropdownMenuTrigger>
                   <Avatar>
@@ -121,11 +129,21 @@ const Navbar = async () => {
                   align="center"
                 >
                   <DropdownMenuItem className="flex items-center justify-around">
-                    <Link href={"/order"}>My Order</Link>
+                    <Link href={"/order"} className="flex items-center gap-5">
+                      <div>My Order</div>
+                      <div>
+                        <BsBagCheckFill />
+                      </div>
+                    </Link>
                   </DropdownMenuItem>
                   <div className="h-px w-full bg-zinc-200" />
                   <DropdownMenuItem className="flex items-center justify-around">
-                    <Link href={"/setting"}>Setting</Link>
+                    <Link href={"/setting"} className="flex items-center gap-5">
+                      <div>Setting</div>
+                      <div>
+                        <AiFillSetting />
+                      </div>
+                    </Link>
                   </DropdownMenuItem>
                   <div className="h-px w-full bg-zinc-200" />
 
@@ -134,7 +152,6 @@ const Navbar = async () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-              <SideCart />
               {/* <ShowUserCartFromDBSideTest /> */}
             </div>
           )}
