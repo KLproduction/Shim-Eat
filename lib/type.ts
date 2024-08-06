@@ -5,6 +5,7 @@ import {
   CartItem,
   OrderStatus,
   $Enums,
+  UserRole,
 } from "@prisma/client";
 
 export type TAddProduct = {

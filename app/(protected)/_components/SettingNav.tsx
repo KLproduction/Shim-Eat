@@ -61,12 +61,21 @@ const SettingNav = () => {
           >
             <Link href="/admin/products">Products</Link>
           </Button>
+
           <Button
             asChild
             variant={pathname === "/admin/order" ? "default" : "outline"}
           >
             <Link href="/admin/order">Order</Link>
           </Button>
+
+          <Button
+            asChild
+            variant={pathname === "/admin/users" ? "default" : "outline"}
+          >
+            <Link href="/admin/users">Users</Link>
+          </Button>
+
           <Button
             asChild
             variant={pathname === "/admin/superAdmin" ? "default" : "outline"}
@@ -107,6 +116,14 @@ const SettingNav = () => {
               >
                 Products
               </DropdownMenuRadioItem>
+
+              <DropdownMenuRadioItem
+                value="/admin/users"
+                onClick={() => route.push("/admin/users")}
+              >
+                Products
+              </DropdownMenuRadioItem>
+
               <DropdownMenuRadioItem
                 value="/admin/superAdmin"
                 onClick={() => route.push("/admin/superAdmin")}

@@ -33,10 +33,6 @@ const navList = [
     label: "Menu",
     path: "/menu",
   },
-  {
-    label: "Test",
-    path: "/test",
-  },
 ];
 
 const Navbar = async () => {
@@ -45,10 +41,10 @@ const Navbar = async () => {
   return (
     <nav className="h-30 sticky inset-x-0 top-0 z-[9999] w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
       <MaxWidthWrapper>
-        <div className="flex items-center justify-between px-4 text-lg">
+        <div className="flex items-center justify-center px-4 text-lg">
           <div className="">
-            <Link href="/" className="text-xl font-bold">
-              SHIM EAT
+            <Link href="/" className="flex flex-col items-end font-black">
+              <img src="/saladLogo.png" alt="logo" className="max-w-24" />
             </Link>
           </div>
           <ul className="flex flex-1 items-center justify-around gap-4 text-orange-500">
@@ -70,15 +66,19 @@ const Navbar = async () => {
                   className="flex w-40 flex-col justify-center pt-4"
                   align="center"
                 >
-                  <DropdownMenuItem className="flex items-center justify-around">
-                    <LoginButtonProps mode="redirect" asChild>
-                      <Button variant={"ghost"} size={"sm"} className="m-0 p-0">
-                        Sign In
-                      </Button>
-                    </LoginButtonProps>
-                    <Avatar>
-                      <FaUser />
-                    </Avatar>
+                  <DropdownMenuItem className="mt-4 flex items-center justify-around">
+                    <div>
+                      <LoginButtonProps mode="redirect" asChild>
+                        <Button variant={"ghost"} size={"sm"}>
+                          Sign In
+                        </Button>
+                      </LoginButtonProps>
+                    </div>
+                    <div>
+                      <Avatar>
+                        <FaUser />
+                      </Avatar>
+                    </div>
                   </DropdownMenuItem>
                   <div className="h-px w-full bg-zinc-200" />
                   <DropdownMenuItem className="flex items-center justify-around">
@@ -117,7 +117,7 @@ const Navbar = async () => {
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                  className="flex w-40 flex-col justify-center pt-4"
+                  className="flex w-40 flex-col justify-center pt-10"
                   align="center"
                 >
                   <DropdownMenuItem className="flex items-center justify-around">

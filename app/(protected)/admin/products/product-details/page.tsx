@@ -29,7 +29,7 @@ import {
 import MySpinner from "@/components/ui/MySpinner";
 import { getProductById } from "@/data/getProductById";
 import { Product } from "@prisma/client";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { startTransition, useEffect, useState, useTransition } from "react";
 import { ProductsettingSchema } from "@/schemas";
 import {
@@ -56,6 +56,7 @@ import { Label } from "@/components/ui/label";
 import { checkServerSession } from "@/actions/check-server-session";
 import { UploadDropzone } from "@/lib/uploadthing";
 import Link from "next/link";
+import { currentUser } from "@/lib/auth";
 
 const ProductDetailsPage = () => {
   const searchParams = useSearchParams();
@@ -66,6 +67,16 @@ const ProductDetailsPage = () => {
   const [formLoaded, setFormLoaded] = useState(false);
   const productId = searchParams.get("product");
   const [imageURL, setImageURL] = useState("");
+  const route = useRouter();
+
+  //   useEffect(() => {
+  //   (async () => {
+  //     const user = await currentUser();
+  //     if (user?.role !== "ADMIN") {
+  //       route.push("/");
+  //     }
+  //   })();
+  // }, []);
 
   useEffect(() => {
     const fetchProduct = async () => {

@@ -1,42 +1,64 @@
-"use server"
+"use server";
 
-import { db } from "@/lib/db"
-import { getUserByEmail } from "@/data/user"
-import { getVerificationTokenBytoken } from "@/data/verification-token"
+import { db } from "@/lib/db";
+import { getUserByEmail, getUserById } from "@/data/user";
+import { getVerificationTokenBytoken } from "@/data/verification-token";
 
-export const newVerification = async(token:string)=>{
-    const existingToken = await getVerificationTokenBytoken(token)
+export const newVerification = async (token: string, userId?: string) => {
+  const existingToken = await getVerificationTokenBytoken(token);
 
-    if(!existingToken){
-        return{error:"Token dose not exist!"}
-    }
+  console.log(userId);
+  console.log("TOKEN:", token);
 
-    const hasExpired = new Date(existingToken.expires) < new Date()
+  if (!existingToken) {
+    return { error: "Token dose not exist!" };
+  }
 
-    if (hasExpired){
-        return{error:"Token has expired!"}
-    }
+  const hasExpired = new Date(existingToken.expires) < new Date();
 
-    const existingUser = await getUserByEmail(existingToken.email)
+  if (hasExpired) {
+    return { error: "Token has expired!" };
+  }
 
-    if(!existingUser){
-        return{error:"Email dose not exist"}
+  if (userId !== "undefined") {
+    const existingUser = await getUserById(userId!);
+
+    if (!existingUser) {
+      return { error: "User dose not exist" };
     }
 
     await db.user.update({
-        where:{
-            id:existingUser.id
-        },
-        data:{
-            email: existingToken.email,
-            emailVerified: new Date()
-        }
-    })
+      where: {
+        id: userId,
+      },
+      data: {
+        email: existingToken.email,
+        emailVerified: new Date(),
+      },
+    });
+  }
 
-    await db.verificationToken.delete({
-        where:{id:existingToken.id}
-    })
-    
+  await db.verificationToken.delete({
+    where: { id: existingToken.id },
+  });
 
-    return {success:"Email verified!"}
-}
+  if (userId === "undefined") {
+    const existingUser = await getUserByEmail(existingToken.email);
+
+    if (!existingUser) {
+      return { error: "email dose not exist" };
+    }
+
+    await db.user.update({
+      where: {
+        email: existingUser.email!,
+      },
+      data: {
+        email: existingToken.email,
+        emailVerified: new Date(),
+      },
+    });
+  }
+
+  return { success: "Email verified!" };
+};

@@ -47,7 +47,7 @@ const SideCart = () => {
               </div>
             </Button>
           </SheetTrigger>
-          <SheetContent className="flex flex-col gap-5 sm:mt-12">
+          <SheetContent className="z-[999999] flex flex-col gap-5">
             <SheetHeader className="mt-12">
               <SheetTitle>My Shopping Basket</SheetTitle>
               <SheetDescription>Enjoy shopping!</SheetDescription>

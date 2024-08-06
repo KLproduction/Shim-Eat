@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 
 import AdminSwitch from "@/components/AdminSwitch";
 import HeroNew from "@/components/HeroNew/HeroNew";
+import Footer from "@/components/footer";
 
 const font = Poppins({
   subsets: ["latin"],

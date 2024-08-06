@@ -37,6 +37,7 @@ import ChangeOrderStatusForm from "../_components/ChangeOrderStatusForm";
 import { deleteSigalUserOrder } from "@/actions/deleteSigalUserOrder";
 import { toast } from "sonner";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { currentUser } from "@/lib/auth";
 
 const OrderPage = () => {
   const [product, setProduct] = useState<TUserOrder | null>();
@@ -44,6 +45,15 @@ const OrderPage = () => {
   const orderId = searchParams.get("order");
   const [pending, startTransition] = useTransition();
   const route = useRouter();
+
+  //   useEffect(() => {
+  //   (async () => {
+  //     const user = await currentUser();
+  //     if (user?.role !== "ADMIN") {
+  //       route.push("/");
+  //     }
+  //   })();
+  // }, []);
 
   useEffect(() => {
     (async () => {

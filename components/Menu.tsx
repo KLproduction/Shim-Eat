@@ -22,8 +22,8 @@ const Menu = async () => {
   return (
     <>
       <MaxWidthWrapper>
-        <div className=" flex items-center justify-center">
-          <h1 className="text-5xl font-bold text-green-500 my-5">
+        <div className="flex items-center justify-center">
+          <h1 className="my-5 text-5xl font-bold text-green-500">
             {saladMenu[0].category.toUpperCase()}
           </h1>
         </div>
@@ -31,7 +31,7 @@ const Menu = async () => {
           {saladMenu.map((product) => (
             <Card
               key={product.name}
-              className="flex flex-col items-center justify-end m-4 duration-500"
+              className="m-4 flex flex-col items-center justify-end duration-500"
             >
               <CardHeader className="mb-auto">
                 <CardTitle className="text-orange-500">
@@ -42,14 +42,14 @@ const Menu = async () => {
               <CardContent>
                 <img
                   src={product.image || undefined}
-                  className="max-w-[250px] h-auto object-cover rounded-xl flex-grow"
+                  className="h-auto max-w-[250px] flex-grow rounded-xl object-cover"
                 />
               </CardContent>
               <CardFooter>
-                <Button asChild className="hover:scale-110 duration-500">
+                <Button asChild className="duration-500 hover:scale-110">
                   <Link
-                    href={`http://localhost:3000/product?product=${product.id}`}
-                    className=" flex gap-5"
+                    href={`/product?product=${product.id}`}
+                    className="flex gap-5"
                   >
                     <div className="flex gap-3">
                       <h1>Order</h1>
@@ -61,16 +61,16 @@ const Menu = async () => {
             </Card>
           ))}
         </div>
-        <div className=" flex items-center justify-center">
-          <h1 className="text-5xl font-bold text-green-500 my-5">
+        <div className="flex items-center justify-center">
+          <h1 className="my-5 text-5xl font-bold text-green-500">
             {mainMenu[0].category.toUpperCase()}
           </h1>
         </div>
-        <div className=" sm:grid sm:grid-cols-2 lg:grid-cols-3">
+        <div className="sm:grid sm:grid-cols-2 lg:grid-cols-3">
           {mainMenu.map((product) => (
             <Card
               key={product.name}
-              className="flex flex-col items-center justify-end m-4 duration-500"
+              className="m-4 flex flex-col items-center justify-end duration-500"
             >
               <CardHeader className="mb-auto">
                 <CardTitle className="text-orange-500">
@@ -81,14 +81,14 @@ const Menu = async () => {
               <CardContent>
                 <img
                   src={product.image || undefined}
-                  className="max-w-[250px] h-auto object-cover rounded-xl flex-grow"
+                  className="h-auto max-w-[250px] flex-grow rounded-xl object-cover"
                 />
               </CardContent>
               <CardFooter>
-                <Button asChild className="hover:scale-110 duration-500">
+                <Button asChild className="duration-500 hover:scale-110">
                   <Link
-                    href={`http://localhost:3000/product?product=${product.id}`}
-                    className=" flex gap-5"
+                    href={`/product?product=${product.id}`}
+                    className="flex gap-5"
                   >
                     <div className="flex gap-3">
                       <h1>Order</h1>
@@ -100,16 +100,16 @@ const Menu = async () => {
             </Card>
           ))}
         </div>
-        <div className=" flex items-center justify-center">
-          <h1 className="text-5xl font-bold text-green-500 my-5">
+        <div className="flex items-center justify-center">
+          <h1 className="my-5 text-5xl font-bold text-green-500">
             {drinkMenu[0].category.toUpperCase()}
           </h1>
         </div>
-        <div className=" sm:grid sm:grid-cols-2 lg:grid-cols-3">
+        <div className="sm:grid sm:grid-cols-2 lg:grid-cols-3">
           {drinkMenu.map((product) => (
             <Card
               key={product.name}
-              className="flex flex-col items-center justify-end m-4 duration-500"
+              className="m-4 flex flex-col items-center justify-end duration-500"
             >
               <CardHeader className="mb-auto">
                 <CardTitle className="text-orange-500">
@@ -120,14 +120,14 @@ const Menu = async () => {
               <CardContent>
                 <img
                   src={product.image || undefined}
-                  className="max-w-[250px] h-auto object-cover rounded-xl flex-grow"
+                  className="h-auto max-w-[250px] flex-grow rounded-xl object-cover"
                 />
               </CardContent>
               <CardFooter>
-                <Button asChild className="hover:scale-110 duration-500">
+                <Button asChild className="duration-500 hover:scale-110">
                   <Link
-                    href={`http://localhost:3000/product?product=${product.id}`}
-                    className=" flex gap-5"
+                    href={`/product?product=${product.id}`}
+                    className="flex gap-5"
                   >
                     <div className="flex gap-3">
                       <h1>Order</h1>

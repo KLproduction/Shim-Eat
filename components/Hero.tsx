@@ -8,7 +8,7 @@ import { BiChevronRight } from "react-icons/bi";
 const Hero = () => {
   return (
     <MaxWidthWrapper>
-      <section className="flex h-dvh flex-col items-center justify-center">
+      <section className="flex h-dvh w-full flex-col items-center justify-center">
         <div className="flex items-center justify-around">
           <div className="mt-[100px] flex flex-col gap-8 p-3 md:my-auto">
             <h1 className="text-6xl font-bold text-green-600">

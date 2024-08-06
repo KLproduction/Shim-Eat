@@ -77,7 +77,7 @@ export const LoginForm = () => {
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className=" space-y-4">
+          <div className="space-y-4">
             {showTwoFactor && (
               <>
                 <FormField
@@ -89,7 +89,7 @@ export const LoginForm = () => {
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder="123456"
+                          placeholder="******"
                           disabled={isPending}
                         />
                       </FormControl>
@@ -110,7 +110,7 @@ export const LoginForm = () => {
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder="KL production@gmail.com"
+                          placeholder="Your Email..."
                           type="email"
                           disabled={isPending}
                         />
@@ -128,7 +128,7 @@ export const LoginForm = () => {
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder="Your password here"
+                          placeholder="Your password..."
                           type="password"
                           disabled={isPending}
                         />
@@ -151,7 +151,7 @@ export const LoginForm = () => {
           <FormError message={error || urlError} />
           <FormSuccess message={success} />
 
-          <Button typeof="submit" className=" w-full" disabled={isPending}>
+          <Button typeof="submit" className="w-full" disabled={isPending}>
             {showTwoFactor ? "Confirm" : "Login"}
           </Button>
         </form>
