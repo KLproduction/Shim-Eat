@@ -121,7 +121,7 @@ const SettingNav = () => {
                 value="/admin/users"
                 onClick={() => route.push("/admin/users")}
               >
-                Products
+                Users
               </DropdownMenuRadioItem>
 
               <DropdownMenuRadioItem
