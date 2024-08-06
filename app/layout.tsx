@@ -7,7 +7,6 @@ import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
 import AdminSwitch from "@/components/AdminSwitch";
 import NavbarMobile from "@/components/NavbarMobile";
-import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
