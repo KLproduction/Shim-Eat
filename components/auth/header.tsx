@@ -13,7 +13,7 @@ interface HeaderProps {
 export const Header = ({ label }: HeaderProps) => {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-y-4">
-      <img src="/saladLogo.png" className="max-w-[150px]" alt="logo" />
+      <img src="/saladLogo.png" className="max-w-[100px]" alt="logo" />
       <p className="text-sm text-muted-foreground">{label}</p>
     </div>
   );
