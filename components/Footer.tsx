@@ -1,6 +1,6 @@
 import React from "react";
 
-const footer = () => {
+const Footer = () => {
   return (
     <footer className="sticky bottom-0 left-0 w-full bg-gray-800 p-5 text-center text-white">
       <div className="mx-auto max-w-4xl px-4">
@@ -21,4 +21,4 @@ const footer = () => {
   );
 };
 
-export default footer;
+export default Footer;
