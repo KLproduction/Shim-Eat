@@ -35,7 +35,7 @@ import { ExtenderUser } from "@/next-auth";
 import SettingformAdmin from "./_components/SettingFormAdmin";
 import { currentUser } from "@/lib/auth";
 
-const userDetailsPage = () => {
+const UserDetailsPage = () => {
   const [products, setProduct] = useState<TUserOrder[] | null>();
   const [user, setUser] = useState<User | null>();
   const searchParams = useSearchParams();
@@ -242,4 +242,4 @@ const userDetailsPage = () => {
   );
 };
 
-export default userDetailsPage;
+export default UserDetailsPage;
