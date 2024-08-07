@@ -1,14 +1,14 @@
 import Link from "next/link";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
-import { LoginButtonProps } from "./auth/loginBtn";
-import MaxWidthWrapper from "./MaxWidthWrapper";
+import { LoginButtonProps } from "../auth/loginBtn";
+import MaxWidthWrapper from "../MaxWidthWrapper";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "../ui/dropdown-menu";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { FaUser } from "react-icons/fa";
 import { currentUser } from "@/lib/auth";
@@ -18,16 +18,16 @@ import {
   AiFillHome,
   AiTwotoneBook,
 } from "react-icons/ai";
-import SideCart from "./SideCart";
+import SideCart from "../SideCart";
 import { useEffect, useState } from "react";
-import AdminSwtich from "./AdminSwitch";
-import SignOutBtn from "./auth/SignOutBtn";
-import GoogleSignInBtn from "./auth/GoogleSignInBtn";
-import GitSignInBtn from "./auth/GitSignInBtn";
+import AdminSwtich from "../AdminSwitch";
+import SignOutBtn from "../auth/SignOutBtn";
+import GoogleSignInBtn from "../auth/GoogleSignInBtn";
+import GitSignInBtn from "../auth/GitSignInBtn";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { ExtenderUser } from "@/next-auth";
 import { AiOutlineGoogle } from "react-icons/ai";
-import ShowUserCartFromDBSideTest from "./ShowUserCartFormDBSideTest";
+import ShowUserCartFromDBSideTest from "../ShowUserCartFormDBSideTest";
 
 const navList = [
   {

@@ -18,6 +18,7 @@ import { userCart } from "@/lib/type";
 import addToCartDB from "@/actions/addToCartDB";
 import { cartQuantityUpdate } from "@/actions/cartQuantityUpdate";
 import { Input } from "./ui/input";
+import MySpinner from "./ui/MySpinner";
 
 export type UserT = {
   user: ExtenderUser;
@@ -47,7 +48,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
       }
     };
     getData();
-  }, [updateCount]);
+  }, [updateCount, user]);
 
   const handleQuantityChange = (
     cartId: string,
@@ -92,10 +93,14 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
     });
   };
 
+  if (!userProduct) {
+    <MySpinner />;
+  }
+
   return (
     <div className="flex h-auto w-full items-center justify-start">
       <div className="mx-auto p-0">
-        {user.id && userProduct?.items.length! > 0 ? (
+        {user.id && userProduct?.items.length! > 0 && (
           <>
             <div>
               {userProduct?.items.map((item, index) => (
@@ -214,13 +219,6 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
               <h1>Total: {formatPrice(total)}</h1>
             </div>
           </>
-        ) : (
-          <div className="mt-[70%] flex flex-col items-center justify-center gap-5">
-            <h1 className="text-sm">Your shopping cart is empty</h1>
-            <Button>
-              <Link href={"/menu"}>Continue Shopping</Link>
-            </Button>
-          </div>
         )}
       </div>
     </div>

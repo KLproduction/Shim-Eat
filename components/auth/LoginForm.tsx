@@ -22,7 +22,7 @@ import { FormSuccess } from "../form-success";
 import { login } from "@/actions/login";
 import { useTransition } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { DialogTrigger } from "../ui/dialog";
 
 export const LoginForm = () => {
@@ -36,6 +36,7 @@ export const LoginForm = () => {
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
+  const route = useRouter();
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -151,7 +152,16 @@ export const LoginForm = () => {
           <FormError message={error || urlError} />
           <FormSuccess message={success} />
 
-          <Button typeof="submit" className="w-full" disabled={isPending}>
+          <Button
+            typeof="submit"
+            className="w-full"
+            disabled={isPending}
+            onClick={() => {
+              {
+                route.refresh(), console.log("REFRESH");
+              }
+            }}
+          >
             {showTwoFactor ? "Confirm" : "Login"}
           </Button>
         </form>

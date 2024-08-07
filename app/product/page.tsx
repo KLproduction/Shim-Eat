@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { getProductById } from "@/data/getProductById";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
@@ -45,6 +45,7 @@ const ProductPage = () => {
   const searchParams = useSearchParams();
   const [product, setProduct] = useState<Product | null>(null);
   const [addOnTotal, setAddOnTotal] = useState(0);
+  const route = useRouter();
 
   const form = useForm<z.infer<typeof AddOnsSchema>>({
     resolver: zodResolver(AddOnsSchema),
@@ -101,6 +102,7 @@ const ProductPage = () => {
         }
         if (data?.success) {
           setSuccess(data.success);
+          route.refresh();
         }
       });
     });

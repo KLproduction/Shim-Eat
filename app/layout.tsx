@@ -4,10 +4,11 @@ import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/(Navbar)/Navbar";
 import AdminSwitch from "@/components/AdminSwitch";
-import NavbarMobile from "@/components/NavbarMobile";
-import NavbarMobileNew from "@/components/NavbarMobileNew";
+import NavbarMobile from "@/components/(Navbar)/NavbarMobile";
+import NavbarMobileNew from "@/components/(Navbar)/NavbarMobileNew";
+import NavbarMobileComponents from "@/components/(Navbar)/_components/NavbarMobile_compoent";
 
 const inter = Inter({ subsets: ["latin"] });
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
@@ -32,7 +33,6 @@ export default async function RootLayout({
             <Navbar />
           </div>
           <div className="sm:hidden">
-            {/* <NavbarMobile /> */}
             <NavbarMobileNew />
           </div>
           <AdminSwitch />

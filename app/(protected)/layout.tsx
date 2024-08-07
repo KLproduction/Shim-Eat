@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/(Navbar)/Navbar";
 import SettingNav from "./_components/SettingNav";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -8,7 +8,7 @@ interface ProtecteLayoutProps {
 
 const ProtecteLayout = ({ children }: ProtecteLayoutProps) => {
   return (
-    <div className=" min-h-dvh w-full flex flex-col gap-y-10 items-center justify-center bg-zinc-200">
+    <div className="flex min-h-dvh w-full flex-col items-center justify-center gap-y-10 bg-zinc-200">
       <SettingNav />
       <Toaster />
       {children}

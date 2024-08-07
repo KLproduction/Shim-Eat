@@ -135,11 +135,6 @@ const HeroNew = () => {
       setOther2ID(other2);
       setActiveID(active);
       setItemID(item);
-
-      console.log(other1ID);
-      console.log(other2ID);
-      console.log(activeID);
-      console.log(itemID);
     }
   }, [products]);
 

@@ -26,12 +26,23 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { DialogDescription } from "@radix-ui/react-dialog";
+import { currentUser } from "@/lib/auth";
+import { User } from "@prisma/client";
+import { ExtenderUser } from "@/next-auth";
 
 const OrderPage = () => {
-  // const [user, setUser] = useState<ExtenderUser>();
+  const [user, setUser] = useState<ExtenderUser | null>(null);
   const [products, setProduct] = useState<TUserOrder[] | null>();
 
-  const user = useCurrentUser();
+  useEffect(() => {
+    (async () => {
+      const data = await currentUser();
+      if (data) {
+        setUser(data);
+      }
+    })();
+  }, []);
+
   useEffect(() => {
     (async () => {
       if (user) {
@@ -43,7 +54,7 @@ const OrderPage = () => {
 
   if (!products) {
     return (
-      <div className="flex flex-col justify-center items-center min-h-full gap-3">
+      <div className="flex min-h-full flex-col items-center justify-center gap-3">
         <MySpinner />
         <Button asChild variant={"link"} size={"sm"}>
           <Link href={"/"}>Back</Link>
@@ -55,22 +66,26 @@ const OrderPage = () => {
   return (
     <MaxWidthWrapper>
       <div className="flex justify-center p-5">
-        <h1 className=" font-bold text-zinc-600 text-3xl">My Orders</h1>
+        <h1 className="text-3xl font-bold text-zinc-600">My Orders</h1>
       </div>
       {products.map((product) => (
         <Card className="m-5 p-5" key={product.createdAt.getMilliseconds()}>
           <CardHeader className="text-lg">
-            <div className="flex flex-col sm:flex-row justify-between ">
-              <div className="text-zinc-600 font-bold">
+            <div className="flex flex-col justify-between sm:flex-row">
+              <div className="font-bold text-zinc-600">
                 Order reference: {product?.id}
               </div>
-              <div className="text-green-500 font-bold">{product.status}</div>
+              <div className="font-bold text-green-500">{product.status}</div>
             </div>
+            <CardDescription className="flex flex-col">
+              <span>Delivery Address: </span>
+              <span>{product.deliveryAddress}</span>
+            </CardDescription>
           </CardHeader>
 
-          <div className=" flex justify-center min-h-full flex-col text-md text-zinc-500 font-bold p-3">
+          <div className="text-md flex min-h-full flex-col justify-center p-3 font-bold text-zinc-500">
             <div>Ordered:</div>
-            <div className=" flex justify-between">
+            <div className="flex justify-between">
               <div className="flex gap-6">
                 <div>
                   {`${product.updatedAt.getDate()}/${
@@ -86,8 +101,8 @@ const OrderPage = () => {
           </div>
 
           <Dialog>
-            <DialogTrigger className="w-full flex justify-center p-3 text-zinc-500 font-bold">
-              <div className="ring-1 ring-zinc-500 p-3 rounded-xl">
+            <DialogTrigger className="flex w-full justify-center p-3 font-bold text-zinc-500">
+              <div className="rounded-xl p-3 ring-1 ring-zinc-500">
                 Show Details
               </div>
             </DialogTrigger>
@@ -96,40 +111,38 @@ const OrderPage = () => {
             </DialogTitle>
             <DialogContent className="h-[500px]">
               <DialogHeader className="p-6">
-                <div className="flex justify-between ">
-                  <div className="text-zinc-500 font-bold">
+                <div className="flex justify-between">
+                  <div className="font-bold text-zinc-500">
                     Order reference: {product?.id}
                   </div>
-                  <div className="text-green-500 font-bold">
+                  <div className="font-bold text-green-500">
                     {product.status}
                   </div>
                 </div>
               </DialogHeader>
-              <ScrollArea className="w-full h-full rounded-md border">
-                <div className="max-w-5xl w-full mx-auto space-y-8">
+              <ScrollArea className="h-full w-full rounded-md border">
+                <div className="mx-auto w-full max-w-5xl space-y-8">
                   <div>
                     {product?.orderItems.map((product) => (
                       <Card
-                        className="flex flex-col items-center gap-5 m-5 p-5"
+                        className="m-5 flex flex-col items-center gap-5 p-5"
                         key={product.id}
                       >
-                        <div className=" grid grid-cols-2 items-center gap-5">
+                        <div className="grid grid-cols-2 items-center gap-5">
                           <img
                             src={product.product.image || undefined}
                             alt=""
-                            className="max-w-[100px] rounded-full col-span-1"
+                            className="col-span-1 max-w-[100px] rounded-full"
                           />
-                          <h1 className=" col-span-1">
-                            {product.product.name}
-                          </h1>
-                          <div className="text-sm col-span-1">
+                          <h1 className="col-span-1">{product.product.name}</h1>
+                          <div className="col-span-1 text-sm">
                             <h2>
                               Size: {product?.sizeOption?.toUpperCase()} <br />+
                               (
                               {formatPrice(
                                 ADDONSPRICE.size[
                                   product?.sizeOption as keyof typeof ADDONSPRICE.size
-                                ]
+                                ],
                               )}
                               )
                             </h2>
@@ -139,7 +152,7 @@ const OrderPage = () => {
                               {formatPrice(
                                 ADDONSPRICE.addOns[
                                   product?.sideOption as keyof typeof ADDONSPRICE.addOns
-                                ]
+                                ],
                               )}
                               )
                             </h2>
@@ -147,11 +160,11 @@ const OrderPage = () => {
                           <h1 className="col-span-1">
                             Quantity: {product.quantity}
                           </h1>
-                          <h1 className=" col-span-2 ml-auto">
+                          <h1 className="col-span-2 ml-auto">
                             Price:
                             {formatPrice(
                               (product.price + product.extraPrice) *
-                                product.quantity
+                                product.quantity,
                             )}
                           </h1>
                         </div>
@@ -160,7 +173,7 @@ const OrderPage = () => {
                   </div>
                 </div>
               </ScrollArea>
-              <h1 className="text-xl flex justify-end">
+              <h1 className="flex justify-end text-xl">
                 Order Total:{formatPrice(product?.orderPrice!)}{" "}
               </h1>
             </DialogContent>
