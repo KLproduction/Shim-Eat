@@ -39,8 +39,6 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
     if (!userProduct) {
       setUpdateCount((prev) => prev + 1);
     }
-
-    console.log("COUNT+1!!");
   }, [user]);
 
   useEffect(() => {

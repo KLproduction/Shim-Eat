@@ -45,6 +45,7 @@ const ProductPage = () => {
   const searchParams = useSearchParams();
   const [product, setProduct] = useState<Product | null>(null);
   const [addOnTotal, setAddOnTotal] = useState(0);
+  const [routeNumber, setRouteNamber] = useState(0);
   const route = useRouter();
 
   const form = useForm<z.infer<typeof AddOnsSchema>>({
@@ -62,9 +63,9 @@ const ProductPage = () => {
     },
   });
 
-  useEffect(() => {
-    const productId = searchParams.get("product");
+  const productId = searchParams.get("product");
 
+  useEffect(() => {
     const fetchProduct = async () => {
       if (productId) {
         const fetchedProduct = await getProductById(productId);
@@ -102,7 +103,8 @@ const ProductPage = () => {
         }
         if (data?.success) {
           setSuccess(data.success);
-          route.refresh();
+          setRouteNamber((prev) => prev + 1);
+          route.push(`/product?product=${productId}&u=${routeNumber}`);
         }
       });
     });
@@ -127,6 +129,7 @@ const ProductPage = () => {
         }
         if (data?.success) {
           setSuccess(data.success);
+          route.push(`/product?product=${productId}`);
         }
       });
     });

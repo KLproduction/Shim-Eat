@@ -17,7 +17,7 @@ import Link from "next/link";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import React, { useEffect, useState } from "react";
 import ShowUserCartFromDBSide from "./ShowUserCartFormDBSide";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { ExtenderUser } from "@/next-auth";
 import { userCart } from "@/lib/type";
@@ -32,15 +32,20 @@ const SideCart = ({ className, user }: SideCartProps) => {
   const [isCart, setIsCart] = useState(true);
   const pathname = usePathname();
   const [userProduct, setUserProduct] = useState<userCart | null>();
+  const searchParams = useSearchParams();
+
+  const cartcount = searchParams.get("u");
 
   useEffect(() => {
     (async () => {
       if (user?.id) {
         const data = await getCartItembyId(user.id);
-        setUserProduct(data);
+        if (data) {
+          setUserProduct(data);
+        }
       }
     })();
-  }, []);
+  }, [user.id, pathname, cartcount]);
 
   useEffect(() => {
     const paths = [
