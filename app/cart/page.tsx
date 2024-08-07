@@ -9,7 +9,6 @@ const CartPage = async () => {
   return (
     <div className="pb-12 sm:pb-0">
       <ShowUserCartFromDB user={user!} />
-      {/* <ShowUserCartFromDBTest /> */}
     </div>
   );
 };

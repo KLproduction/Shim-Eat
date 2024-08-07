@@ -6,9 +6,9 @@ import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/(Navbar)/Navbar";
 import AdminSwitch from "@/components/AdminSwitch";
-import NavbarMobile from "@/components/(Navbar)/NavbarMobile";
 import NavbarMobileNew from "@/components/(Navbar)/NavbarMobileNew";
 import NavbarMobileComponents from "@/components/(Navbar)/_components/NavbarMobile_compoent";
+import { currentUser } from "@/lib/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
@@ -24,6 +24,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
+  const user = await currentUser();
 
   return (
     <SessionProvider session={session}>

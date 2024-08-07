@@ -36,6 +36,14 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
   }
 
   useEffect(() => {
+    if (!userProduct) {
+      setUpdateCount((prev) => prev + 1);
+    }
+
+    console.log("COUNT+1!!");
+  }, [user]);
+
+  useEffect(() => {
     const getData = async () => {
       const data = await getCartItembyId(user?.id!);
       if (isValidUserCart(data)) {
@@ -48,7 +56,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
       }
     };
     getData();
-  }, [updateCount, user]);
+  }, [updateCount, user.id]);
 
   const handleQuantityChange = (
     cartId: string,
@@ -92,10 +100,6 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
       setLoading(!loading);
     });
   };
-
-  if (!userProduct) {
-    <MySpinner />;
-  }
 
   return (
     <div className="flex h-auto w-full items-center justify-start">
