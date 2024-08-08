@@ -50,7 +50,7 @@ const ProductCategoryMenu = ({
             <CardFooter>
               <Button asChild className="duration-500 hover:scale-110">
                 <Link
-                  href={`/product?product=${product.id}`}
+                  href={`/productStore?product=${product.id}`}
                   className="flex gap-5"
                 >
                   <div className="flex gap-3">

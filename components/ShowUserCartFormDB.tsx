@@ -18,6 +18,7 @@ import { userCart } from "@/lib/type";
 import addToCartDB from "@/actions/addToCartDB";
 import { cartQuantityUpdate } from "@/actions/cartQuantityUpdate";
 import AddCartitemToOrderBtn from "./AddCartitemToOrderBtn";
+import { TCartItem } from "./ShowUserCartFormStoageSide";
 
 export type UserT = {
   user: ExtenderUser;
@@ -44,7 +45,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
   }, [updateCount]);
 
   useEffect(() => {
-    if (userProduct?.items.length) {
+    if (userProduct) {
       const orderTotal = userProduct.items.reduce(
         (acc, item) => acc + (item.itemTotal || 0),
         0,
@@ -75,7 +76,49 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
         })
         .then(() => {
           setUpdateCount((c) => c + 1);
+        })
+        .then(() => {
+          const storedCart = localStorage.getItem("cart");
+          if (storedCart) {
+            let cartItems = JSON.parse(storedCart);
+            const itemIndex = cartItems.findIndex(
+              (item: any) =>
+                item.productId === productId &&
+                item.sizeOption === sizeOption &&
+                item.sideOption === sideOption,
+            );
+
+            if (itemIndex !== -1) {
+              cartItems[itemIndex].quantity = newQuantity;
+              localStorage.setItem("cart", JSON.stringify(cartItems));
+            }
+          }
         });
+    });
+  };
+
+  const deleteLocalCartAction = (
+    productId: string,
+    sizeOption: Size,
+    sideOption: AddOns,
+  ) => {
+    startTransition(async () => {
+      const storedCart = localStorage.getItem("cart");
+      if (storedCart) {
+        const cartItems = JSON.parse(storedCart);
+        const updatedCartItems = cartItems.filter((item: TCartItem) => {
+          return !(
+            item.userId === user.id &&
+            item.productId === productId &&
+            item.sizeOption === sizeOption &&
+            item.sideOption === sideOption
+          );
+        });
+        localStorage.setItem("cart", JSON.stringify(updatedCartItems));
+        setUserProduct(updatedCartItems);
+      }
+
+      setUpdateCount((count) => count + 1);
     });
   };
 
@@ -103,23 +146,12 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
       }
     });
   };
-
-  if (!user || userProduct?.items.length === 0)
-    return (
-      <Card className="flex min-h-screen flex-col justify-center">
-        <div className="flex h-full flex-col items-center justify-center gap-5">
-          <h1>Your shopping cart is empty</h1>
-          <Button>
-            <Link href={"/menu"}>Continue Shopping</Link>
-          </Button>
-        </div>
-      </Card>
-    );
-
+  const hasItems =
+    userProduct && userProduct.items && userProduct.items.length > 0;
   return (
     <div className="flex h-auto w-full items-center justify-start">
       <div className="mx-auto p-3">
-        {user.id ? (
+        {user.id && hasItems && userProduct.items.length > 0 ? (
           <>
             <div>
               {userProduct?.items.map((item) => (
@@ -215,14 +247,19 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
                       <Button
                         variant={"ghost"}
                         size={"sm"}
-                        onClick={() =>
+                        onClick={() => {
                           deleteCartAction(
                             item.cartId,
                             item?.product.id,
                             item?.sizeOption!,
                             item?.sideOption!,
-                          )
-                        }
+                          ),
+                            deleteLocalCartAction(
+                              item?.product.id,
+                              item?.sizeOption!,
+                              item?.sideOption!,
+                            );
+                        }}
                         disabled={pending}
                         className="m-2 rounded bg-red-500 p-2 text-white"
                       >
@@ -239,8 +276,10 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
             </div>
           </>
         ) : (
-          <div>
-            <h1>Your shopping cart is empty</h1>
+          <div className="flex h-auto w-full translate-y-2/3 flex-col items-center justify-center gap-5">
+            <h1 className="text-3xl text-zinc-600">
+              Your shopping cart is empty
+            </h1>
             <Button>
               <Link href={"/menu"}>Continue Shopping</Link>
             </Button>
