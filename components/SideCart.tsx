@@ -33,7 +33,8 @@ const SideCart = ({ className, user }: SideCartProps) => {
   const pathname = usePathname();
   const [userProduct, setUserProduct] = useState<userCart | null>();
   const searchParams = useSearchParams();
-
+  const [cartItemQuantity, setCartItemQuiantity] = useState(0);
+  const route = useRouter();
   const cartcount = searchParams.get("u");
 
   useEffect(() => {
@@ -54,17 +55,35 @@ const SideCart = ({ className, user }: SideCartProps) => {
       "/stripe/purchase-success",
     ] as string[];
     const hideCart = paths.some((path) => pathname.includes(path));
-
     setIsCart(!hideCart);
   }, [pathname]);
+
+  useEffect(() => {
+    if (userProduct && userProduct?.items.length > 0) {
+      const quantity = userProduct.items.reduce(
+        (acc, item) => acc + (Number(item.quantity) || 0),
+        0,
+      );
+      setCartItemQuiantity(quantity);
+    } else {
+      setCartItemQuiantity(0);
+    }
+  }, [userProduct, cartItemQuantity]);
 
   return (
     <div className={`${className}`}>
       {isCart && (
         <Sheet>
           <SheetTrigger asChild className={isCart ? "block" : "hidden"}>
-            <div className="cursor-pointer text-xl text-green-500 hover:text-orange-600 sm:text-3xl sm:text-zinc-600 sm:hover:text-green-500">
-              <AiFillShopping />
+            <div className="relative cursor-pointer text-xl text-green-500 hover:text-orange-500 sm:text-3xl sm:text-orange-500 sm:hover:text-green-500">
+              <div>
+                <AiFillShopping />
+                <div className="absolute right-0 top-0 -translate-y-1/2 translate-x-1/2 transform">
+                  {/* <p className="rounded-full bg-orange-500 px-1.5 py-0.5 text-xs text-white">
+                    {cartItemQuantity}
+                  </p> */}
+                </div>
+              </div>
             </div>
           </SheetTrigger>
           <SheetContent className="flex flex-col gap-5 sm:z-[999999]">

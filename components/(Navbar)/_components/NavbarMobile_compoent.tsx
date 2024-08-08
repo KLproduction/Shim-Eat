@@ -103,12 +103,12 @@ const NavbarMobileComponents = ({ user }: NavbarMobileComponentsProps) => {
     {
       label: <AiFillHome />,
       path: "/",
-      className: `${activeStates.home ? " translate-y-[-10px]" : ""}`,
+      className: `${activeStates.home ? " translate-y-[-10px] text-orange-500" : ""}`,
     },
     {
       label: <AiFillBook />,
       path: "/menu",
-      className: `${activeStates.menu ? " translate-y-[-10px]" : ""}`,
+      className: `${activeStates.menu ? " translate-y-[-10px] text-orange-500" : ""}`,
     },
     {
       label: <CgLogIn />,
@@ -160,7 +160,9 @@ const NavbarMobileComponents = ({ user }: NavbarMobileComponentsProps) => {
               <DropdownMenuTrigger
                 className={cn(
                   "hover:text-green-500",
-                  activeStates.profile ? "translate-y-[-10px]" : "",
+                  activeStates.profile
+                    ? "translate-y-[-10px] text-orange-500"
+                    : "",
                 )}
               >
                 <BiSolidUser />

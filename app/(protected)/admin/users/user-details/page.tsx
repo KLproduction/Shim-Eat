@@ -118,6 +118,10 @@ const UserDetailsPage = () => {
                       {product.status}
                     </div>
                   </div>
+                  <CardDescription className="flex flex-col">
+                    <p>Delivery Address:</p>
+                    <p>{product.deliveryAddress}</p>
+                  </CardDescription>
                 </CardHeader>
 
                 <div className="text-md flex min-h-full flex-col justify-center p-3 font-bold text-zinc-500">
@@ -219,6 +223,11 @@ const UserDetailsPage = () => {
                 </Dialog>
               </Card>
             ))}
+            <div className="flex justify-center p-5">
+              <Button asChild size={"lg"}>
+                <Link href={"/admin/users"}>Back</Link>
+              </Button>
+            </div>
           </Card>
         </section>
       ) : (
@@ -229,15 +238,14 @@ const UserDetailsPage = () => {
                 User Orders is Empty.
               </h1>
             </div>
+            <div className="flex justify-center p-5">
+              <Button asChild size={"lg"}>
+                <Link href={"/admin/users"}>Back</Link>
+              </Button>
+            </div>
           </Card>
         </section>
       )}
-
-      <div className="flex justify-end p-5">
-        <Button asChild variant={"link"} size={"lg"}>
-          <Link href={"/admin/users"}>Back</Link>
-        </Button>
-      </div>
     </MaxWidthWrapper>
   );
 };

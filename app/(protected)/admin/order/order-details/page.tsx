@@ -267,7 +267,7 @@ const OrderPage = () => {
             </Card>
           </div>
         )}
-        <div className="flex justify-end p-5">
+        <div className="flex justify-start p-5">
           <Button
             asChild
             variant={"outline"}

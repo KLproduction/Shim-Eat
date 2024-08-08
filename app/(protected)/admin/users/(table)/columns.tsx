@@ -120,11 +120,31 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "totalSpend",
-    header: () => <div className="text-center">Total Spend</div>,
+    header: ({ column }) => {
+      const isSortedAsc = column.getIsSorted();
+      return (
+        <div className="flex justify-center">
+          <Button
+            className="flex items-center justify-center gap-3"
+            variant={"ghost"}
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Total Spend
+            {isSortedAsc === "asc" && <AiOutlineCaretUp />}
+            {isSortedAsc === "desc" && <AiOutlineCaretDown />}
+            {!isSortedAsc && (
+              <div>
+                <BsChevronExpand />
+              </div>
+            )}
+          </Button>
+        </div>
+      );
+    },
     cell: ({ row }) => {
       const data = row.getValue("totalSpend") as number;
       const formattedData = formatPrice(data);
-      return <div className="text-center">{formattedData}</div>;
+      return <div className="flex justify-center">{formattedData}</div>;
     },
   },
   {

@@ -19,6 +19,7 @@ import addToCartDB from "@/actions/addToCartDB";
 import { cartQuantityUpdate } from "@/actions/cartQuantityUpdate";
 import { Input } from "./ui/input";
 import MySpinner from "./ui/MySpinner";
+import { useRouter } from "next/navigation";
 
 export type UserT = {
   user: ExtenderUser;
@@ -72,6 +73,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
         newQuantity,
       );
     });
+
     setUpdateCount((c) => c + 1);
   };
 

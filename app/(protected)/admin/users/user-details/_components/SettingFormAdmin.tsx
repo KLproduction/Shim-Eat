@@ -113,11 +113,6 @@ const SettingformAdmin = ({ user }: SettingFormProps) => {
             </div>
 
             <div className="flex items-center gap-3">
-              <div>Name:</div>
-              <div>{user.id}</div>
-            </div>
-
-            <div className="flex items-center gap-3">
               <div>Total Spend:</div>
               <div>{formatPrice(user.totalSpend)}</div>
             </div>
