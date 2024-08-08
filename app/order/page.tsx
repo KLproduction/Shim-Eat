@@ -93,7 +93,7 @@ const OrderPage = () => {
                   }/${product.updatedAt.getFullYear()}`}
                 </div>
                 <div>
-                  {`${product.updatedAt.getHours()}:${product.updatedAt.getMinutes()}`}
+                  {`${product.updatedAt.getHours()}:${product.updatedAt.getMinutes().toString().padStart(2, "0")}`}
                 </div>
               </div>
               <div>{formatPrice(product.orderPrice)}</div>

@@ -117,14 +117,14 @@ const Form = ({ orderPrice }: FormProps) => {
           setError("An unknown error occurred");
         }
       });
+    localStorage.removeItem("cart");
+
     setLoading(!loading);
   };
 
   return (
     <>
-      {/* <div className={loading === false ? "hidden" : ""}>
-        <MySpinner />
-      </div> */}
+      {pending && <MySpinner />}
       <form onSubmit={handleSubmit}>
         <Card>
           <CardHeader>Confirm Payment</CardHeader>

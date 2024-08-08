@@ -19,6 +19,9 @@ import addToCartDB from "@/actions/addToCartDB";
 import { cartQuantityUpdate } from "@/actions/cartQuantityUpdate";
 import AddCartitemToOrderBtn from "./AddCartitemToOrderBtn";
 import { TCartItem } from "./ShowUserCartFormStoageSide";
+import MySpinner from "./ui/MySpinner";
+import { usePathname, useSearchParams } from "next/navigation";
+import { deleteAllCurrentCartItemByUserId } from "@/actions/deleteAllCurrentCartItemByUserId";
 
 export type UserT = {
   user: ExtenderUser;
@@ -29,6 +32,8 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
   const [updateCount, setUpdateCount] = useState<number>(0);
   const [userProduct, setUserProduct] = useState<userCart>();
   const [total, setTotal] = useState(0);
+
+  const pathname = usePathname();
 
   function isValidUserCart(data: any): data is userCart {
     return data;
@@ -146,6 +151,7 @@ const ShowUserCartFromDB = ({ user }: UserT) => {
       }
     });
   };
+
   const hasItems =
     userProduct && userProduct.items && userProduct.items.length > 0;
   return (

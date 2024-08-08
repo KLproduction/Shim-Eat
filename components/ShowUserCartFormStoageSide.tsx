@@ -16,12 +16,16 @@ import { ADDONSPRICE } from "@/data/products";
 import Link from "next/link";
 import { TaddCartToDB } from "@/lib/type";
 import addLocalToCart from "@/actions/addLocalToCartDB";
+import { ScrollArea } from "./ui/scroll-area";
+import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 export type UserT = {
   user: ExtenderUser;
 };
 
 export type TfetchedProducts = Array<{
+  userId: string;
   id?: string;
   name?: string;
   description?: string;
@@ -47,6 +51,8 @@ const ShowUserCartFromStoageSide = ({ user }: UserT) => {
   const [pending, startTransition] = useTransition();
   const [updateCount, setUpdateCount] = useState(0);
   const [userProduct, setUserProduct] = useState<TfetchedProducts>([]);
+  const [total, setTotal] = useState(0);
+  const route = useRouter();
 
   useEffect(() => {
     const getProductsFromLocalCart = async () => {
@@ -86,6 +92,7 @@ const ShowUserCartFromStoageSide = ({ user }: UserT) => {
                   sizeOption: item.sizeOption,
                   sideOption: item.sideOption,
                   extraPrice: item.extraPrice,
+                  userId: user.id!,
                 });
               }
             });
@@ -187,6 +194,19 @@ const ShowUserCartFromStoageSide = ({ user }: UserT) => {
     });
   };
 
+  const checkoutOnClickHandler = () => {
+    startTransition(() => {
+      addLocalToCart(userProduct).then((data) => {
+        if (data.success) {
+          route.push("/cart");
+        }
+        if (data.error) {
+          toast.error(data.error);
+        }
+      });
+    });
+  };
+
   if (!user)
     return (
       <div className="flex h-full flex-col items-center justify-center gap-5">
@@ -198,97 +218,119 @@ const ShowUserCartFromStoageSide = ({ user }: UserT) => {
     );
 
   return (
-    <div className="flex h-auto w-full items-center justify-start">
-      <div className="mx-auto p-3">
-        {user.id && userProduct.length > 0 ? (
-          <>
-            <div>
-              {userProduct?.map((item) => (
-                <div
-                  className="p-3"
-                  key={`${item?.id}-${user.id}-${item?.sizeOption}-${item?.sideOption}`}
-                >
-                  <div className="flex flex-col items-center justify-center gap-4 rounded-md bg-white p-3 shadow">
-                    <img
-                      src={item?.image || undefined}
-                      className="h-auto max-w-[60px] items-center rounded-full object-cover"
-                    />
-                    <div className="flex flex-col items-center gap-2">
-                      <h1 className="text-md font-bold">{item?.name}</h1>
-                      <div className="text-sm">
-                        <h2>
-                          Size: {item?.sizeOption?.toUpperCase()} + (
-                          {formatPrice(
-                            ADDONSPRICE.size[
-                              item?.sizeOption as keyof typeof ADDONSPRICE.size
-                            ],
-                          )}
-                          )
-                        </h2>
-                        <h2>
-                          Side: {item?.sideOption?.toUpperCase()} + (
-                          {formatPrice(
-                            ADDONSPRICE.addOns[
-                              item?.sideOption as keyof typeof ADDONSPRICE.addOns
-                            ],
-                          )}
-                          )
-                        </h2>
+    <div
+      className={cn(
+        "flex w-full flex-col gap-5 rounded-md border border-b-2 border-green-500",
+        userProduct.length > 2
+          ? "h-[30%] sm:h-[40%]"
+          : "h-[60%] min-h-[500px] sm:h-[70%]",
+      )}
+    >
+      <ScrollArea>
+        <div className="flex h-auto w-full items-center justify-start">
+          <div className="mx-auto p-3">
+            {user.id && userProduct.length > 0 ? (
+              <>
+                <div>
+                  {userProduct?.map((item) => (
+                    <div
+                      className="p-3"
+                      key={`${item?.id}-${user.id}-${item?.sizeOption}-${item?.sideOption}`}
+                    >
+                      <div className="flex flex-col items-center justify-center gap-4 rounded-md bg-white p-3 shadow">
+                        <img
+                          src={item?.image || undefined}
+                          className="h-auto max-w-[60px] items-center rounded-full object-cover"
+                        />
+                        <div className="flex flex-col items-center gap-2">
+                          <h1 className="text-md font-bold">{item?.name}</h1>
+                          <div className="text-sm">
+                            <h2>
+                              Size: {item?.sizeOption?.toUpperCase()} + (
+                              {formatPrice(
+                                ADDONSPRICE.size[
+                                  item?.sizeOption as keyof typeof ADDONSPRICE.size
+                                ],
+                              )}
+                              )
+                            </h2>
+                            <h2>
+                              Side: {item?.sideOption?.toUpperCase()} + (
+                              {formatPrice(
+                                ADDONSPRICE.addOns[
+                                  item?.sideOption as keyof typeof ADDONSPRICE.addOns
+                                ],
+                              )}
+                              )
+                            </h2>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col items-center">
+                          <input
+                            className="w-16 rounded-lg border border-zinc-400 text-center"
+                            type="number"
+                            value={item?.quantity!}
+                            onChange={(e) =>
+                              handleLocalQuantityChange(
+                                item?.id!,
+                                item?.sizeOption!,
+                                item?.sideOption!,
+                                parseInt(e.target.value),
+                              )
+                            }
+                            min={1}
+                          />
+                          <h1 className="mt-2 text-lg">
+                            Total:{" "}
+                            {formatPrice(
+                              item?.quantity! *
+                                (item?.price! + item?.extraPrice!),
+                            )}
+                          </h1>
+                        </div>
+                        <div className="flex items-center justify-end">
+                          <Button
+                            size={"sm"}
+                            onClick={() =>
+                              deleteCartAction(
+                                item?.id!,
+                                item?.sizeOption!,
+                                item?.sideOption!,
+                              )
+                            }
+                            disabled={pending}
+                            className="m-2 rounded bg-red-500 p-2 text-white"
+                          >
+                            Cancel
+                          </Button>
+                        </div>
                       </div>
                     </div>
-
-                    <div className="flex flex-col items-center">
-                      <input
-                        className="w-16 rounded-lg border border-zinc-400 text-center"
-                        type="number"
-                        value={item?.quantity!}
-                        onChange={(e) =>
-                          handleLocalQuantityChange(
-                            item?.id!,
-                            item?.sizeOption!,
-                            item?.sideOption!,
-                            parseInt(e.target.value),
-                          )
-                        }
-                        min={1}
-                      />
-                      <h1 className="mt-2 text-lg">
-                        Total:{" "}
-                        {formatPrice(
-                          item?.quantity! * (item?.price! + item?.extraPrice!),
-                        )}
-                      </h1>
-                    </div>
-                    <div className="flex items-center justify-end">
-                      <Button
-                        size={"sm"}
-                        onClick={() =>
-                          deleteCartAction(
-                            item?.id!,
-                            item?.sizeOption!,
-                            item?.sideOption!,
-                          )
-                        }
-                        disabled={pending}
-                        className="m-2 rounded bg-red-500 p-2 text-white"
-                      >
-                        Cancel
-                      </Button>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </>
-        ) : (
-          <div className="flex h-full w-full translate-y-1/2 flex-col justify-center gap-5">
-            <h1 className="text-2xl">Your shopping cart is empty</h1>
-            <Button className="mx-auto">
-              <Link href={"/menu"}>Continue Shopping</Link>
-            </Button>
+              </>
+            ) : (
+              <div className="flex h-full w-full translate-y-1/2 flex-col justify-center gap-5">
+                <h1 className="text-2xl">Your shopping cart is empty</h1>
+                <Button className="mx-auto">
+                  <Link href={"/menu"}>Continue Shopping</Link>
+                </Button>
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </div>
+      </ScrollArea>
+      <Button
+        className="mx-auto my-5"
+        onClick={() => {
+          setUpdateCount((prev) => prev + 1), checkoutOnClickHandler();
+        }}
+      >
+        <div className="flex flex-col gap-5 sm:flex-row">
+          <span>Checkout</span>
+        </div>
+      </Button>
     </div>
   );
 };

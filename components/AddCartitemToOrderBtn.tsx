@@ -1,7 +1,7 @@
 "use client";
 
 import { currentUser } from "@/lib/auth";
-import { startTransition, useEffect, useState } from "react";
+import { startTransition, useEffect, useState, useTransition } from "react";
 import { getCartItembyId } from "@/data/getCartItembyId";
 import { userCart } from "@/lib/type";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,7 @@ interface AddCartitemToOrderBtnProps {
 
 const AddCartitemToOrderBtn = (props: AddCartitemToOrderBtnProps) => {
   const [data, setData] = useState<userCart | null>();
+  const [pending, startTransition] = useTransition();
   const route = useRouter();
 
   useEffect(() => {
@@ -39,7 +40,6 @@ const AddCartitemToOrderBtn = (props: AddCartitemToOrderBtnProps) => {
             if (data?.success) {
               console.log(data.success);
               console.log(data.orderId);
-              <MySpinner />;
               route.push(`/checkout/${data.orderId}`);
             }
           });
@@ -49,13 +49,17 @@ const AddCartitemToOrderBtn = (props: AddCartitemToOrderBtnProps) => {
   };
 
   return (
-    <Button
-      onClick={() => {
-        onClickhandler();
-      }}
-    >
-      BUY NOW
-    </Button>
+    <>
+      {pending && <MySpinner />}
+      <Button
+        onClick={() => {
+          onClickhandler();
+        }}
+        disabled={pending}
+      >
+        BUY NOW
+      </Button>
+    </>
   );
 };
 
