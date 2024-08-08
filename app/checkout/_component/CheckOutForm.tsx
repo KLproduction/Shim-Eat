@@ -124,7 +124,7 @@ const Form = ({ orderPrice }: FormProps) => {
 
   return (
     <>
-      {pending && <MySpinner />}
+      {loading && <MySpinner />}
       <form onSubmit={handleSubmit}>
         <Card>
           <CardHeader>Confirm Payment</CardHeader>

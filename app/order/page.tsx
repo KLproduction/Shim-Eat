@@ -71,15 +71,13 @@ const OrderPage = () => {
       {products.map((product) => (
         <Card className="m-5 p-5" key={product.createdAt.getMilliseconds()}>
           <CardHeader className="text-lg">
-            <div className="flex flex-col justify-between sm:flex-row">
-              <div className="font-bold text-zinc-600">
-                Order reference: {product?.id}
-              </div>
-              <div className="font-bold text-green-500">{product.status}</div>
-            </div>
             <CardDescription className="flex flex-col">
-              <span>Delivery Address: </span>
-              <span>{product.deliveryAddress}</span>
+              <div className="flex flex-col justify-between sm:flex-row">
+                <div className="font-bold text-zinc-600">
+                  Order reference: {product?.id}
+                </div>
+                <div className="font-bold text-green-500">{product.status}</div>
+              </div>
             </CardDescription>
           </CardHeader>
 

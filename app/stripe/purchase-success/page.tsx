@@ -65,7 +65,7 @@ const successPage = async ({
         <CardHeader className="text-xl">
           <div className="flex justify-center font-bold text-orange-500">
             {isSuccess
-              ? "Enjoy!".toUpperCase()
+              ? "Payment success!".toUpperCase()
               : "Something went wrong, order not placed!"}
           </div>
         </CardHeader>
@@ -73,6 +73,8 @@ const successPage = async ({
           <CardDescription className="flex min-h-full flex-col justify-center">
             <span className="font-bold">Order reference: </span>
             <span>{products?.id}</span>
+            <span className="mt-3 font-bold">Delivery Address:</span>
+            <span>{products.deliveryAddress}</span>
           </CardDescription>
         </div>
         <div className="mx-auto w-full max-w-5xl space-y-8">
