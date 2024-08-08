@@ -21,12 +21,12 @@ const AdminSwitch = () => {
   return (
     <div
       className={cn(
-        "flex items-center justify-start gap-3 border border-zinc-400 p-3  bg-orange-400 h-[40px]",
-        { "opacity-100": isAdmin, "opacity-50": !isAdmin }
+        "flex h-[40px] items-center justify-start gap-3 border border-zinc-400 bg-orange-400 p-3",
+        { "opacity-100": isAdmin, "opacity-50": !isAdmin },
       )}
     >
       {" "}
-      <div className="flex items-center justify-start p-3 gap-3">
+      <div className="flex items-center justify-start gap-3 p-3">
         <Switch id="admin-mode" checked={isAdmin} onCheckedChange={setAdmin} />
         <Label htmlFor="admin-mode" className="text-zinc-50">
           Admin Mode
@@ -37,9 +37,9 @@ const AdminSwitch = () => {
           asChild
           variant={"outline"}
           size={"sm"}
-          className="p-3 bg-green-500"
+          className="bg-green-500 p-3"
         >
-          <Link href={"/admin"} className="text-zinc-50">
+          <Link href={"/admin/order"} className="text-zinc-50">
             Admin
           </Link>
         </Button>

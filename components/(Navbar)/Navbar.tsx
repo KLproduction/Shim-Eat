@@ -31,10 +31,6 @@ import { BsBagCheckFill } from "react-icons/bs";
 
 const navList = [
   {
-    label: "Home",
-    path: "/",
-  },
-  {
     label: "Menu",
     path: "/menu",
   },
@@ -54,8 +50,10 @@ const Navbar = async () => {
           </div>
           <ul className="flex flex-1 items-center justify-around gap-4 text-orange-500">
             {navList.map(({ label, path }) => (
-              <li key={label} className="font-bold hover:text-orange-200">
-                <Link href={path}>{label}</Link>
+              <li key={label}>
+                <div className="text-3xl font-bold hover:text-orange-200">
+                  <Link href={path}>{label}</Link>
+                </div>
               </li>
             ))}
           </ul>

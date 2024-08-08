@@ -45,28 +45,15 @@ const SettingNav = () => {
         <div className="hidden gap-2 sm:flex">
           <Button
             asChild
-            variant={pathname === "/admin" ? "default" : "outline"}
+            variant={pathname === "/admin/order" ? "default" : "outline"}
           >
-            <Link href="/admin">Admin</Link>
-          </Button>
-          <Button
-            asChild
-            variant={pathname === "/setting" ? "default" : "outline"}
-          >
-            <Link href="/setting">Setting</Link>
+            <Link href="/admin/order">Orders</Link>
           </Button>
           <Button
             asChild
             variant={pathname === "/admin/products" ? "default" : "outline"}
           >
             <Link href="/admin/products">Products</Link>
-          </Button>
-
-          <Button
-            asChild
-            variant={pathname === "/admin/order" ? "default" : "outline"}
-          >
-            <Link href="/admin/order">Order</Link>
           </Button>
 
           <Button
