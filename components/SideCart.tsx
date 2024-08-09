@@ -27,6 +27,7 @@ import ShowUserCartFromStoageSide from "./ShowUserCartFormStoageSide";
 interface SideCartProps {
   user: ExtenderUser;
   className?: string;
+  isOpen?: boolean;
 }
 
 const SideCart = ({ className, user }: SideCartProps) => {
@@ -59,17 +60,17 @@ const SideCart = ({ className, user }: SideCartProps) => {
     setIsCart(!hideCart);
   }, [pathname]);
 
-  useEffect(() => {
-    if (userProduct && userProduct?.items.length > 0) {
-      const quantity = userProduct.items.reduce(
-        (acc, item) => acc + (Number(item.quantity) || 0),
-        0,
-      );
-      setCartItemQuiantity(quantity);
-    } else {
-      setCartItemQuiantity(0);
-    }
-  }, [userProduct, cartItemQuantity]);
+  // useEffect(() => {
+  //   if (userProduct && userProduct?.items.length > 0) {
+  //     const quantity = userProduct.items.reduce(
+  //       (acc, item) => acc + (Number(item.quantity) || 0),
+  //       0,
+  //     );
+  //     setCartItemQuiantity(quantity);
+  //   } else {
+  //     setCartItemQuiantity(0);
+  //   }
+  // }, [userProduct, cartItemQuantity]);
 
   return (
     <div className={`${className}`}>
@@ -81,7 +82,7 @@ const SideCart = ({ className, user }: SideCartProps) => {
                 <AiFillShopping />
                 <div className="absolute right-0 top-0 -translate-y-1/2 translate-x-1/2 transform">
                   {/* <p className="rounded-full bg-orange-500 px-1.5 py-0.5 text-xs text-white">
-                    {cartItemQuantity}
+                    {}
                   </p> */}
                 </div>
               </div>

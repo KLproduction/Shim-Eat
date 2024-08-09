@@ -29,6 +29,8 @@ import { AiOutlineGoogle } from "react-icons/ai";
 import ShowUserCartFromDBSideTest from "../ShowUserCartFormDBSideTest";
 import { BsBagCheckFill } from "react-icons/bs";
 import NavbarLargeSrceenDropdown from "./_components/NavbarLargeSrceenDropdown";
+import { getCartIdbyUserId } from "@/data/getCartIdbyUserId";
+import { getCartItembyId } from "@/data/getCartItembyId";
 
 const navList = [
   {

@@ -13,7 +13,7 @@ import { ADDONSPRICE } from "@/data/products";
 import { formatPrice } from "@/lib/formatPrice";
 import { TUserOrder } from "@/lib/type";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { getuserOrderFromDB } from "@/data/getuserOrderFromDB";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import MySpinner from "@/components/ui/MySpinner";
@@ -30,10 +30,18 @@ import { currentUser } from "@/lib/auth";
 import { User } from "@prisma/client";
 import { ExtenderUser } from "@/next-auth";
 import { cn } from "@/lib/utils";
+import {
+  addToCartFromUserOrder,
+  addToCartFromUserOrderProps,
+} from "@/actions/addToCartFromUserOder";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const OrderPage = () => {
   const [user, setUser] = useState<ExtenderUser | null>(null);
   const [products, setProduct] = useState<TUserOrder[] | null>();
+  const [routeNumber, setRouteNamber] = useState(0);
+  const route = useRouter();
 
   useEffect(() => {
     (async () => {
@@ -63,6 +71,30 @@ const OrderPage = () => {
       </div>
     );
   }
+
+  const buyAgainOnClickHandler = async (userId: string, orderId: string) => {
+    startTransition(async () => {
+      if (user) {
+        const data: addToCartFromUserOrderProps = {
+          orderId: orderId,
+          user: user,
+        };
+        await addToCartFromUserOrder(data).then((data) => {
+          if (data.success) {
+            toast.success("Items Reordered.");
+            setRouteNamber((prev) => prev + 1);
+            route.push(
+              `/order?id=${products.map((item) => item.id)}&u=${routeNumber}`,
+            );
+          } else {
+            toast.error(data.error);
+          }
+        });
+      } else {
+        console.error("User not found");
+      }
+    });
+  };
 
   return (
     <MaxWidthWrapper>
@@ -184,9 +216,16 @@ const OrderPage = () => {
                   </div>
                 </div>
               </ScrollArea>
-              <h1 className="flex justify-end text-xl">
-                Order Total:{formatPrice(product?.orderPrice!)}{" "}
-              </h1>
+              <div className="flex items-center justify-between">
+                <Button
+                  onClick={() => buyAgainOnClickHandler(user?.id!, product.id)}
+                >
+                  Buy Again
+                </Button>
+                <h1 className="flex justify-end text-xl">
+                  Order Total:{formatPrice(product?.orderPrice!)}{" "}
+                </h1>
+              </div>
             </DialogContent>
           </Dialog>
         </Card>
