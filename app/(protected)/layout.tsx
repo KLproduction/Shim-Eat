@@ -10,7 +10,7 @@ const ProtecteLayout = ({ children }: ProtecteLayoutProps) => {
   return (
     <div className="flex min-h-dvh w-full flex-col items-center justify-center gap-y-10 bg-zinc-200">
       <SettingNav />
-      <Toaster />
+
       {children}
     </div>
   );

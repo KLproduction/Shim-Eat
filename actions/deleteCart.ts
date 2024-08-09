@@ -7,7 +7,7 @@ export const deleteCart = async (
   cartId: string,
   productId: string,
   sizeOption: Size,
-  sideOption: AddOns
+  sideOption: AddOns,
 ) => {
   const exisitingItem = await db.cartItem.findUnique({
     where: {
@@ -32,7 +32,7 @@ export const deleteCart = async (
           },
         },
       });
-      return { success: "Item deleted" };
+      return { success: "Item Deleted" };
     } catch (e) {
       console.error(e);
     }
