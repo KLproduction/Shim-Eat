@@ -28,6 +28,7 @@ import { ExtenderUser } from "@/next-auth";
 import { AiOutlineGoogle } from "react-icons/ai";
 import ShowUserCartFromDBSideTest from "../ShowUserCartFormDBSideTest";
 import { BsBagCheckFill } from "react-icons/bs";
+import NavbarLargeSrceenDropdown from "./_components/NavbarLargeSrceenDropdown";
 
 const navList = [
   {
@@ -110,46 +111,9 @@ const Navbar = async () => {
               <div className="text-orange-500">
                 <SideCart user={user} />
               </div>
-              <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <Avatar>
-                    <AvatarImage
-                      src={user?.image || ""}
-                      className="max-w-[30px] rounded-full ring-2 ring-orange-500"
-                    />
-                    <AvatarFallback className="bg-orange-300">
-                      <FaUser />
-                    </AvatarFallback>
-                  </Avatar>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  className="flex w-40 flex-col justify-center pt-10"
-                  align="center"
-                >
-                  <DropdownMenuItem className="flex items-center justify-around">
-                    <Link href={"/order"} className="flex items-center gap-5">
-                      <div>My Order</div>
-                      <div>
-                        <BsBagCheckFill />
-                      </div>
-                    </Link>
-                  </DropdownMenuItem>
-                  <div className="h-px w-full bg-zinc-200" />
-                  <DropdownMenuItem className="flex items-center justify-around">
-                    <Link href={"/setting"} className="flex items-center gap-5">
-                      <div>Setting</div>
-                      <div>
-                        <AiFillSetting />
-                      </div>
-                    </Link>
-                  </DropdownMenuItem>
-                  <div className="h-px w-full bg-zinc-200" />
-
-                  <DropdownMenuItem className="flex items-center justify-around">
-                    <SignOutBtn />
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <div>
+                <NavbarLargeSrceenDropdown user={user} />
+              </div>
             </div>
           )}
         </div>

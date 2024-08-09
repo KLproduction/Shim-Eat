@@ -38,7 +38,7 @@ enum OrderStatus {
 }
 
 enum DeliveryStatus {
-  PENDING
+  PREPARING
   DISPATCHED
   DELIVERED
 }
@@ -133,7 +133,7 @@ model UserOrder {
   amountReceived  Float?
   clientEmail     String?
   status          OrderStatus    @default(PENDING)
-  deliveryStatus  DeliveryStatus @default(PENDING)
+  deliveryStatus  DeliveryStatus @default(PREPARING)
   user            User           @relation(fields: [userId], references: [id])
 
   @@map("orders")

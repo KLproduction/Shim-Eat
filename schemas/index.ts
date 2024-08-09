@@ -9,7 +9,7 @@ export const ChangeOrderStatusSchema = z.object({
   orderId: z.string(),
 });
 export const ChangeDeliveryStatusSchema = z.object({
-  deliveryStatus: z.enum(["PENDING", "DISPATCHED", "DELIVERED"]),
+  deliveryStatus: z.enum(["PREPARING", "DISPATCHED", "DELIVERED"]),
   orderId: z.string(),
 });
 

@@ -89,13 +89,14 @@ const OrderPage = () => {
 
   return (
     <MaxWidthWrapper className="flex flex-col justify-center gap-5">
-      <div className="flex justify-center p-5">
-        <h1 className="text-3xl font-bold text-orange-500">Order Details</h1>
-      </div>
       <Card className="m-5 p-5">
+        <div className="flex justify-center p-5">
+          <h1 className="text-3xl font-bold text-orange-500">Order Details</h1>
+        </div>
+
         <div className="flex justify-end">
           <Dialog>
-            <DialogTrigger className="flex justify-end" asChild>
+            <DialogTrigger className="mx-5 flex justify-end" asChild>
               <Button variant={"destructive"}>Delete</Button>
             </DialogTrigger>
             <DialogContent className="h-[150px] w-auto border-none bg-transparent bg-white p-0 shadow-lg">
@@ -129,38 +130,58 @@ const OrderPage = () => {
 
         {product && (
           <div>
-            <div className="text-md flex min-h-full flex-col justify-center p-3 font-bold text-zinc-500">
-              <div>Order:</div>
-              <div className="flex justify-between">
-                <div className="flex gap-6">
-                  <div>
-                    {`${product.updatedAt.getDate()}/${
-                      product.updatedAt.getMonth() + 1
-                    }/${product.updatedAt.getFullYear()}`}
-                  </div>
-                  <div>
-                    {`${product.updatedAt.getHours()}:${product.updatedAt.getMinutes().toString().padStart(2, "0")}`}
+            <div className="mx-auto max-w-[600px]">
+              <div className="text-md flex min-h-full flex-col justify-center p-3 font-bold text-zinc-500">
+                <div className="font-bold text-zinc-500">
+                  Order reference: {product?.id}
+                </div>
+                <div>Ordered:</div>
+                <div className="flex justify-between">
+                  <div className="flex gap-6">
+                    <div>
+                      {`${product.updatedAt.getDate()}/${
+                        product.updatedAt.getMonth() + 1
+                      }/${product.updatedAt.getFullYear()}`}
+                    </div>
+                    <div>
+                      {`${product.updatedAt.getHours()}:${product.updatedAt.getMinutes().toString().padStart(2, "0")}`}
+                    </div>
                   </div>
                 </div>
-                <div>{formatPrice(product.orderPrice)}</div>
               </div>
-            </div>
 
-            <div className="flex justify-between p-3">
-              <div className="font-bold text-zinc-500">
-                Order reference: {product?.id}
+              <div className="flex justify-between p-3 font-bold text-zinc-500">
+                <div>
+                  <div>DeliveryStatus:</div>
+                  <span
+                    className={cn(
+                      product.deliveryStatus === "PREPARING"
+                        ? "text-yellow-500"
+                        : product.deliveryStatus === "DISPATCHED"
+                          ? "text-orange-500"
+                          : "text-green-500",
+                    )}
+                  >
+                    {product.deliveryStatus}
+                  </span>
+                </div>
+
+                <div>
+                  <div className="font-bold text-zinc-500">Order Status:</div>
+                  <span
+                    className={cn(
+                      product.status === "PENDING"
+                        ? "text-orange-500"
+                        : product.status === "CANCELLED"
+                          ? "text-red-500"
+                          : "text-green-500",
+                      "font-bold",
+                    )}
+                  >
+                    {product.status}
+                  </span>
+                </div>
               </div>
-              <span
-                className={
-                  product.status === "PENDING"
-                    ? "text-orange-500"
-                    : product.status === "CANCELLED"
-                      ? "text-red-500"
-                      : "text-green-500"
-                }
-              >
-                {product.status}
-              </span>
             </div>
 
             <div className="mx-auto w-full max-w-5xl space-y-8">

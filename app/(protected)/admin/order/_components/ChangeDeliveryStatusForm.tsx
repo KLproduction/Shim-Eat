@@ -106,7 +106,7 @@ const ChangeDeliveryStatusForm = ({
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value="PENDING">Pending</SelectItem>
+                          <SelectItem value="PREPARING">Preparing</SelectItem>
                           <SelectItem value="DISPATCHED">Dispatched</SelectItem>
                           <SelectItem value="DELIVERED">Delivered</SelectItem>
                         </SelectGroup>

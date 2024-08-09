@@ -29,6 +29,7 @@ import { DialogDescription } from "@radix-ui/react-dialog";
 import { currentUser } from "@/lib/auth";
 import { User } from "@prisma/client";
 import { ExtenderUser } from "@/next-auth";
+import { cn } from "@/lib/utils";
 
 const OrderPage = () => {
   const [user, setUser] = useState<ExtenderUser | null>(null);
@@ -76,7 +77,20 @@ const OrderPage = () => {
                 <div className="font-bold text-zinc-600">
                   Order reference: {product?.id}
                 </div>
-                <div className="font-bold text-green-500">{product.status}</div>
+                <div className="font-bold">
+                  <span className="mr-3">Delivery Status:</span>
+                  <span
+                    className={cn(
+                      product.deliveryStatus === "PREPARING"
+                        ? "text-yellow-500"
+                        : product.deliveryStatus === "DISPATCHED"
+                          ? "text-orange-500"
+                          : "text-green-500",
+                    )}
+                  >
+                    {product.deliveryStatus}
+                  </span>
+                </div>
               </div>
             </CardDescription>
           </CardHeader>
@@ -96,6 +110,8 @@ const OrderPage = () => {
               </div>
               <div>{formatPrice(product.orderPrice)}</div>
             </div>
+            <div className="mt-3">Delivery Address:</div>
+            <div>{product.deliveryAddress}</div>
           </div>
 
           <Dialog>
@@ -112,9 +128,6 @@ const OrderPage = () => {
                 <div className="flex justify-between">
                   <div className="font-bold text-zinc-500">
                     Order reference: {product?.id}
-                  </div>
-                  <div className="font-bold text-green-500">
-                    {product.status}
                   </div>
                 </div>
               </DialogHeader>
