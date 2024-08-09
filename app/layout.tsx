@@ -38,7 +38,12 @@ export default async function RootLayout({
           </div>
           <AdminSwitch />
           {children}
-          <Toaster position="top-center" />
+          <div className="block sm:hidden">
+            <Toaster position="top-center" />
+          </div>
+          <div className="hidden sm:block">
+            <Toaster position="bottom-left" />
+          </div>
         </body>
       </html>
     </SessionProvider>
