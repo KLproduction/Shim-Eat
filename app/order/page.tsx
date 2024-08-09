@@ -71,6 +71,16 @@ const OrderPage = () => {
       </div>
     );
   }
+  if (products && products.length === 0) {
+    return (
+      <div className="flex min-h-full flex-col items-center justify-center gap-3">
+        <div className="text-2xl">No Order yet</div>
+        <Button asChild size={"lg"} className="mx-auto">
+          <Link href={"/menu"}>Continue Shopping</Link>
+        </Button>
+      </div>
+    );
+  }
 
   const buyAgainOnClickHandler = async (userId: string, orderId: string) => {
     startTransition(async () => {

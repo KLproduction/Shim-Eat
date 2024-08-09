@@ -4,6 +4,7 @@ import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { TaddCartToDB } from "@/lib/type";
 import { $Enums, AddOns, Product, ProductCategory, Size } from "@prisma/client";
+import { tree } from "next/dist/build/templates/app-page";
 
 const addToCart = async (data: TaddCartToDB[]) => {
   const user = await currentUser();
@@ -36,7 +37,15 @@ const addToCart = async (data: TaddCartToDB[]) => {
         });
 
         if (existingCartItem) {
-          return { success: false };
+          await db.cartItem.update({
+            where: {
+              id: existingCartItem.id,
+            },
+            data: {
+              quantity: existingCartItem.quantity + 1,
+            },
+          });
+          return { success: true };
         } else {
           const newItem = await db.cartItem.create({
             data: {
@@ -53,7 +62,7 @@ const addToCart = async (data: TaddCartToDB[]) => {
           });
           return { success: true, item: newItem };
         }
-      })
+      }),
     );
     const productAdded = result.every((result) => result.success);
     if (productAdded) {

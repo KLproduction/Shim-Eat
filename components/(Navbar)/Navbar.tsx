@@ -51,7 +51,7 @@ const Navbar = async () => {
               <img src="/saladLogo.png" alt="logo" className="max-w-24" />
             </Link>
           </div>
-          <ul className="flex flex-1 items-center justify-around gap-4 text-orange-500">
+          <ul className="flex flex-1 items-center justify-center gap-4 text-orange-500">
             {navList.map(({ label, path }) => (
               <li key={label}>
                 <div className="text-3xl font-bold hover:text-orange-200">

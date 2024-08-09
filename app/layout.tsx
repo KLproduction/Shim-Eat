@@ -38,7 +38,7 @@ export default async function RootLayout({
           </div>
           <AdminSwitch />
           {children}
-          <Toaster />
+          <Toaster position="top-center" />
         </body>
       </html>
     </SessionProvider>

@@ -99,10 +99,10 @@ const ProductPage = () => {
       };
       addToCartDB([formData]).then((data) => {
         if (data?.error) {
-          setError(data.error);
+          toast.error(data.error);
         }
         if (data?.success) {
-          setSuccess(data.success);
+          toast.success("Item Added to Cart.");
           setRouteNamber((prev) => prev + 1);
           route.push(`/product?product=${productId}&u=${routeNumber}`);
         }
@@ -125,10 +125,10 @@ const ProductPage = () => {
       };
       addToCartDB([formData]).then((data) => {
         if (data?.error) {
-          setError(data.error);
+          toast.error(data.error);
         }
         if (data?.success) {
-          setSuccess(data.success);
+          toast.success("Item Added to Cart.");
           route.push(`/product?product=${productId}`);
         }
       });
