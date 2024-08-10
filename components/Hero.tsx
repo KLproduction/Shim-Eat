@@ -93,7 +93,7 @@ const Hero = () => {
           <motion.div className="ml-auto block sm:hidden">
             <img
               src="/hero-2.png"
-              className="fixed right-0 top-[-100px] z-[-1] mt-[50px] opacity-30 md:relative md:z-10 md:p-0 md:opacity-100"
+              className="fixed right-0 top-[-100px] z-[-1] mt-[150px] opacity-30 sm:mt-[200px] md:relative md:z-10 md:p-0 md:opacity-100"
             />
           </motion.div>
         </div>

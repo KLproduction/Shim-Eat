@@ -108,6 +108,7 @@ const Form = ({ orderPrice }: FormProps) => {
         },
       })
       .then(({ error }) => {
+        setLoading(false);
         if (
           error?.type === "card_error" ||
           error?.type === "validation_error"

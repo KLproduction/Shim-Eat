@@ -9,6 +9,22 @@ import { getOnSaleProducts } from "@/data/getOnsaleProducts";
 import { Product } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { Link, animateScroll } from "react-scroll";
+import { motion } from "framer-motion";
+
+const fadeInMotionVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.75,
+    },
+  },
+};
+
+const fadeInMotionChildVariants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
+};
 
 const MenuPage = () => {
   const [products, setProducts] = useState<Product[] | null>();
@@ -59,17 +75,17 @@ const MenuPage = () => {
         </div>
       </div>
       <MaxWidthWrapper>
-        <div className="mt-20">
-          <div className="Salads">
+        <motion.div className="mt-20" variants={fadeInMotionVariants}>
+          <motion.div className="Salads" variants={fadeInMotionChildVariants}>
             <SaladMenu products={products} />
-          </div>
-          <div className="Mains">
+          </motion.div>
+          <motion.div className="Mains" variants={fadeInMotionChildVariants}>
             <MainMenu products={products} />
-          </div>
-          <div className="Drinks">
+          </motion.div>
+          <motion.div className="Drinks" variants={fadeInMotionChildVariants}>
             <DrinkMenu products={products} />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </MaxWidthWrapper>
     </>
   );

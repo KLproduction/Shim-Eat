@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { AiOutlineLoading } from "react-icons/ai";
 
 const MySpinner = () => {
