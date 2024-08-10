@@ -95,7 +95,7 @@ const Hero = () => {
       transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
     >
       <img
-        src="/newHero.png"
+        src="https://utfs.io/f/39e50a54-9972-4b98-a353-b1b1ca703518-uidgai.png"
         className="absolute inset-0 h-full w-full object-cover brightness-50 filter lg:brightness-100"
       />
       <motion.div
