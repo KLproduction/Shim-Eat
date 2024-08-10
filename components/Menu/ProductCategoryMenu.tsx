@@ -28,7 +28,7 @@ const ProductCategoryMenu = ({
       <motion.div
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, ease: "easeInOut", delay: 1.5 }}
+        transition={{ duration: 1, ease: "easeInOut", delay: 1 }}
         className="ml-8 flex items-center justify-start"
       >
         <h1 className="my-5 text-5xl font-bold text-green-500">
