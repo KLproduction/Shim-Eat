@@ -34,7 +34,7 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
+            transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
             className="mt-[100px] flex flex-col gap-8 p-3 md:my-auto"
           >
             <div className="mb-2 flex flex-col gap-3 text-6xl font-bold">
@@ -82,7 +82,7 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
+            transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
             className="ml-auto hidden sm:block"
           >
             <img

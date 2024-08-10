@@ -132,6 +132,7 @@ const ProductDetailsPage = () => {
           if (response?.success) {
             setSuccess("Update successful!");
             toast.success(response.success);
+            route.refresh();
             redirect("/admin/products");
           } else {
             setError("Update failed");
@@ -154,6 +155,7 @@ const ProductDetailsPage = () => {
           if (data.success) {
             setSuccess(data.success);
             toast.success(data.success);
+            route.refresh();
             redirect("/admin/products");
           }
           if (data.error) {
@@ -383,8 +385,8 @@ const ProductDetailsPage = () => {
                 <img src={imageURL} alt="" />
               )}
             </div>
-            <FormError message={error} />
-            <FormSuccess message={success} />
+            {/* <FormError message={error} />
+            <FormSuccess message={success} /> */}
 
             <div className="flex justify-center">
               <Button type="submit">Save</Button>
