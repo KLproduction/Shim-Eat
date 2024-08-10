@@ -35,7 +35,7 @@ const Hero = () => {
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-            className="mt-[100px] flex flex-col gap-8 p-3 md:my-auto"
+            className="mt-[10px] flex flex-col gap-8 p-3 md:my-auto"
           >
             <div className="mb-2 flex flex-col gap-3 text-6xl font-bold">
               <motion.div

@@ -41,9 +41,9 @@ const ProductCategoryMenu = ({
             key={product.name}
             initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
           >
-            <Card className="m-4 flex flex-col items-center justify-end duration-500">
+            <Card className="m-4 flex min-h-[500px] flex-col items-center justify-end duration-500">
               <CardHeader className="mb-auto">
                 <CardTitle className="mb-10 text-orange-500">
                   {product.name}
