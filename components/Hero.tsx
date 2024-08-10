@@ -38,28 +38,13 @@ const Hero = () => {
             className="mt-[10px] flex flex-col gap-8 p-3 md:my-auto"
           >
             <div className="mb-2 flex flex-col gap-3 text-6xl font-bold">
-              <motion.div
-                variants={fadeInMotionChildVariants}
-                className="text-green-600"
-              >
-                Fresh
-              </motion.div>
+              <motion.div className="text-green-600">Fresh</motion.div>
 
-              <motion.div
-                variants={fadeInMotionChildVariants}
-                className="text-orange-600"
-              >
-                Fast
-              </motion.div>
+              <motion.div className="text-orange-600">Fast</motion.div>
 
-              <motion.div
-                variants={fadeInMotionChildVariants}
-                className="text-green-600"
-              >
-                Flavorful
-              </motion.div>
+              <motion.div className="text-green-600">Flavorful</motion.div>
             </div>
-            <motion.div variants={fadeInMotionChildVariants}>
+            <motion.div>
               <h1 className="text-5xl font-bold text-orange-600">
                 Your <span className="uppercase text-green-600">Salad</span> is
                 Ready!
