@@ -129,7 +129,7 @@ const ProductPage = () => {
         }
         if (data?.success) {
           toast.success("Item Added to Cart.");
-          route.push(`/product?product=${productId}`);
+          route.push(`/product?product=${productId}&u=${routeNumber}`);
         }
       });
     });

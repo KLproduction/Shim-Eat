@@ -19,6 +19,7 @@ import {
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { AiOutlineMenu } from "react-icons/ai";
 import { currentUser } from "@/lib/auth";
+import { cn } from "@/lib/utils";
 
 const SettingNav = () => {
   const pathname = usePathname();
@@ -29,18 +30,30 @@ const SettingNav = () => {
   }, [pathname]);
 
   const [superAdmin, setSuperAdmin] = useState(false);
+  const [isSetting, setIsSetting] = useState(false);
+
+  useEffect(() => {
+    if (pathname.includes("/setting")) {
+      setIsSetting(true);
+    }
+  }, [pathname]);
 
   useEffect(() => {
     (async () => {
       const user = await currentUser();
       if (user?.isSuperAdmin) {
-        setSuperAdmin(!superAdmin);
+        setSuperAdmin(true);
       }
     })();
   }, []);
 
   return (
-    <MaxWidthWrapper className="flex justify-start p-3 sm:justify-center">
+    <MaxWidthWrapper
+      className={cn(
+        "flex justify-start p-3 sm:justify-center",
+        isSetting ? "hidden" : "",
+      )}
+    >
       <nav className="hidden w-auto items-center justify-center rounded-xl bg-secondary p-4 shadow-sm sm:flex">
         <div className="hidden gap-2 sm:flex">
           <Button

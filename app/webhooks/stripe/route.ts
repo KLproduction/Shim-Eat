@@ -67,11 +67,39 @@ export async function POST(req: NextRequest) {
             id: existingUser?.id,
           },
           data: {
-            totalSpend: existingUser?.totalSpend! + pricePaid,
+            totalSpend: +(existingUser?.totalSpend! + pricePaid).toFixed(2),
           },
         });
         await db.cartItem.deleteMany({
           where: { cartId: userCart.id },
+        });
+      }
+
+      const oldOrder = await db.userOrder.findMany({
+        where: {
+          userId: products?.userId,
+          status: "PENDING",
+        },
+      });
+
+      if (oldOrder) {
+        oldOrder.map(async (item) => {
+          try {
+            await db.orderItem.deleteMany({
+              where: {
+                orderId: item.id,
+              },
+            });
+            await db.userOrder.deleteMany({
+              where: {
+                userId: item.userId,
+                status: "PENDING",
+              },
+            });
+            console.log(oldOrder);
+          } catch (e) {
+            console.error(e);
+          }
         });
       }
     }

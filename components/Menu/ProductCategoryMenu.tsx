@@ -35,7 +35,7 @@ const ProductCategoryMenu = ({
           {categoryName.toUpperCase()}
         </h1>
       </motion.div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3">
+      <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3">
         {menuItems?.map((product) => (
           <motion.div
             key={product.name}
@@ -72,7 +72,7 @@ const ProductCategoryMenu = ({
             </Card>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </>
   );
 };

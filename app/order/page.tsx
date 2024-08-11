@@ -55,7 +55,8 @@ const OrderPage = () => {
   useEffect(() => {
     (async () => {
       if (user) {
-        const products = await getuserOrderFromDB(user?.id!);
+        const data = await getuserOrderFromDB(user?.id!);
+        const products = data.filter((item) => !(item.status === "PENDING"));
         setProduct(products);
       }
     })();

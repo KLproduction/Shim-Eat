@@ -96,15 +96,15 @@ const Hero = () => {
     >
       <img
         src="https://utfs.io/f/39e50a54-9972-4b98-a353-b1b1ca703518-uidgai.png"
-        className="absolute inset-0 h-full w-full object-cover brightness-50 filter lg:brightness-100"
+        className="absolute inset-0 h-full w-full object-cover brightness-50 filter"
       />
       <motion.div
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, ease: "easeInOut", delay: 0.75 }}
-        className="relative top-[100px] ml-5 sm:ml-12"
+        className="relative top-[100px] ml-5 transition-all sm:ml-12"
       >
-        <div className="pb-[10%] text-start sm:pb-[30%] md:pb-[20%]">
+        <div className="pb-[10%] text-start sm:pb-[30%] md:pb-[20%] xl:ml-[10%]">
           <div className="mb-6 flex flex-col gap-3 text-4xl font-bold sm:mb-12 sm:text-6xl">
             <motion.div className="text-zinc-100">Fresh</motion.div>
             <motion.div className="text-orange-500">Fast</motion.div>
