@@ -31,5 +31,7 @@ export const config = {
     "/admin/order",
     "/admin/products",
     "/admin/products/product-details",
+    "/admin/users",
+    "/admin/user-details",
   ],
 };

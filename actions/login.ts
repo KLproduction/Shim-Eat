@@ -90,7 +90,7 @@ export const login = async (
     await signIn("credentials", {
       email,
       password,
-      redirectTo: `/?id=${existingUser.id}`,
+      redirectTo: callbackUrl || `/?id=${existingUser.id}`,
     });
   } catch (e) {
     if (e instanceof AuthError) {

@@ -71,7 +71,7 @@ const ProductPage = () => {
         const fetchedProduct = await getProductById(productId);
         setProduct(fetchedProduct);
       } else {
-        setError("Invaild product ID!");
+        setError("Invalid product ID!");
         return;
       }
     };
@@ -100,6 +100,7 @@ const ProductPage = () => {
       addToCartDB([formData]).then((data) => {
         if (data?.error) {
           toast.error(data.error);
+          route.push(`/auth/login?callbackUrl=${window.location.href}`);
         }
         if (data?.success) {
           toast.success("Item Added to Cart.");
@@ -126,6 +127,7 @@ const ProductPage = () => {
       addToCartDB([formData]).then((data) => {
         if (data?.error) {
           toast.error(data.error);
+          route.push(`/auth/login?callbackUrl=${window.location.href}`);
         }
         if (data?.success) {
           toast.success("Item Added to Cart.");
