@@ -74,7 +74,7 @@ const OrderPage = () => {
   }
   if (products && products.length === 0) {
     return (
-      <div className="flex min-h-full flex-col items-center justify-center gap-3">
+      <div className="flex min-h-full flex-col items-center justify-center gap-3 pt-20">
         <div className="text-2xl">No Order yet</div>
         <Button asChild size={"lg"} className="mx-auto">
           <Link href={"/menu"}>Continue Shopping</Link>
@@ -109,7 +109,7 @@ const OrderPage = () => {
 
   return (
     <MaxWidthWrapper>
-      <div className="flex justify-center p-5 sm:pt-16">
+      <div className="flex justify-center p-5 sm:pt-20">
         <h1 className="text-3xl font-bold text-zinc-600">My Orders</h1>
       </div>
       {products.map((product) => (

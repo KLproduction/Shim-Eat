@@ -35,7 +35,7 @@ const NavbarLargeSrceenDropdown = ({
               className="max-w-[50px] rounded-full ring-2 ring-orange-500"
             />
             <AvatarFallback className="bg-orange-300">
-              <FaUser />
+              <FaUser className="mt-3" />
             </AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
