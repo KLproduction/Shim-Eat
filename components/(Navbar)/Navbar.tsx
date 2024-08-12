@@ -31,6 +31,7 @@ import { BsBagCheckFill } from "react-icons/bs";
 import NavbarLargeSrceenDropdown from "./_components/NavbarLargeSrceenDropdown";
 import { getCartIdbyUserId } from "@/data/getCartIdbyUserId";
 import { getCartItembyId } from "@/data/getCartItembyId";
+import AdminSwitch from "../AdminSwitch";
 
 const navList = [
   {
@@ -43,12 +44,12 @@ const Navbar = async () => {
   const user = await currentUser();
 
   return (
-    <nav className="h-30 sticky inset-x-0 top-0 z-[9999] w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
+    <nav className="fixed inset-x-0 top-0 z-[9999] h-20 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
       <MaxWidthWrapper>
         <div className="flex items-center justify-center px-4 text-lg">
           <div className="">
             <Link href="/" className="flex flex-col items-end font-black">
-              <img src="/saladLogo.png" alt="logo" className="max-w-24" />
+              <img src="/saladLogo.png" alt="logo" className="max-w-20" />
             </Link>
           </div>
           <ul className="flex flex-1 items-center justify-center gap-4 text-orange-500">
@@ -69,14 +70,14 @@ const Navbar = async () => {
                   </h1>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                  className="flex w-40 flex-col justify-center pt-4"
+                  className="z-[9999] m-0 flex w-40 flex-col justify-center p-0"
                   align="center"
                 >
-                  <DropdownMenuItem className="mt-4 flex items-center justify-around">
+                  <DropdownMenuItem className="flex items-center justify-around">
                     <div>
                       <LoginButtonProps mode="redirect" asChild>
                         <Button variant={"ghost"} size={"sm"}>
-                          Sign In
+                          Email Sign In
                         </Button>
                       </LoginButtonProps>
                     </div>
@@ -120,6 +121,7 @@ const Navbar = async () => {
           )}
         </div>
       </MaxWidthWrapper>
+      <AdminSwitch />
     </nav>
   );
 };

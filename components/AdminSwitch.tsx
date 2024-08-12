@@ -21,8 +21,8 @@ const AdminSwitch = () => {
   return (
     <div
       className={cn(
-        "flex h-[40px] items-center justify-start gap-3 border border-zinc-400 bg-orange-400 p-3",
-        { "opacity-100": isAdmin, "opacity-50": !isAdmin },
+        "flex h-[40px] items-center justify-start gap-3 bg-orange-400 p-3",
+        { "opacity-80": isAdmin, "bg-transparent opacity-50": !isAdmin },
       )}
     >
       {" "}

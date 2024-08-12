@@ -7,7 +7,7 @@ import { ExtenderUser } from "@/next-auth";
 import { redirect, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const loginPage = async () => {
+const loginPage = () => {
   const [user, setUser] = useState<ExtenderUser>();
   const [count, setCount] = useState(0);
   const route = useRouter();

@@ -100,7 +100,7 @@ const Hero = () => {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.25, ease: "easeInOut", delay: 0.75 }}
-        className="relative top-[100px] ml-5 sm:ml-12"
+        className="relative top-[150px] ml-5 sm:ml-12"
       >
         <div className="pb-[10%] text-start sm:pb-[30%] md:pb-[20%] xl:ml-[10%]">
           <div className="mb-6 flex flex-col gap-3 text-4xl font-bold sm:mb-12 sm:text-6xl">
