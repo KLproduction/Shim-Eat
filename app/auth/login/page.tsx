@@ -7,15 +7,15 @@ import { ExtenderUser } from "@/next-auth";
 import { redirect, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const loginPage = () => {
-  const [user, setUser] = useState<ExtenderUser>();
+const LoginPage = () => {
+  const [user, setUser] = useState<ExtenderUser | null>(null);
   const [count, setCount] = useState(0);
   const route = useRouter();
 
   useEffect(() => {
     (async () => {
       const data = await currentUser();
-      if (user?.id) {
+      if (data?.id) {
         setUser(data);
         setCount((p) => p + 1);
       }
@@ -28,8 +28,6 @@ const loginPage = () => {
     }
   }, [count]);
 
-  const callbackURL = sessionStorage.getItem("preLoginUrl") || null;
-
   return (
     <>
       <LoginForm />
@@ -37,4 +35,4 @@ const loginPage = () => {
   );
 };
 
-export default loginPage;
+export default LoginPage;

@@ -1,5 +1,6 @@
 "use server";
 
+import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 
 interface deleteSignalUserProps {
@@ -7,32 +8,53 @@ interface deleteSignalUserProps {
 }
 
 export const deleteSignalUser = async ({ userId }: deleteSignalUserProps) => {
+  const operatingUser = await currentUser();
+
+  if (!operatingUser) {
+    return { error: "Authentication required." };
+  }
+
   const user = await db.user.findUnique({
     where: { id: userId },
   });
 
   if (!user) {
-    return { error: "Something went wrong." };
+    return { error: "User not found." };
   }
-  if (user) {
-    const carts = await db.cart.findMany({
-      where: { userId: user.id },
-    });
 
-    carts.map(async (cart) => {
-      await db.cartItem.deleteMany({
-        where: { cartId: cart.id },
-      });
-    });
+  if (user.id === operatingUser.id) {
+    return { error: "Cannot delete operating account." };
+  }
 
-    await db.cart.deleteMany({
-      where: { userId: userId },
-    });
+  const orders = await db.userOrder.findMany({
+    where: { userId: user.id },
+  });
 
-    await db.user.delete({
-      where: { id: userId },
+  for (const order of orders) {
+    await db.orderItem.deleteMany({
+      where: { orderId: order.id },
+    });
+    await db.userOrder.delete({
+      where: { id: order.id },
     });
   }
 
-  return { success: "User Data Deleted" };
+  const carts = await db.cart.findMany({
+    where: { userId: user.id },
+  });
+
+  for (const cart of carts) {
+    await db.cartItem.deleteMany({
+      where: { cartId: cart.id },
+    });
+    await db.cart.delete({
+      where: { id: cart.id },
+    });
+  }
+
+  await db.user.delete({
+    where: { id: user.id },
+  });
+
+  return { success: "User data deleted successfully." };
 };

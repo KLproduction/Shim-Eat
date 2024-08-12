@@ -7,7 +7,7 @@ import React from "react";
 const CartPage = async () => {
   const user = await currentUser();
   return (
-    <div className="pb-12 sm:pb-0">
+    <div className="pb-12 sm:pb-0 sm:pt-20">
       <ShowUserCartFromDB user={user!} />
     </div>
   );

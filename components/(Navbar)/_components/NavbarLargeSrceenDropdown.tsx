@@ -40,7 +40,7 @@ const NavbarLargeSrceenDropdown = ({
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          className="flex w-40 flex-col justify-center pt-10"
+          className="z-[9999] flex w-40 flex-col justify-center"
           align="center"
         >
           <DropdownMenuItem className="flex items-center justify-around">

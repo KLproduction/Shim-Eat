@@ -71,6 +71,9 @@ const UserDetailsPage = () => {
           const data = await getUserById(userId);
           setUser(data);
         } catch (e) {
+          if (!user) {
+            route.push("/");
+          }
           console.error("Failed to fetch user:", e);
         }
       }

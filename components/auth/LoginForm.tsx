@@ -24,6 +24,7 @@ import { useTransition } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { DialogTrigger } from "../ui/dialog";
+import { toast } from "sonner";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -55,7 +56,7 @@ export const LoginForm = () => {
         .then((data) => {
           if (data?.error) {
             form.reset();
-            setError(data.error);
+            toast.error(data.error);
           }
           if (data?.success) {
             form.reset();

@@ -64,7 +64,7 @@ const successPage = async ({
   const isSuccess = paymentIntent.status === "succeeded";
   if (isSuccess) {
     return (
-      <MaxWidthWrapper className="pb-12 sm:p-5">
+      <MaxWidthWrapper className="pb-12 sm:p-5 sm:pt-20">
         <Card className="m-5 mx-auto max-w-[280px] p-5 sm:max-w-full">
           <CardHeader className="text-xl">
             <div className="flex justify-center font-bold text-orange-500">

@@ -21,14 +21,17 @@ const AdminSwitch = () => {
   return (
     <div
       className={cn(
-        "flex h-[40px] items-center justify-start gap-3 bg-orange-400 p-3",
+        "z-0 flex h-[40px] items-center justify-start gap-3 bg-orange-400 p-3",
         { "opacity-80": isAdmin, "bg-transparent opacity-50": !isAdmin },
       )}
     >
       {" "}
       <div className="flex items-center justify-start gap-3 p-3">
         <Switch id="admin-mode" checked={isAdmin} onCheckedChange={setAdmin} />
-        <Label htmlFor="admin-mode" className="text-zinc-50">
+        <Label
+          htmlFor="admin-mode"
+          className={cn(isAdmin ? "text-zinc-50" : "text-zinc-500")}
+        >
           Admin Mode
         </Label>
       </div>

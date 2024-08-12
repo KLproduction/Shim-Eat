@@ -37,7 +37,7 @@ const CheckOutPage = async ({
     }
 
     return (
-      <div className="pb-12">
+      <div className="pb-12 sm:pt-20">
         <CheckOutForm
           products={products!}
           clientSecret={paymentIntent.client_secret}
