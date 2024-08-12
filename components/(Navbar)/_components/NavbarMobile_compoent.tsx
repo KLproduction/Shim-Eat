@@ -131,10 +131,7 @@ const NavbarMobileComponents = ({ user }: NavbarMobileComponentsProps) => {
             {navList.map(({ label, path, className }) => (
               <li
                 key={path}
-                className={cn(
-                  "font-bold transition-all hover:text-green-500",
-                  className,
-                )}
+                className={cn("font-bold transition-all", className)}
               >
                 <Link href={path}>{label}</Link>
               </li>
@@ -149,10 +146,7 @@ const NavbarMobileComponents = ({ user }: NavbarMobileComponentsProps) => {
             )}
           >
             {navList.map(({ label, path, className }) => (
-              <li
-                key={path}
-                className={cn("font-bold hover:text-green-500", className)}
-              >
+              <li key={path} className={cn("font-bold", className)}>
                 <Link href={path}>{label}</Link>
               </li>
             ))}

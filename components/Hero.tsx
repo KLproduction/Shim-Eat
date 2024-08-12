@@ -93,7 +93,7 @@ const Hero = () => {
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
-        src="https://utfs.io/f/39e50a54-9972-4b98-a353-b1b1ca703518-uidgai.png"
+        src="https://utfs.io/f/165d6336-e328-4b12-b11f-d0f280d2ed94-mf4bfd.png"
         className="absolute inset-0 h-full w-full object-cover brightness-50 filter"
       />
       <motion.div
