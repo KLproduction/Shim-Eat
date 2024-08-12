@@ -149,7 +149,7 @@ const ProductPage = () => {
 
   return (
     <div>
-      <MaxWidthWrapper className="sm:pt-13 flex h-full flex-col items-center justify-center pb-12 sm:pt-20">
+      <MaxWidthWrapper className="flex h-full flex-col items-center justify-center pb-12 sm:pt-16">
         <Card className="m-4 flex max-w-[600px] flex-col items-center justify-end">
           <CardHeader className="mb-auto">
             <CardTitle className="mb-10 text-orange-500">

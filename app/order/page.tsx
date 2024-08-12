@@ -109,7 +109,7 @@ const OrderPage = () => {
 
   return (
     <MaxWidthWrapper>
-      <div className="flex justify-center p-5">
+      <div className="flex justify-center p-5 sm:pt-16">
         <h1 className="text-3xl font-bold text-zinc-600">My Orders</h1>
       </div>
       {products.map((product) => (
