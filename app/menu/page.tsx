@@ -16,7 +16,7 @@ const fadeInMotionVariants = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.75,
+      staggerChildren: 2,
     },
   },
 };
