@@ -73,11 +73,16 @@ export function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
+    manualFiltering: false,
   });
 
   useEffect(() => {
     route.refresh();
   }, []);
+
+  useEffect(() => {
+    setPageIndex(0);
+  }, [columnFilters]);
 
   return (
     <>

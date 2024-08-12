@@ -6,20 +6,20 @@ import Link from "next/link";
 import { BiChevronRight } from "react-icons/bi";
 import { motion } from "framer-motion";
 
-const fadeInMotionVariants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.75,
-    },
-  },
-};
+// const fadeInMotionVariants = {
+//   hidden: { opacity: 0 },
+//   show: {
+//     opacity: 1,
+//     transition: {
+//       staggerChildren: 0.75,
+//     },
+//   },
+// };
 
-const fadeInMotionChildVariants = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1 },
-};
+// const fadeInMotionChildVariants = {
+//   hidden: { opacity: 0 },
+//   show: { opacity: 1 },
+// };
 // const Hero = () => {
 //   return (
 //     <MaxWidthWrapper>
@@ -88,29 +88,27 @@ const fadeInMotionChildVariants = {
 
 const Hero = () => {
   return (
-    <motion.section
-      className="sticky h-dvh w-full"
-      initial={{ opacity: 0, y: -100 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
-    >
-      <img
+    <motion.section className="sticky h-dvh w-full">
+      <motion.img
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
         src="https://utfs.io/f/39e50a54-9972-4b98-a353-b1b1ca703518-uidgai.png"
         className="absolute inset-0 h-full w-full object-cover brightness-50 filter"
       />
       <motion.div
-        initial={{ opacity: 0, x: -100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, ease: "easeInOut", delay: 0.75 }}
-        className="relative top-[100px] ml-5 transition-all sm:ml-12"
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.25, ease: "easeInOut", delay: 0.75 }}
+        className="relative top-[100px] ml-5 sm:ml-12"
       >
         <div className="pb-[10%] text-start sm:pb-[30%] md:pb-[20%] xl:ml-[10%]">
           <div className="mb-6 flex flex-col gap-3 text-4xl font-bold sm:mb-12 sm:text-6xl">
-            <motion.div className="text-zinc-100">Fresh</motion.div>
-            <motion.div className="text-orange-500">Fast</motion.div>
-            <motion.div className="text-zinc-100">Flavorful</motion.div>
+            <div className="text-zinc-100">Fresh</div>
+            <div className="text-orange-500">Fast</div>
+            <div className="text-zinc-100">Flavorful</div>
           </div>
-          <motion.div>
+          <div>
             <h1 className="text-3xl font-bold text-orange-500 sm:text-5xl">
               Your <span className="uppercase text-zinc-100">Salad</span> is
               Ready!
@@ -128,7 +126,7 @@ const Hero = () => {
                 </Link>
               </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </motion.div>
     </motion.section>

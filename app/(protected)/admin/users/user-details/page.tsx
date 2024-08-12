@@ -14,7 +14,7 @@ import { ADDONSPRICE } from "@/data/products";
 import { formatPrice } from "@/lib/formatPrice";
 import { TUserOrder } from "@/lib/type";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { getuserOrderFromDB } from "@/data/getuserOrderFromDB";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import MySpinner from "@/components/ui/MySpinner";
@@ -34,10 +34,14 @@ import Settingform from "@/components/auth/SettingForm";
 import { ExtenderUser } from "@/next-auth";
 import SettingformAdmin from "./_components/SettingFormAdmin";
 import { currentUser } from "@/lib/auth";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { deleteSignalUser } from "@/actions/deleteSignalUser";
+import { toast } from "sonner";
 
 const UserDetailsPage = () => {
   const [products, setProduct] = useState<TUserOrder[] | null>();
   const [user, setUser] = useState<User | null>();
+  const [pending, startTransition] = useTransition();
   const searchParams = useSearchParams();
   const userId = searchParams.get("user");
   const route = useRouter();
@@ -84,7 +88,19 @@ const UserDetailsPage = () => {
     );
   }
 
-  console.log(products);
+  const onClickDeleteHandler = (userId: string) => {
+    startTransition(async () => {
+      await deleteSignalUser({ userId }).then((data) => {
+        if (data.success) {
+          toast.success(data.success);
+          route.refresh();
+          route.push("/admin/users");
+        } else {
+          toast.error(data.error);
+        }
+      });
+    });
+  };
 
   return (
     <MaxWidthWrapper>
@@ -93,8 +109,49 @@ const UserDetailsPage = () => {
           <CardHeader className="text-lg">
             <div className="flex flex-col justify-between sm:flex-row"></div>
           </CardHeader>
-          <CardContent className="flex justify-center">
-            {user && <SettingformAdmin user={user} />}
+          <CardContent className="flex flex-col">
+            <div className="flex justify-end">
+              <Dialog>
+                <DialogTrigger className="mx-5 flex justify-end" asChild>
+                  <Button variant={"destructive"}>Delete</Button>
+                </DialogTrigger>
+                <DialogContent className="h-[150px] w-auto border-none bg-transparent bg-white p-0 shadow-lg">
+                  <Card>
+                    <DialogHeader>
+                      <DialogTitle>
+                        <div className="mt-6 flex flex-col items-center justify-center gap-3 border-red-700 p-5 text-red-700">
+                          <div className="flex items-center gap-1">
+                            <ExclamationTriangleIcon />
+                            <span>Warning:</span>
+                          </div>
+                          <p>
+                            Will also deleted user cart items and is
+                            unrecoverable
+                          </p>
+                        </div>
+                      </DialogTitle>
+                      <DialogDescription></DialogDescription>
+                    </DialogHeader>
+                    <DialogTrigger asChild>
+                      <div className="my-auto flex items-center justify-center gap-5">
+                        <Button variant={"outline"}>Cancel</Button>
+                        <Button
+                          onClick={() => onClickDeleteHandler(userId!)}
+                          variant={"destructive"}
+                          disabled={pending}
+                          className="p-2"
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    </DialogTrigger>
+                  </Card>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className="flex justify-center">
+              {user && <SettingformAdmin user={user} />}
+            </div>
           </CardContent>
         </Card>
       </section>
@@ -118,6 +175,7 @@ const UserDetailsPage = () => {
                       {product.status}
                     </div>
                   </div>
+
                   <CardDescription className="flex flex-col">
                     <p>Delivery Address:</p>
                     <p>{product.deliveryAddress}</p>
@@ -223,7 +281,7 @@ const UserDetailsPage = () => {
                 </Dialog>
               </Card>
             ))}
-            <div className="flex justify-center p-5">
+            <div className="flex justify-end p-5">
               <Button asChild size={"lg"}>
                 <Link href={"/admin/users"}>Back</Link>
               </Button>
@@ -238,7 +296,7 @@ const UserDetailsPage = () => {
                 User Orders is Empty.
               </h1>
             </div>
-            <div className="flex justify-center p-5">
+            <div className="justify- flex p-5">
               <Button asChild size={"lg"}>
                 <Link href={"/admin/users"}>Back</Link>
               </Button>

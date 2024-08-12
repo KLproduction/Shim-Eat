@@ -18,9 +18,12 @@ export const addProductToDB = async (values: TAddProduct) => {
           category: values.category,
         },
       });
+      return { success: true, message: "Product added successfully." };
     } catch {
-      return { error: "Something went wrong" };
+      return {
+        success: false,
+        message: "Something went wrong. product name cannot be duplicate",
+      };
     }
   }
-  return { success: "Product added." };
 };

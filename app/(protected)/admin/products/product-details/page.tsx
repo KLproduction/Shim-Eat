@@ -155,8 +155,7 @@ const ProductDetailsPage = () => {
           if (data.success) {
             setSuccess(data.success);
             toast.success(data.success);
-            route.refresh();
-            redirect("/admin/products");
+            route.push("/admin/products");
           }
           if (data.error) {
             setError(data.error);

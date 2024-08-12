@@ -28,7 +28,7 @@ import {
 } from "@/components/ui/select";
 import MySpinner from "@/components/ui/MySpinner";
 import { Product } from "@prisma/client";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { startTransition, useEffect, useState, useTransition } from "react";
 import { ProductAddingSchema, ProductsettingSchema } from "@/schemas";
 import {
@@ -58,6 +58,7 @@ const AddProductForm = () => {
   const [pending, startTransition] = useTransition();
   const [success, setSuccess] = useState("");
   const [imageURL, setImageURL] = useState("");
+  const route = useRouter();
 
   const form = useForm<z.infer<typeof ProductAddingSchema>>({
     resolver: zodResolver(ProductAddingSchema),
@@ -78,13 +79,15 @@ const AddProductForm = () => {
         setError("");
         if (values) {
           const data = await addProductToDB(values);
-          if (data?.success) {
-            setSuccess("Update successful!");
-            toast.success(data.success);
-            redirect("/admin/products");
-          } else {
-            setError("Update failed");
-            toast.error(data.error);
+          if (data?.success === true) {
+            toast.success(data.message);
+            route.push("/admin/products");
+          }
+
+          if (data?.success !== true) {
+            const errorMessage =
+              data?.message ?? "An unexpected error occurred.";
+            setError(errorMessage);
           }
         }
       });
@@ -96,12 +99,12 @@ const AddProductForm = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <Card className=" sm:w-[600px] w-[300px]">
+    <div className="flex flex-col items-center justify-center">
+      <Card className="w-[300px] sm:w-[600px]">
         <CardHeader>Add Product</CardHeader>
         <CardContent>
           <Form {...form}>
-            <form className=" space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+            <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
               <div className="flex flex-col gap-4">
                 <FormField
                   control={form.control}
@@ -160,7 +163,7 @@ const AddProductForm = () => {
                           disabled={pending}
                           onChange={(e) =>
                             field.onChange(
-                              parseFloat(parseFloat(e.target.value).toFixed(2))
+                              parseFloat(parseFloat(e.target.value).toFixed(2)),
                             )
                           }
                         />
@@ -215,7 +218,7 @@ const AddProductForm = () => {
                 <div>
                   <Label>Upload Product Image:</Label>
                   <UploadDropzone
-                    className=" cursor-pointer"
+                    className="cursor-pointer"
                     appearance={{
                       uploadIcon: {
                         color: "orange",
@@ -260,11 +263,13 @@ const AddProductForm = () => {
                   />
                 </div>
               ) : (
-                <img src={imageURL} alt="" />
+                <div className="flex justify-center">
+                  <img src={imageURL} alt="" />
+                </div>
               )}
               <FormError message={error} />
               <FormSuccess message={success} />
-              <div className=" flex justify-center">
+              <div className="flex justify-center">
                 <Button type="submit">Save</Button>
               </div>
             </form>

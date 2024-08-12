@@ -21,7 +21,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   AiOutlineArrowLeft,
@@ -36,6 +36,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -51,6 +52,7 @@ export function DataTable<TData, TValue>({
   const [pageSize, setPageSize] = useState(10);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const route = useRouter();
 
   const table = useReactTable({
     data,
@@ -71,7 +73,16 @@ export function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
+    manualFiltering: false,
   });
+
+  useEffect(() => {
+    route.refresh();
+  }, []);
+
+  useEffect(() => {
+    setPageIndex(0);
+  }, [columnFilters]);
 
   return (
     <>
