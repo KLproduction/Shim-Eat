@@ -104,7 +104,7 @@ const Form = ({ orderPrice }: FormProps) => {
       .confirmPayment({
         elements,
         confirmParams: {
-          return_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/order`,
+          return_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/stripe/purchase-success`,
         },
       })
       .then(({ error }) => {

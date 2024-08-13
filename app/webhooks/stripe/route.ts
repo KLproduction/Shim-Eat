@@ -75,33 +75,33 @@ export async function POST(req: NextRequest) {
         });
       }
 
-      // const oldOrder = await db.userOrder.findMany({
-      //   where: {
-      //     userId: products?.userId,
-      //     status: "PENDING",
-      //   },
-      // });
+      const oldOrder = await db.userOrder.findMany({
+        where: {
+          userId: products?.userId,
+          status: "PENDING",
+        },
+      });
 
-      // if (oldOrder) {
-      //   oldOrder.map(async (item) => {
-      //     try {
-      //       await db.orderItem.deleteMany({
-      //         where: {
-      //           orderId: item.id,
-      //         },
-      //       });
-      //       await db.userOrder.deleteMany({
-      //         where: {
-      //           userId: item.userId,
-      //           status: "PENDING",
-      //         },
-      //       });
-      //       console.log(oldOrder);
-      //     } catch (e) {
-      //       console.error(e);
-      //     }
-      //   });
-      // }
+      if (oldOrder) {
+        oldOrder.map(async (item) => {
+          try {
+            await db.orderItem.deleteMany({
+              where: {
+                orderId: item.id,
+              },
+            });
+            await db.userOrder.deleteMany({
+              where: {
+                userId: item.userId,
+                status: "PENDING",
+              },
+            });
+            console.log(oldOrder);
+          } catch (e) {
+            console.error(e);
+          }
+        });
+      }
     }
   }
   return new NextResponse("ok", { status: 200 });
