@@ -20,10 +20,10 @@ const AdminSwitch = () => {
 
   return (
     <div
-      className={cn(
-        "z-0 flex h-[40px] items-center justify-start gap-3 bg-orange-400 p-3",
-        { "opacity-80": isAdmin, "bg-transparent opacity-50": !isAdmin },
-      )}
+      className={cn("z-0 flex h-[40px] items-center justify-start gap-3 p-3", {
+        "opacity-80": isAdmin,
+        "bg-transparent opacity-50": !isAdmin,
+      })}
     >
       {" "}
       <div className="flex items-center justify-start gap-3 p-3">
