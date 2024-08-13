@@ -55,6 +55,14 @@ const successPage = async ({
     );
   }
 
+  if (products.status === "PENDING") {
+    return (
+      <div>
+        Something went wrong, payment not success, please reload the page
+      </div>
+    );
+  }
+
   const isSuccess = paymentIntent.status === "succeeded";
 
   return (
