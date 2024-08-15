@@ -30,7 +30,7 @@ const AdminSwitch = () => {
         <Switch id="admin-mode" checked={isAdmin} onCheckedChange={setAdmin} />
         <Label
           htmlFor="admin-mode"
-          className={cn(isAdmin ? "text-green-500" : "text-zinc-500")}
+          className={cn(isAdmin ? "text-zinc-50" : "text-zinc-500")}
         >
           Admin Mode
         </Label>
