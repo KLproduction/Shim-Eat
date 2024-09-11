@@ -113,7 +113,8 @@ export const columns: ColumnDef<User>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.getValue("email") as string;
+      // const data = row.getValue("email") as string;
+      const data = "confidential" as string;
 
       return <div className="flex justify-center">{data}</div>;
     },

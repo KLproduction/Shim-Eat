@@ -8,9 +8,11 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ExtenderUser } from "@/next-auth";
 import { getAllUser } from "@/data/getAllUser";
+import { currentUser } from "@/lib/auth";
 
 const UserTablePage = async () => {
   const data: User[] | undefined = await getAllUser();
+  const user = await currentUser();
 
   return (
     <div className="container mx-auto pb-20 sm:py-10">

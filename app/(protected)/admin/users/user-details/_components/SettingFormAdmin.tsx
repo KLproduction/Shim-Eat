@@ -109,7 +109,7 @@ const SettingformAdmin = ({ user }: SettingFormProps) => {
             </div>
             <div className="flex items-center gap-3">
               <div>Email:</div>
-              <div>{user.email}</div>
+              <div>Confidential</div>
             </div>
 
             <div className="flex items-center gap-3">
