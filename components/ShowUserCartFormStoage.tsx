@@ -1,3 +1,5 @@
+"use client";
+
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { Button } from "./ui/button";
 import { formatPrice } from "@/lib/formatPrice";
