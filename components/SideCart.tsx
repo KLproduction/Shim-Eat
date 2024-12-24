@@ -15,7 +15,6 @@ import { AiFillShopping } from "react-icons/ai";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import ShowUserCartFromDBSide from "./ShowUserCartFormDBSide";
 import { usePathname } from "next/navigation";
 import { ExtenderUser } from "@/next-auth";
 import { RootState, store } from "@/redux/store";

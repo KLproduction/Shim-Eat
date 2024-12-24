@@ -1,3 +1,5 @@
+"use client";
+
 import { addCartItems, addToCart } from "@/actions/addToCartDB";
 import {
   getCartItemByCartId,

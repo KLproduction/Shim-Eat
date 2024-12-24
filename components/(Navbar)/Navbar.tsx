@@ -26,7 +26,6 @@ import GitSignInBtn from "../auth/GitSignInBtn";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { ExtenderUser } from "@/next-auth";
 import { AiOutlineGoogle } from "react-icons/ai";
-import ShowUserCartFromDBSideTest from "../ShowUserCartFormDBSideTest";
 import { BsBagCheckFill } from "react-icons/bs";
 import NavbarLargeSrceenDropdown from "./_components/NavbarLargeSrceenDropdown";
 import { getCartIdbyUserId } from "@/data/getCartIdbyUserId";

@@ -121,7 +121,6 @@ const ShowUserCartFromStorageSide = ({ userProduct }: Props) => {
                               dispatch(
                                 removeProductFromCart({
                                   productId: item?.productId,
-                                  quantity: item?.quantity,
                                   sideOption: item?.sideOption,
                                   sizeOption: item?.sizeOption,
                                 }),

@@ -1,28 +1,10 @@
-"use client";
-import { getCartItembyId } from "@/data/getCartItembyId";
-import { ExtenderUser } from "@/next-auth";
-import { $Enums, AddOns, ProductCategory, Size } from "@prisma/client";
-import { startTransition, useEffect, useState, useTransition } from "react";
-
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { Button } from "./ui/button";
-import { deleteCart } from "@/actions/deleteCart";
-import { getProductById } from "@/data/getProductById";
-
-import { toast } from "sonner";
-import { getCartIdbyUserId } from "@/data/getCartIdbyUserId";
 import { formatPrice } from "@/lib/formatPrice";
-import { ADDONSPRICE } from "@/data/products";
 import Link from "next/link";
-import { userCart } from "@/lib/type";
-import { cartQuantityUpdate } from "@/actions/cartQuantityUpdate";
 import AddCartitemToOrderBtn from "./AddCartitemToOrderBtn";
 import MySpinner from "./ui/MySpinner";
-import { usePathname, useSearchParams } from "next/navigation";
-import { deleteAllCurrentCartItemByUserId } from "@/actions/deleteAllCurrentCartItemByUserId";
 import { cn } from "@/lib/utils";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
 import { useCartMain } from "@/hooks/cart";
 import CartItemCard from "./CartItemCard";
 
@@ -46,7 +28,7 @@ const ShowUserCartFormDB = ({ cartId }: Props) => {
         <div className="mx-auto p-3">
           {hasItems ? (
             userProduct?.map((item) => (
-              <div>
+              <div key={item.id} className="w-full">
                 <CartItemCard data={item} cartId={cartId} />
               </div>
             ))

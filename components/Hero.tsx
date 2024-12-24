@@ -110,7 +110,7 @@ const Hero = () => {
                   });
                 }}
               >
-                What's News
+                {`What's News`}
               </Button>
               <Button asChild size="lg" className="flex justify-center gap-3">
                 <Link
