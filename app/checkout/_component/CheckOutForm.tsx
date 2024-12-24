@@ -85,7 +85,7 @@ const CheckOutForm = ({ products, clientSecret }: CheckOutFormProps) => {
           Order Total:{formatPrice(products.orderPrice)}{" "}
         </h1>
       </div>
-      <div className="flex flex-col items-start gap-4 text-red-500">
+      <div className="flex flex-col items-start gap-4 text-green-500">
         <span>Please use dummy payment details in this demo.</span>
         <span>Card number: 4242 4242 4242 4242</span>
       </div>
