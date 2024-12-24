@@ -1,26 +1,9 @@
-import Image from "next/image";
 import React from "react";
-import MaxWidthWrapper from "./MaxWidthWrapper";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { BiChevronRight } from "react-icons/bi";
 import { motion } from "framer-motion";
 
-// const fadeInMotionVariants = {
-//   hidden: { opacity: 0 },
-//   show: {
-//     opacity: 1,
-//     transition: {
-//       staggerChildren: 0.75,
-//     },
-//   },
-// };
-
-// const fadeInMotionChildVariants = {
-//   hidden: { opacity: 0 },
-//   show: { opacity: 1 },
-// };
-// const Hero = () => {
 //   return (
 //     <MaxWidthWrapper>
 //       <motion.section
@@ -116,13 +99,25 @@ const Hero = () => {
             <p className="sm:text-md mt-3 text-sm font-bold text-zinc-100">
               From Farm to Table – Taste the Freshness in Every Bite
             </p>
-            <div className="mt-3 flex items-center justify-start sm:mt-5">
+            <div className="mt-3 flex items-center justify-start gap-5 sm:mt-5">
+              <Button
+                size={"lg"}
+                className="border-2 border-zinc-100 bg-transparent text-zinc-100 backdrop-blur-md"
+                onClick={() => {
+                  window.scrollBy({
+                    top: window.innerHeight + 100, // Scroll down by 100vh
+                    behavior: "smooth", // Adds a smooth scrolling effect
+                  });
+                }}
+              >
+                What's News
+              </Button>
               <Button asChild size="lg" className="flex justify-center gap-3">
                 <Link
                   href="/menu"
                   className="flex items-center justify-around uppercase"
                 >
-                  <h1>See Menu</h1> <BiChevronRight className="text-xl" />
+                  <h1>Our Menu</h1> <BiChevronRight className="text-xl" />
                 </Link>
               </Button>
             </div>

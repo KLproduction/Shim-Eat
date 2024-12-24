@@ -6,9 +6,7 @@ import { formatPrice } from "@/lib/formatPrice";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { AiOutlineCaretRight, AiOutlineCaretLeft } from "react-icons/ai";
-import { count } from "console";
 import Hero from "../Hero";
-import { getProductByName } from "@/data/getProductByName";
 import { Product } from "@prisma/client";
 import { getProducts } from "@/data/getProducts";
 
@@ -141,7 +139,7 @@ const HeroNew = () => {
   return (
     <>
       <Hero />
-      <main className="flex flex-col">
+      <main className="news flex flex-col">
         <section className="carousel next" ref={carousel}>
           <div className="list">
             <article className="item other_1">
@@ -166,8 +164,7 @@ const HeroNew = () => {
               <figure className="image">
                 <img
                   src={
-                    "https://utfs.io/f/81ed3b31-f868-400f-8adc-0bbc03a3aa5e-65d0vx.png" ||
-                    undefined
+                    "https://utfs.io/f/81ed3b31-f868-400f-8adc-0bbc03a3aa5e-65d0vx.png"
                   }
                   alt=""
                 />
@@ -206,8 +203,7 @@ const HeroNew = () => {
               <figure className="image">
                 <img
                   src={
-                    "https://utfs.io/f/e4c58bfb-c2f2-4f3c-b93f-a091c903bcff-tn6yzk.png" ||
-                    undefined
+                    "https://utfs.io/f/e4c58bfb-c2f2-4f3c-b93f-a091c903bcff-tn6yzk.png"
                   }
                   alt=""
                 />
@@ -245,8 +241,7 @@ const HeroNew = () => {
               <figure className="image">
                 <img
                   src={
-                    "https://utfs.io/f/606ad341-a2d3-4bd6-bda8-24f43f862242-gtr07o.png" ||
-                    undefined
+                    "https://utfs.io/f/606ad341-a2d3-4bd6-bda8-24f43f862242-gtr07o.png"
                   }
                   alt=""
                 />
@@ -284,8 +279,7 @@ const HeroNew = () => {
               <figure className="image">
                 <img
                   src={
-                    "https://utfs.io/f/1467007f-0fc5-4185-8e27-298bf919771d-fqeve2.png" ||
-                    undefined
+                    "https://utfs.io/f/1467007f-0fc5-4185-8e27-298bf919771d-fqeve2.png"
                   }
                   alt=""
                 />

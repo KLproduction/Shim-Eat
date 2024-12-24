@@ -9,6 +9,8 @@ import AdminSwitch from "@/components/AdminSwitch";
 import NavbarMobileNew from "@/components/(Navbar)/NavbarMobileNew";
 import NavbarMobileComponents from "@/components/(Navbar)/_components/NavbarMobile_compoent";
 import { currentUser } from "@/lib/auth";
+import { ReactQueryProvider } from "@/react-query/provider";
+import { ReduxProvider } from "@/redux/provider";
 
 const inter = Inter({ subsets: ["latin"] });
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
@@ -30,20 +32,24 @@ export default async function RootLayout({
     <SessionProvider session={session}>
       <html lang="en" className="">
         <body className={roboto.className}>
-          <div className="hidden sm:block">
-            <Navbar />
-          </div>
-          <div className="sm:hidden">
-            <NavbarMobileNew />
-          </div>
-          <AdminSwitch />
-          {children}
-          <div className="block sm:hidden">
-            <Toaster position="top-center" />
-          </div>
-          <div className="hidden sm:block">
-            <Toaster position="bottom-left" />
-          </div>
+          <ReduxProvider>
+            <ReactQueryProvider>
+              <div className="hidden sm:block">
+                <Navbar />
+              </div>
+              <div className="sm:hidden">
+                <NavbarMobileNew />
+              </div>
+              <AdminSwitch />
+              {children}
+              <div className="block sm:hidden">
+                <Toaster position="top-center" />
+              </div>
+              <div className="hidden sm:block">
+                <Toaster position="bottom-left" />
+              </div>
+            </ReactQueryProvider>
+          </ReduxProvider>
         </body>
       </html>
     </SessionProvider>

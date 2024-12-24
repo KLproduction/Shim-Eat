@@ -57,7 +57,7 @@ const AddCartitemToOrderBtn = (props: AddCartitemToOrderBtnProps) => {
         }}
         disabled={pending}
       >
-        BUY NOW
+        Check Out
       </Button>
     </>
   );

@@ -58,7 +58,13 @@ const ProductCategoryMenu = ({
               </CardContent>
               <CardFooter>
                 <Button asChild className="duration-500 hover:scale-110">
-                  <Link
+                  <Link href={`/product/${product.id}`} className="flex gap-5">
+                    <div className="flex gap-3">
+                      <h1>Order</h1>
+                      <h2>{formatPrice(product.price)}</h2>
+                    </div>
+                  </Link>
+                  {/* <Link
                     href={`/product?product=${product.id}`}
                     className="flex gap-5"
                   >
@@ -66,7 +72,7 @@ const ProductCategoryMenu = ({
                       <h1>Order</h1>
                       <h2>{formatPrice(product.price)}</h2>
                     </div>
-                  </Link>
+                  </Link> */}
                 </Button>
               </CardFooter>
             </Card>

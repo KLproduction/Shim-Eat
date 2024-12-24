@@ -13,6 +13,7 @@ import MySpinner from "@/components/ui/MySpinner";
 import { ADDONSPRICE } from "@/data/products";
 import { formatPrice } from "@/lib/formatPrice";
 import { TUserOrder, userCart } from "@/lib/type";
+import { clearCart } from "@/redux/slices/add-to-cart-slice";
 import {
   AddressElement,
   Elements,
@@ -22,7 +23,9 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { FormEvent, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { FormEvent, useEffect, useState, useTransition } from "react";
+import { useDispatch } from "react-redux";
 
 type CheckOutFormProps = {
   products: TUserOrder;
@@ -93,16 +96,20 @@ const CheckOutForm = ({ products, clientSecret }: CheckOutFormProps) => {
   );
 };
 const Form = ({ orderPrice }: FormProps) => {
+  const dispatch = useDispatch();
   const stripe = useStripe();
   const elements = useElements();
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string>();
   const [loading, setLoading] = useState(false);
+  const route = useRouter();
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setLoading(!loading);
     if (stripe == null || elements == null) return;
+    dispatch(clearCart());
     stripe
       .confirmPayment({
         elements,
@@ -118,10 +125,9 @@ const Form = ({ orderPrice }: FormProps) => {
         ) {
           setError(error.message);
         } else {
-          setError("An unknown error occurred");
+          setPaymentSuccess(true);
         }
       });
-    localStorage.removeItem("cart");
 
     setLoading(!loading);
   };

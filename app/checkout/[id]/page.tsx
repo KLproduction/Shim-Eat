@@ -8,13 +8,7 @@ import { getOrderByOrderID } from "@/data/getOrderByOrderID";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
-const CheckOutPage = async ({
-  params,
-  searchParams,
-}: {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-}) => {
+const CheckOutPage = async ({ params }: { params: { id: string } }) => {
   const user = await currentUser();
   if (!user) revalidatePath("/auth/login");
 

@@ -56,6 +56,12 @@ export const AddOnsSchema = z.object({
   type: z.enum(["standard", "large"]),
   side: z.enum(["redRice", "potatoSalad", "brownToast", "noAddOns"]),
 });
+export const AddToCartSchema = z.object({
+  product: z.string(),
+  quantity: z.number().min(1),
+  type: z.enum(["standard", "large"]),
+  side: z.enum(["redRice", "potatoSalad", "brownToast", "noAddOns"]),
+});
 
 export const TodoSchema = z.object({
   content: z.string(),

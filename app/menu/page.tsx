@@ -5,11 +5,9 @@ import MainMenu from "@/components/Menu/MainMenu";
 import SaladMenu from "@/components/Menu/SaladMenu";
 import { Button } from "@/components/ui/button";
 import MySpinner from "@/components/ui/MySpinner";
-import { getOnSaleProducts } from "@/data/getOnsaleProducts";
-import { Product } from "@prisma/client";
-import { useEffect, useState } from "react";
-import { Link, animateScroll } from "react-scroll";
+import { Link } from "react-scroll";
 import { motion } from "framer-motion";
+import { useMenu } from "@/hooks/menu";
 
 const fadeInMotionVariants = {
   hidden: { opacity: 0 },
@@ -27,16 +25,9 @@ const fadeInMotionChildVariants = {
 };
 
 const MenuPage = () => {
-  const [products, setProducts] = useState<Product[] | null>();
+  const { data: products, isFetching } = useMenu();
 
-  useEffect(() => {
-    (async () => {
-      const data = await getOnSaleProducts();
-      setProducts(data);
-    })();
-  }, []);
-
-  if (!products) {
+  if (isFetching) {
     <MySpinner />;
   }
 
