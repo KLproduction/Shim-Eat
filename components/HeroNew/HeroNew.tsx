@@ -157,7 +157,7 @@ const HeroNew = () => {
                     prepared to ensure every bite is as delightful as the last.
                   </p>
                   <Button asChild className="bg-green-500" size={"lg"}>
-                    <Link href={`/product?product=${other1ID}`}>Order Now</Link>
+                    <Link href={`/product/${other1ID}`}>Order Now</Link>
                   </Button>
                 </div>
               </div>
@@ -172,9 +172,7 @@ const HeroNew = () => {
                   <h2>Elegant Chicken Skewer Platter</h2>
                   <div>
                     <Button asChild className="bg-green-500" size={"sm"}>
-                      <Link href={`/product?product=${other1ID}`}>
-                        Order Now
-                      </Link>
+                      <Link href={`/product/${other1ID}`}>Order Now</Link>
                     </Button>
                   </div>
                 </figcaption>
@@ -196,7 +194,7 @@ const HeroNew = () => {
                     salad can be.
                   </p>
                   <Button asChild className="bg-green-500" size={"lg"}>
-                    <Link href={`/product?product=${activeID}`}>Order Now</Link>
+                    <Link href={`/product/${activeID}`}>Order Now</Link>
                   </Button>
                 </div>
               </div>
@@ -211,9 +209,7 @@ const HeroNew = () => {
                   <h2>Garden Delight Steak Salad</h2>
                   <div>
                     <Button asChild className="bg-green-500" size={"sm"}>
-                      <Link href={`/product?product=${activeID}`}>
-                        Order Now
-                      </Link>
+                      <Link href={`/product/${activeID}`}>Order Now</Link>
                     </Button>
                   </div>
                 </figcaption>
@@ -234,7 +230,7 @@ const HeroNew = () => {
                     main course.
                   </p>
                   <Button asChild className="bg-green-500" size={"lg"}>
-                    <Link href={`/product?product=${other2ID}`}>Order Now</Link>
+                    <Link href={`/product/${other2ID}`}>Order Now</Link>
                   </Button>
                 </div>
               </div>
@@ -249,9 +245,7 @@ const HeroNew = () => {
                   <h2>Mediterranean Tuna Pasta Salad</h2>
                   <div>
                     <Button asChild className="bg-green-500" size={"sm"}>
-                      <Link href={`/product?product=${other2ID}`}>
-                        Order Now
-                      </Link>
+                      <Link href={`/product/${other2ID}`}>Order Now</Link>
                     </Button>
                   </div>
                 </figcaption>
@@ -272,7 +266,7 @@ const HeroNew = () => {
                     a taste of Asian delicacies right to your plate.
                   </p>
                   <Button asChild className="bg-green-500" size={"lg"}>
-                    <Link href={`/product?product=${itemID}`}>Order Now</Link>
+                    <Link href={`/product/${itemID}`}>Order Now</Link>
                   </Button>
                 </div>
               </div>
@@ -287,7 +281,7 @@ const HeroNew = () => {
                   <h2>Sesame Pork Bao</h2>
                   <div>
                     <Button asChild className="bg-green-500" size={"sm"}>
-                      <Link href={`/product?product=${itemID}`}>Order Now</Link>
+                      <Link href={`/product/${itemID}`}>Order Now</Link>
                     </Button>
                   </div>
                 </figcaption>

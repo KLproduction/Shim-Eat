@@ -246,6 +246,7 @@ export const useCartItem = () => {
       route.push(`/cart/${data}`);
     },
     onError: (error) => {
+      toast.error("Something went wrong, please try re-login");
       console.error("Error updating cart:", error);
     },
     onSettled: (data) => {

@@ -40,9 +40,9 @@ const ShowUserCartFromStorageSide = ({ userProduct }: Props) => {
     <div
       className={cn(
         "flex w-full flex-col gap-5 rounded-md",
-        // userProduct.length > 2
-        //   ? "h-[30%] sm:h-[40%]"
-        //   : "h-[60%] min-h-[500px] sm:h-[70%]",
+        userProduct.length > 2
+          ? "h-[30%] sm:h-[40%]"
+          : "h-[60%] min-h-[500px] sm:h-[70%]",
       )}
     >
       <>

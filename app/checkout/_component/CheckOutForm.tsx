@@ -39,11 +39,11 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!);
 
 const CheckOutForm = ({ products, clientSecret }: CheckOutFormProps) => {
   return (
-    <div className="mx-auto w-full max-w-5xl space-y-8">
+    <div className="w-full space-y-8">
       <div>
         {products.orderItems.map((product, index) => (
           <div className="m-5 flex flex-col items-center gap-5" key={index}>
-            <Card className="flex min-w-[300px] flex-col items-center justify-center gap-5 p-3 text-zinc-600 transition-all sm:grid sm:grid-cols-6 sm:gap-5">
+            <Card className="grid w-full grid-cols-1 items-center justify-center gap-5 p-3 text-zinc-600 transition-all sm:grid sm:grid-cols-6 sm:gap-5">
               <img
                 src={product.product.image || undefined}
                 alt=""
@@ -85,7 +85,7 @@ const CheckOutForm = ({ products, clientSecret }: CheckOutFormProps) => {
           Order Total:{formatPrice(products.orderPrice)}{" "}
         </h1>
       </div>
-      <div className="flex flex-col items-start gap-4 text-green-500">
+      <div className="flex flex-col items-start gap-2 text-green-500">
         <span>Please use dummy payment details in this demo.</span>
         <span>Card number: 4242 4242 4242 4242</span>
       </div>

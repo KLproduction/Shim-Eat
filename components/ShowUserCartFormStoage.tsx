@@ -23,15 +23,24 @@ const ShowUserCartFormDB = ({ cartId }: Props) => {
   }, 0);
   const orderTotal = formatPrice(total || 0);
 
+  console.log(userProduct);
+
   return (
     <MaxWidthWrapper>
       {isFetching && <MySpinner />}
       <div className="flex h-auto w-full flex-col items-center justify-start pb-12">
         <div className="mx-auto p-3">
+          <div></div>
           {hasItems ? (
             userProduct?.map((item) => (
-              <div key={item.id} className="w-full">
+              <div
+                key={item.id}
+                className="flex w-full flex-col items-center justify-center gap-4"
+              >
                 <CartItemCard data={item} cartId={cartId} />
+                <div className="flex w-full justify-end pr-6">
+                  Total: {orderTotal}
+                </div>
               </div>
             ))
           ) : (
@@ -49,11 +58,8 @@ const ShowUserCartFormDB = ({ cartId }: Props) => {
               </Button>
             </div>
           )}
-          <div className="flex w-full justify-end pr-6">
-            Total: {orderTotal}
-          </div>
         </div>
-        <AddCartitemToOrderBtn orderPrice={total} />
+        {hasItems && <AddCartitemToOrderBtn orderPrice={total} />}
       </div>
     </MaxWidthWrapper>
   );

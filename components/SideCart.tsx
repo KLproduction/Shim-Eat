@@ -89,7 +89,6 @@ const SideCart = ({ className, user }: SideCartProps) => {
                     disabled={isAddingToCart}
                   >
                     {isAddingToCart ? "Adding to Cart..." : "Go To Cart"}
-                    Cart
                   </Button>
                 </SheetTrigger>
               </SheetFooter>
