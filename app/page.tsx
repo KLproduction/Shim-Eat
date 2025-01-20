@@ -164,7 +164,7 @@ const HeroNew = () => {
     offset: ["start start", "end end"],
   });
 
-  const heroScale = useTransform(scrollY, [0, 600], [1, 0.8]);
+  const heroScale = useTransform(scrollY, [0, 600], [1, 0.5]);
   const heroRotate = useTransform(scrollY, [0, 600], [0, 2]);
 
   const promoteScale = useTransform(scrollY, [0, 600], [0.5, 1]);
