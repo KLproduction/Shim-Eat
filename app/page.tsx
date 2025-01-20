@@ -168,7 +168,7 @@ const HeroNew = () => {
   const heroRotate = useTransform(scrollY, [0, 600], [0, 2]);
 
   const promoteScale = useTransform(scrollY, [0, 600], [0.5, 1]);
-  const promoteRotate = useTransform(scrollY, [0, 600], [5, 0]);
+  const promoteRotate = useTransform(scrollY, [0, 600], [8, 0]);
 
   return (
     <div ref={sectionRef} className="h-[200vh] bg-zinc-900">
