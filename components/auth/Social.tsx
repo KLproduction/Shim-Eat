@@ -5,6 +5,8 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
+import { guestLogin } from "@/actions/guestLogin";
+import { FaUser } from "react-icons/fa";
 
 export const Social = () => {
   const searchParams = useSearchParams();
@@ -13,6 +15,9 @@ export const Social = () => {
     signIn(provider, {
       callbackUrl: callbackUrl || `/`,
     });
+  };
+  const handleGuest = () => {
+    guestLogin();
   };
   return (
     <div className="flex w-full items-center gap-x-2">
@@ -31,6 +36,14 @@ export const Social = () => {
         onClick={() => onClick("github")}
       >
         <FaGithub className="h-5 w-5" />
+      </Button>
+      <Button
+        size={"lg"}
+        className="w-full"
+        variant={"outline"}
+        onClick={handleGuest}
+      >
+        <FaUser className="h-5 w-5" />
       </Button>
     </div>
   );
