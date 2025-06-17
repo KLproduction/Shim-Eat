@@ -18,7 +18,7 @@ const ResponsiveModel = ({ children, isOpen, onOpenChange }: Props) => {
           <DialogDescription></DialogDescription>
         </DialogTitle>
         <DialogContent className="hide-scrollbar z-[9999] max-h-[85vh] w-full overflow-y-auto border-none p-0 sm:max-w-lg">
-          {children}
+          <div className="flex items-center justify-center">{children}</div>
         </DialogContent>
       </Dialog>
     );
@@ -31,7 +31,7 @@ const ResponsiveModel = ({ children, isOpen, onOpenChange }: Props) => {
       </DrawerTitle>
       <DrawerContent>
         <div className="hide-scrollbar z-[99999] max-h-[70vh] overflow-y-auto pb-24">
-          {children}
+          <div className="flex justify-center">{children}</div>
         </div>
       </DrawerContent>
     </Drawer>

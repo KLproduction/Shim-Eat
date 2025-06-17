@@ -12,6 +12,8 @@ import { currentUser } from "@/lib/auth";
 import { ReactQueryProvider } from "@/react-query/provider";
 import { ReduxProvider } from "@/redux/provider";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import SignInModel from "@/components/modals/sign-in-model";
+import SignUpModel from "@/components/modals/sign-up-model";
 
 const inter = Inter({ subsets: ["latin"] });
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
@@ -36,6 +38,8 @@ export default async function RootLayout({
           <ReduxProvider>
             <ReactQueryProvider>
               <NuqsAdapter>
+                <SignInModel />
+                <SignUpModel />
                 <div className="hidden sm:block">
                   <Navbar />
                 </div>

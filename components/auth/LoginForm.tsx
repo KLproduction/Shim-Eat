@@ -26,7 +26,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { DialogTrigger } from "../ui/dialog";
 import { toast } from "sonner";
 
-export const LoginForm = () => {
+type Props = {
+  noBackground?: boolean;
+};
+export const LoginForm = ({ noBackground }: Props) => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
   const urlError =
@@ -73,9 +76,10 @@ export const LoginForm = () => {
   return (
     <CardWapper
       headerLabel="Welcome"
-      backBtnLabel="Don't have a account?"
+      backBtnLabel="Don't have a account? Sign up"
       backBtnHref="/auth/register"
       showSocial
+      noShadowOrBorder={noBackground}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

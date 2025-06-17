@@ -22,7 +22,10 @@ import { useTransition } from "react";
 import { RegisterSchema } from "@/schemas";
 import { register } from "@/actions/register";
 
-export const RegisterForm = () => {
+type Props = {
+  noBackground?: boolean;
+};
+export const RegisterForm = ({ noBackground }: Props) => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -50,9 +53,10 @@ export const RegisterForm = () => {
   return (
     <CardWapper
       headerLabel="Create an account"
-      backBtnLabel="Already have a account?"
+      backBtnLabel="Already have a account? Sign in"
       backBtnHref="/auth/login"
       showSocial
+      noShadowOrBorder={noBackground}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

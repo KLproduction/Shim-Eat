@@ -31,6 +31,7 @@ import NavbarLargeSrceenDropdown from "./_components/NavbarLargeSrceenDropdown";
 import { getCartIdbyUserId } from "@/data/getCartIdbyUserId";
 import { getCartItembyId } from "@/data/getCartItembyId";
 import AdminSwitch from "../AdminSwitch";
+import GlobalSignInBtn from "../global/global-sign-in-btn";
 
 const navList = [
   {
@@ -62,7 +63,7 @@ const Navbar = async () => {
           </ul>
           {!user?.id ? (
             <div className="flex items-center gap-3 p-3">
-              <DropdownMenu>
+              {/* <DropdownMenu>
                 <DropdownMenuTrigger>
                   <h1 className="rounded-2xl bg-orange-500 px-3 py-2 text-sm text-white">
                     Signin
@@ -106,7 +107,8 @@ const Navbar = async () => {
               <div className="h-8 w-px bg-zinc-200" />
               <Link href={"/auth/register"} className="text-sm text-gray-500">
                 Sign up
-              </Link>
+              </Link> */}
+              <GlobalSignInBtn />
             </div>
           ) : (
             <div className="flex items-center gap-5 p-3">
