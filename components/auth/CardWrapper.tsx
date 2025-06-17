@@ -23,27 +23,25 @@ export const CardWapper = ({
   showSocial,
   noShadowOrBorder = false,
 }: CardWrapperProps) => {
+  const { open: openSignIn, close: closeSignIn } = useSignInModel();
+  const { open: openSignUp, close: closeSignUp } = useSignUpModel();
   // Optional: Use useSignUpModel if backBtnLabel is provided and equals a specific value (e.g., 'Sign up')
   let handleBackBtnClick = undefined;
   if (backBtnLabel && backBtnLabel.toLowerCase().includes("sign up")) {
     try {
-      const { open } = useSignUpModel();
-      const { close } = useSignInModel();
       handleBackBtnClick = (e: React.MouseEvent) => {
         e.preventDefault();
-        close();
-        open();
+        closeSignIn();
+        openSignUp();
       };
     } catch {}
   }
   if (backBtnLabel && backBtnLabel.toLowerCase().includes("sign in")) {
     try {
-      const { open } = useSignInModel();
-      const { close } = useSignUpModel();
       handleBackBtnClick = (e: React.MouseEvent) => {
         e.preventDefault();
-        close();
-        open();
+        closeSignUp();
+        openSignIn();
       };
     } catch {}
   }

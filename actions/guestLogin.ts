@@ -3,28 +3,27 @@
 import { signIn } from "@/auth";
 import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
+import { randomUUID } from "crypto";
 
 export const guestLogin = async () => {
-  const email = "guest@example.com";
-  const password = "guestpass";
+  const uid = randomUUID();
+  const email = `guest-${uid}@example.com`;
+  const rawPassword = randomUUID();
 
-  let guest = await db.user.findUnique({ where: { email } });
-
-  if (!guest) {
-    const hashed = await bcrypt.hash(password, 10);
-    guest = await db.user.create({
-      data: {
-        email,
-        password: hashed,
-        name: "Guest",
-        emailVerified: new Date(),
-      },
-    });
-  }
+  await db.user.create({
+    data: {
+      email,
+      password: await bcrypt.hash(rawPassword, 10),
+      name: `Guest ${uid.slice(0, 8)}`,
+      emailVerified: new Date(),
+      isGuest: true,
+      guestExpiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    },
+  });
 
   await signIn("credentials", {
     email,
-    password,
-    redirectTo: "/",
+    password: rawPassword,
+    redirectTo: "/", // or `redirect:` if you use the latest API
   });
 };

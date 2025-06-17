@@ -22,23 +22,31 @@ export const Social = () => {
   };
 
   return (
-    <div className="flex w-full items-center gap-x-2">
-      <Button
-        size={"lg"}
-        className="w-full"
-        variant={"outline"}
-        onClick={() => onClick("google")}
-      >
-        <FcGoogle className="h-5 w-5" />
-      </Button>
-      <Button
-        size={"lg"}
-        className="w-full"
-        variant={"outline"}
-        onClick={() => onClick("github")}
-      >
-        <FaGithub className="h-5 w-5" />
-      </Button>
+    <div className="flex w-full flex-col gap-5">
+      <div className="flex w-full items-center gap-x-2">
+        <Button
+          size={"lg"}
+          className="w-full"
+          variant={"outline"}
+          onClick={() => onClick("google")}
+        >
+          <FcGoogle className="h-5 w-5" />
+        </Button>
+        <Button
+          size={"lg"}
+          className="w-full"
+          variant={"outline"}
+          onClick={() => onClick("github")}
+        >
+          <FaGithub className="h-5 w-5" />
+        </Button>
+      </div>
+      <div>
+        <div className="h-px w-full bg-zinc-200" />
+        <div className="flex w-full items-center gap-x-2">
+          <span className="text-sm text-gray-500">or continue as guest</span>
+        </div>
+      </div>
       <Button
         size={"lg"}
         className="w-full"

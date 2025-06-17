@@ -60,6 +60,8 @@ model User {
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
   isSuperAdmin          Boolean                @default(false)
+  isGuest               Boolean                @default(false)
+  guestExpiresAt        DateTime?
   totalSpend            Float                  @default(0)
   Cart                  Cart?
   userOrder             UserOrder[]
