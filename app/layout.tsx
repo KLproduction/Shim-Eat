@@ -11,6 +11,7 @@ import NavbarMobileComponents from "@/components/(Navbar)/_components/NavbarMobi
 import { currentUser } from "@/lib/auth";
 import { ReactQueryProvider } from "@/react-query/provider";
 import { ReduxProvider } from "@/redux/provider";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const inter = Inter({ subsets: ["latin"] });
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
@@ -34,20 +35,22 @@ export default async function RootLayout({
         <body className={roboto.className}>
           <ReduxProvider>
             <ReactQueryProvider>
-              <div className="hidden sm:block">
-                <Navbar />
-              </div>
-              <div className="sm:hidden">
-                <NavbarMobileNew />
-              </div>
-              <AdminSwitch />
-              {children}
-              <div className="block sm:hidden">
-                <Toaster position="top-center" />
-              </div>
-              <div className="hidden sm:block">
-                <Toaster position="bottom-left" />
-              </div>
+              <NuqsAdapter>
+                <div className="hidden sm:block">
+                  <Navbar />
+                </div>
+                <div className="sm:hidden">
+                  <NavbarMobileNew />
+                </div>
+                <AdminSwitch />
+                {children}
+                <div className="block sm:hidden">
+                  <Toaster position="top-center" />
+                </div>
+                <div className="hidden sm:block">
+                  <Toaster position="bottom-left" />
+                </div>
+              </NuqsAdapter>
             </ReactQueryProvider>
           </ReduxProvider>
         </body>
