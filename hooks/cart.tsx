@@ -28,8 +28,11 @@ import { z } from "zod";
 import { $Enums, AddOns, Product, ProductCategory, Size } from "@prisma/client";
 import { currentUser } from "@/lib/auth";
 import { useRouter } from "next/navigation";
+import { useCurrentUser } from "./use-current-user";
+import { useSignInModel } from "./modals";
+import { useSideCart } from "./use-side-cart";
 
-export const useAddToCart = (productId: string) => {
+export const useAddToCart = (productId: string, userId: string | undefined) => {
   const [addOnTotal, setAddOnTotal] = useState(0);
   const dispatch = useDispatch();
 
@@ -75,6 +78,9 @@ export const useAddToCart = (productId: string) => {
       side: "noAddOns",
     },
   });
+
+  const { open: openSignIn } = useSignInModel();
+  const { open: openSideCart } = useSideCart();
 
   const updateAddOnTotal = () => {
     const type = getValues().type;
@@ -146,11 +152,21 @@ export const useAddToCart = (productId: string) => {
     });
 
   const onSubmit = handleSubmit(() => {
+    if (!userId) {
+      openSignIn();
+      return;
+    }
     addToCartMutation();
+    openSideCart();
   });
 
   const onDrinksSubmit = handleSubmitDrinks(() => {
+    if (!userId) {
+      openSignIn();
+      return;
+    }
     addDrinksToCartMutation();
+    openSideCart();
   });
 
   const [totalBasePrice, setTotalBasePrice] = useState(Number(data?.price!));
@@ -240,6 +256,7 @@ export const useCartItem = () => {
           itemTotal: item.itemTotal,
         };
       });
+      console.log("Validated Cart:", validatedCart);
       return await addCartItems(validatedCart);
     },
     onSuccess: (data) => {

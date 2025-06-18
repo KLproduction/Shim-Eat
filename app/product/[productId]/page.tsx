@@ -1,6 +1,5 @@
-"use client";
-
 import { AddCartToReduxForm } from "@/components/form/add-to-cart";
+import { currentUser } from "@/lib/auth";
 import React from "react";
 
 type Props = {
@@ -9,10 +8,11 @@ type Props = {
   };
 };
 
-const page = ({ params }: Props) => {
+const page = async ({ params }: Props) => {
+  const user = await currentUser();
   return (
     <div>
-      <AddCartToReduxForm productId={params.productId} />
+      <AddCartToReduxForm productId={params.productId} userId={user?.id} />
     </div>
   );
 };

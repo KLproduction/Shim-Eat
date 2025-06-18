@@ -39,7 +39,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!);
 
 const CheckOutForm = ({ products, clientSecret }: CheckOutFormProps) => {
   return (
-    <div className="w-full space-y-8">
+    <div className="container mx-auto w-full space-y-8 px-4 py-8 sm:px-0">
       <div>
         {products.orderItems.map((product, index) => (
           <div className="m-5 flex flex-col items-center gap-5" key={index}>
@@ -82,7 +82,7 @@ const CheckOutForm = ({ products, clientSecret }: CheckOutFormProps) => {
           </div>
         ))}
         <h1 className="flex justify-center p-3 text-xl text-zinc-600 sm:justify-end">
-          Order Total:{formatPrice(products.orderPrice)}{" "}
+          Order Total:{formatPrice(products.orderPrice)}
         </h1>
       </div>
       <div className="flex flex-col items-start gap-2 text-green-500">

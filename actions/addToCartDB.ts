@@ -145,12 +145,8 @@ export const addCartItems = async (
         const extraPrice =
           ADDONSPRICE.addOns[
             item.sideOption as keyof typeof ADDONSPRICE.addOns
-          ] ||
-          0 +
-            ADDONSPRICE.size[
-              item.sizeOption as keyof typeof ADDONSPRICE.size
-            ] ||
-          0;
+          ] +
+          ADDONSPRICE.size[item.sizeOption as keyof typeof ADDONSPRICE.size];
 
         const newItem = await db.cartItem.create({
           data: {
@@ -163,6 +159,7 @@ export const addCartItems = async (
             itemTotal: userProduct?.price! + extraPrice * item.quantity! || 1,
           },
         });
+
         return {
           status: 200,
           cartItemId: newItem.id,

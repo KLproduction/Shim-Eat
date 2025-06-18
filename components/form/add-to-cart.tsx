@@ -23,11 +23,15 @@ import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import { BsBack } from "react-icons/bs";
 import { ArrowBigLeft, ArrowBigLeftDash, ArrowBigLeftIcon } from "lucide-react";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { useSignInModel } from "@/hooks/modals";
+import { useSideCart } from "@/hooks/use-side-cart";
 
 type Props = {
   productId: string;
+  userId: string | undefined;
 };
-export const AddCartToReduxForm = ({ productId }: Props) => {
+export const AddCartToReduxForm = ({ productId, userId }: Props) => {
   const route = useRouter();
   const {
     data: product,
@@ -52,7 +56,7 @@ export const AddCartToReduxForm = ({ productId }: Props) => {
     drinksErrors,
     watchDrinks,
     getDrinksValues,
-  } = useAddToCart(productId);
+  } = useAddToCart(productId, userId);
 
   if (isFetching) {
     return <MySpinner />;

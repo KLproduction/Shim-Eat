@@ -19,7 +19,7 @@ const ShowUserCartFormDB = ({ cartId }: Props) => {
   const userProduct = cartItems?.items;
   const hasItems = userProduct && userProduct.length > 0;
   const total = userProduct?.reduce((acc, item) => {
-    return acc + item.quantity * item.product.price;
+    return acc + item.quantity * (item.product.price + item.extraPrice);
   }, 0);
   const orderTotal = formatPrice(total || 0);
 
