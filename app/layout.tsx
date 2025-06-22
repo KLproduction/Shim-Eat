@@ -30,6 +30,7 @@ export default async function RootLayout({
 }>) {
   const session = await auth();
   const user = await currentUser();
+  console.log("session", session);
 
   return (
     <SessionProvider session={session}>
