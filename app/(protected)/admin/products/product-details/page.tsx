@@ -80,15 +80,15 @@ const ProductDetailsPage = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      await checkServerSession(
-        window.location.pathname + window.location.search,
-      );
+
+      await checkServerSession();
       if (productId) {
         const fetchedProduct = await getProductById(productId);
         setProduct(fetchedProduct);
       } else {
         setError("Invaild product ID!");
         return;
+
       }
     };
 
