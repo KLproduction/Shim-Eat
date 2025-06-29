@@ -41,12 +41,7 @@ export const Social = () => {
           <FaGithub className="h-5 w-5" />
         </Button>
       </div>
-      {/* <div>
-        <div className="h-px w-full bg-zinc-200" />
-        <div className="flex w-full items-center gap-x-2">
-          <span className="text-sm text-gray-500">or continue as guest</span>
-        </div>
-      </div> */}
+
       <Button
         size={"lg"}
         className="w-full"

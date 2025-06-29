@@ -80,6 +80,7 @@ const ProductDetailsPage = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
+
       await checkServerSession();
       if (productId) {
         const fetchedProduct = await getProductById(productId);
@@ -87,6 +88,7 @@ const ProductDetailsPage = () => {
       } else {
         setError("Invaild product ID!");
         return;
+
       }
     };
 

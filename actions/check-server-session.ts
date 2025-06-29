@@ -3,6 +3,7 @@
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 
+
 export const checkServerSession = async () => {
     const session = await auth()
 
@@ -10,3 +11,4 @@ export const checkServerSession = async () => {
         redirect("/auth/login")
     }
 }
+
