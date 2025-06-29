@@ -4,6 +4,7 @@ import * as z from "zod";
 import { LoginSchema } from "@/schemas";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
+import { cookies } from "next/headers";
 import {
   generateVerificationToken,
   generateTwoFactorToken,
@@ -87,10 +88,16 @@ export const login = async (
   }
 
   try {
+    const cookieStore = cookies();
+    const cookieRedirect = cookieStore.get("postLoginRedirect")?.value;
+    if (cookieRedirect) {
+      cookieStore.delete("postLoginRedirect");
+    }
+
     await signIn("credentials", {
       email,
       password,
-      redirectTo: callbackUrl || `/?id=${existingUser.id}`,
+      redirectTo: callbackUrl || cookieRedirect || `/?id=${existingUser.id}`,
     });
   } catch (e) {
     if (e instanceof AuthError) {
