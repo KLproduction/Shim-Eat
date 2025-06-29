@@ -80,7 +80,9 @@ const ProductDetailsPage = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      await checkServerSession();
+      await checkServerSession(
+        window.location.pathname + window.location.search,
+      );
       if (productId) {
         const fetchedProduct = await getProductById(productId);
         setProduct(fetchedProduct);
