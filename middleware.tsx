@@ -2,19 +2,25 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "./auth";
 
 export default async function middleware(request: NextRequest) {
-  const isLoggedIn = async () => {
-    const session = await auth();
-    if (!session) {
-      return false;
-    }
-    return true;
-  };
-
-  if (await isLoggedIn()) {
+  const session = await auth();
+  if (session) {
     return NextResponse.next();
   }
 
-  return NextResponse.redirect(new URL("/auth/login", request.url));
+  const response = NextResponse.redirect(
+    new URL("/auth/login", request.url),
+  );
+  response.cookies.set(
+    "postLoginRedirect",
+    request.nextUrl.pathname + request.nextUrl.search,
+    {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    },
+  );
+
+  return response;
 }
 
 export const config = {
