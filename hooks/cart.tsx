@@ -153,7 +153,10 @@ export const useAddToCart = (productId: string, userId: string | undefined) => {
 
   const onSubmit = handleSubmit(() => {
     if (!userId) {
+      document.cookie = `postLoginRedirect=${encodeURIComponent(window.location.pathname + window.location.search)};path=/;SameSite=Lax;${process.env.NODE_ENV === "production" ? "Secure;" : ""}`;
+
       openSignIn();
+
       return;
     }
     addToCartMutation();
@@ -162,6 +165,7 @@ export const useAddToCart = (productId: string, userId: string | undefined) => {
 
   const onDrinksSubmit = handleSubmitDrinks(() => {
     if (!userId) {
+      document.cookie = `postLoginRedirect=${encodeURIComponent(window.location.pathname + window.location.search)};path=/;SameSite=Lax;${process.env.NODE_ENV === "production" ? "Secure;" : ""}`;
       openSignIn();
       return;
     }

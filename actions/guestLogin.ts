@@ -4,6 +4,7 @@ import { signIn } from "@/auth";
 import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
 import { randomUUID } from "crypto";
+import { cookies } from "next/headers";
 
 export const guestLogin = async () => {
   const uid = randomUUID();
@@ -21,9 +22,16 @@ export const guestLogin = async () => {
     },
   });
 
+  const cookieStore = cookies();
+  const postLoginRedirect = cookieStore.get("postLoginRedirect")?.value;
+
+  if (postLoginRedirect) {
+    cookieStore.delete("postLoginRedirect");
+  }
+
   await signIn("credentials", {
     email,
     password: rawPassword,
-    redirectTo: "/", // or `redirect:` if you use the latest API
+    redirectTo: postLoginRedirect || "/",
   });
 };

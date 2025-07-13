@@ -11,9 +11,15 @@ export const Social = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
 
+  function getPostLoginRedirectFromCookie(): string | null {
+    const match = document.cookie.match(/(?:^|;\s*)postLoginRedirect=([^;]*)/);
+    return match ? decodeURIComponent(match[1]) : null;
+  }
+
   const onClick = (provider: "google" | "github") => {
+    const postLoginRedirect = getPostLoginRedirectFromCookie();
     signIn(provider, {
-      callbackUrl: callbackUrl || `/`,
+      callbackUrl: postLoginRedirect || callbackUrl || `/`,
     });
   };
 
