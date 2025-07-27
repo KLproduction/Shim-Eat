@@ -1,6 +1,5 @@
 import { AddCartToReduxForm } from "@/components/form/add-to-cart";
 import { currentUser } from "@/lib/auth";
-import { cookies } from "next/headers";
 import React from "react";
 
 type Props = {
@@ -9,13 +8,8 @@ type Props = {
   };
 };
 
-const page = async ({ params }: Props) => {
+const Page = async ({ params }: Props) => {
   const user = await currentUser();
-  const cookieStore = cookies();
-  const cookieRedirect = cookieStore.get("postLoginRedirect")?.value;
-  if (cookieRedirect) {
-    cookieStore.delete("postLoginRedirect");
-  }
   return (
     <div>
       <AddCartToReduxForm productId={params.productId} userId={user?.id} />
@@ -23,4 +17,4 @@ const page = async ({ params }: Props) => {
   );
 };
 
-export default page;
+export default Page;
