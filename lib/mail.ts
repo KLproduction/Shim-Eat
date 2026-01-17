@@ -16,7 +16,7 @@ export const sendVerificationEmail = async (
   const confirmLink = `${baseURL}/auth/new-verification?token=${token}&id=${userId}`;
 
   await resend.emails.send({
-    from: "mail@shimgsolution.com",
+    from: "admin@shimg-solution.com",
     to: email,
     subject: "Confirm your email",
     html: `<head>
@@ -66,7 +66,7 @@ export const sendPasswordResentEmail = async (email: string, token: string) => {
   const resetLink = `${baseURL}/auth/new-password?token=${token}`;
 
   await resend.emails.send({
-    from: "mail@shimgsolution.com",
+    from: "admin@shimg-solution.com",
     to: email,
     subject: "Reset your password",
     html: `<head>
@@ -115,7 +115,7 @@ export const sendPasswordResentEmail = async (email: string, token: string) => {
 
 export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
   await resend.emails.send({
-    from: "mail@shimgsolution.com",
+    from: "admin@shimg-solution.com",
     to: email,
     subject: "2FA Code",
     html: `<head>
