@@ -47,7 +47,7 @@ export default async function RootLayout({
                 <div className="sm:hidden">
                   <NavbarMobileNew />
                 </div>
-                <AdminSwitch />
+
                 {children}
                 <div className="block sm:hidden">
                   <Toaster position="top-center" />

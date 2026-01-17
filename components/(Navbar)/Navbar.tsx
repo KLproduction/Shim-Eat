@@ -32,6 +32,7 @@ import { getCartIdbyUserId } from "@/data/getCartIdbyUserId";
 import { getCartItembyId } from "@/data/getCartItembyId";
 import AdminSwitch from "../AdminSwitch";
 import GlobalSignInBtn from "../global/global-sign-in-btn";
+import { cn } from "@/lib/utils";
 
 const navList = [
   {
@@ -52,7 +53,7 @@ const Navbar = async () => {
               <img src="/saladLogo.png" alt="logo" className="max-w-20" />
             </Link>
           </div>
-          <ul className="flex flex-1 items-center justify-center gap-4 text-orange-500">
+          <ul className="font-milker flex flex-1 items-center justify-center gap-4 text-orange-500">
             {navList.map(({ label, path }) => (
               <li key={label}>
                 <div className="text-3xl font-bold hover:text-orange-200">
@@ -122,7 +123,9 @@ const Navbar = async () => {
           )}
         </div>
       </MaxWidthWrapper>
-      <AdminSwitch />
+      <div className={cn(!user?.id && "hidden")}>
+        <AdminSwitch />
+      </div>
     </nav>
   );
 };
