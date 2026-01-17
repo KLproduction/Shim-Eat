@@ -63,6 +63,8 @@ const SettingformAdmin = ({ user }: SettingFormProps) => {
   //   })();
   // }, []);
 
+  const isAdmin = user.role === UserRole.ADMIN;
+
   const form = useForm<z.infer<typeof SettingSchema>>({
     resolver: zodResolver(SettingSchema),
     defaultValues: {
@@ -223,7 +225,7 @@ const SettingformAdmin = ({ user }: SettingFormProps) => {
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger>
+                        <SelectTrigger disabled={!isAdmin}>
                           <SelectValue placeholder="Select a role" />
                         </SelectTrigger>
                       </FormControl>

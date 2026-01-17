@@ -14,6 +14,10 @@ export const deleteSignalUser = async ({ userId }: deleteSignalUserProps) => {
     return { error: "Authentication required." };
   }
 
+  if (operatingUser.role !== "ADMIN") {
+    return { error: "Deletion not allowed - Unauthorized." };
+  }
+
   const user = await db.user.findUnique({
     where: { id: userId },
   });

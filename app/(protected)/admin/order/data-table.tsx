@@ -128,9 +128,9 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border border-zinc-400 p-3">
+      <div className="rounded-md border border-zinc-500 bg-zinc-50 p-3">
         <Table>
-          <TableHeader className="border-b-2 border-zinc-400">
+          <TableHeader className="border-b-2 border-zinc-500 bg-zinc-50">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -148,7 +148,7 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody className="bg-zinc-200 text-xs">
+          <TableBody className="bg-zinc-50 text-xs">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow

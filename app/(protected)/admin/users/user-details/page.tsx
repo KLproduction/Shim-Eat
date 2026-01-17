@@ -46,15 +46,6 @@ const UserDetailsPage = () => {
   const userId = searchParams.get("user");
   const route = useRouter();
 
-  //   useEffect(() => {
-  //   (async () => {
-  //     const user = await currentUser();
-  //     if (user?.role !== "ADMIN") {
-  //       route.push("/");
-  //     }
-  //   })();
-  // }, []);
-
   useEffect(() => {
     (async () => {
       if (userId) {
@@ -136,7 +127,7 @@ const UserDetailsPage = () => {
                       <DialogDescription></DialogDescription>
                     </DialogHeader>
                     <DialogTrigger asChild>
-                      <div className="my-auto flex items-center justify-center gap-5">
+                      <div className="my-auto flex items-center justify-center gap-5 p-3">
                         <Button variant={"outline"}>Cancel</Button>
                         <Button
                           onClick={() => onClickDeleteHandler(userId!)}

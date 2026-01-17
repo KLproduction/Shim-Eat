@@ -292,12 +292,12 @@ export const columns: ColumnDef<TUserOrder>[] = [
     },
   },
 
-  {
-    accessorKey: "id",
-    header: () => <div className="text-center">ID</div>,
-  },
-  {
-    accessorKey: "userId",
-    header: () => <div className="text-center">User ID</div>,
-  },
+  // {
+  //   accessorKey: "id",
+  //   header: () => <div className="text-center">ID</div>,
+  // },
+  // {
+  //   accessorKey: "userId",
+  //   header: () => <div className="text-center">User ID</div>,
+  // },
 ];
