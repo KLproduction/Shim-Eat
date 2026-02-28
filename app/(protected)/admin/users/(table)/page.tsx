@@ -1,23 +1,23 @@
-import { getOrderFromDB } from "@/data/getOrderFromDB";
 import React from "react";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
-import { Product, User } from "@prisma/client";
-import { getProducts } from "@/data/getProducts";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { ExtenderUser } from "@/next-auth";
+import { User } from "@prisma/client";
 import { getAllUser } from "@/data/getAllUser";
-import { currentUser } from "@/lib/auth";
+import AdminPageHeader from "@/components/admin/admin-page-header";
+import AdminShell from "@/components/admin/admin-shell";
 
 const UserTablePage = async () => {
   const data: User[] | undefined = await getAllUser();
-  const user = await currentUser();
 
   return (
-    <div className="container mx-auto pb-20 sm:py-10">
+    <AdminShell>
+      <AdminPageHeader
+        eyebrow="Users"
+        title="Customer accounts"
+        description="Inspect account health, permissions, and spend patterns with a more readable customer workspace."
+      />
       {data && <DataTable columns={columns} data={data} />}
-    </div>
+    </AdminShell>
   );
 };
 

@@ -3,14 +3,21 @@ import React from "react";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
 import { TUserOrder } from "@/lib/type";
+import AdminPageHeader from "@/components/admin/admin-page-header";
+import AdminShell from "@/components/admin/admin-shell";
 
 const UserOrderTablePage = async () => {
   const data: TUserOrder[] | undefined = await getOrderFromDB();
 
   return (
-    <div className="container mx-auto pb-20 sm:py-10">
+    <AdminShell>
+      <AdminPageHeader
+        eyebrow="Orders"
+        title="Order management"
+        description="Keep the kitchen, dispatch, and payment states aligned with a cleaner operational workflow."
+      />
       {data && <DataTable columns={columns} data={data} />}
-    </div>
+    </AdminShell>
   );
 };
 
