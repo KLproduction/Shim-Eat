@@ -25,12 +25,16 @@ type CheckOutFormProps = {
 const successPage = async ({
   searchParams,
 }: {
-  searchParams: { payment_intent: string };
+  searchParams: Promise<{ payment_intent?: string }>;
 }) => {
+  const { payment_intent } = await searchParams;
+
+  if (!payment_intent) {
+    notFound();
+  }
+
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
-  const paymentIntent = await stripe.paymentIntents.retrieve(
-    searchParams.payment_intent,
-  );
+  const paymentIntent = await stripe.paymentIntents.retrieve(payment_intent);
 
   console.log(paymentIntent.metadata);
 

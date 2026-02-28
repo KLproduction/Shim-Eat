@@ -3,16 +3,18 @@ import { currentUser } from "@/lib/auth";
 import React from "react";
 
 type Props = {
-  params: {
+  params: Promise<{
     productId: string;
-  };
+  }>;
 };
 
 const Page = async ({ params }: Props) => {
   const user = await currentUser();
+  const { productId } = await params;
+
   return (
     <div>
-      <AddCartToReduxForm productId={params.productId} userId={user?.id} />
+      <AddCartToReduxForm productId={productId} userId={user?.id} />
     </div>
   );
 };
