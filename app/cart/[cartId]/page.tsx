@@ -2,15 +2,17 @@ import CartItemCards from "@/components/ShowUserCartFormStoage";
 import React from "react";
 
 type Props = {
-  params: {
+  params: Promise<{
     cartId: string;
-  };
+  }>;
 };
 
-const page = ({ params }: Props) => {
+const page = async ({ params }: Props) => {
+  const { cartId } = await params;
+
   return (
     <div>
-      <CartItemCards cartId={params.cartId} />
+      <CartItemCards cartId={cartId} />
     </div>
   );
 };

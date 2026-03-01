@@ -22,7 +22,7 @@ export const guestLogin = async () => {
     },
   });
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const postLoginRedirect = cookieStore.get("postLoginRedirect")?.value;
 
   if (postLoginRedirect) {

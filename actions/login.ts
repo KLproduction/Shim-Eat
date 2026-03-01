@@ -88,7 +88,7 @@ export const login = async (
   }
 
   try {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const cookieRedirect = cookieStore.get("postLoginRedirect")?.value;
     if (cookieRedirect) {
       cookieStore.delete("postLoginRedirect");

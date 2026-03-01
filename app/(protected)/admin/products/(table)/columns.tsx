@@ -1,7 +1,7 @@
 "use client";
 
+import { ProductStatusBadge } from "@/components/admin/admin-badges";
 import { formatPrice } from "@/lib/formatPrice";
-import { TUserOrder } from "@/lib/type";
 
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
@@ -15,22 +15,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useRouter } from "next/navigation";
 import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
 import { BsChevronExpand } from "react-icons/bs";
-import { startTransition, useTransition } from "react";
-import { deleteSigalUserOrder } from "@/actions/deleteSigalUserOrder";
-import { toast } from "sonner";
-import {
-  Dialog,
-  DialogHeader,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-  DialogDescription,
-} from "@/components/ui/dialog";
-import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
-import { Card } from "@/components/ui/card";
 import { Product } from "@prisma/client";
 import { NavigateButton } from "../../order/_components/NavigateButton";
 
@@ -162,18 +148,9 @@ export const columns: ColumnDef<Product>[] = [
     },
     cell: ({ row }) => {
       const data = row.getValue("status") as string;
-      const formattedData = data.toLocaleUpperCase();
       return (
-        <div className="text-center">
-          <span
-            className={
-              data === "onSale"
-                ? "font-bold text-green-500"
-                : "font-bold text-red-500"
-            }
-          >
-            {formattedData}
-          </span>
+        <div className="flex justify-center">
+          <ProductStatusBadge status={data as Product["status"]} />
         </div>
       );
     },

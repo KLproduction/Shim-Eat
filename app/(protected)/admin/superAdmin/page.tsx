@@ -3,13 +3,16 @@
 import { createAllProducts } from "@/actions/createAllProduct";
 import { deleteAllProduct } from "@/actions/deleteAllProducts";
 import { deleteAlluserOrder } from "@/actions/deleteAlluserOrder";
+import AdminPageHeader from "@/components/admin/admin-page-header";
+import AdminSectionCard from "@/components/admin/admin-section-card";
+import AdminShell from "@/components/admin/admin-shell";
 import { Button } from "@/components/ui/button";
 import { generateDummyUserOrderToDB } from "@/data/generateDummyUserOrderToDB";
 import { generateDummyUserToDB } from "@/data/generateDummyUserToDB";
 import { currentUser } from "@/lib/auth";
-import { ExtenderUser } from "@/next-auth";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useTransition } from "react";
+import { DatabaseZap, ShieldAlert } from "lucide-react";
+import { useEffect, useTransition } from "react";
 import { toast } from "sonner";
 
 const SuperAdminPage = () => {
@@ -22,7 +25,7 @@ const SuperAdminPage = () => {
         route.push("/admin");
       }
     })();
-  }, []);
+  }, [route]);
 
   const generateDummyOrder = () => {
     startTransition(async () => {
@@ -71,32 +74,68 @@ const SuperAdminPage = () => {
     });
   };
   return (
-    <main className="flex flex-col justify-center gap-3">
-      <Button onClick={() => generateDummyOrder()} disabled={pending}>
-        Create Dummy Order
-      </Button>
-      <Button onClick={() => createProudct()} disabled={pending}>
-        Re-generate Product List
-      </Button>
-      <Button onClick={() => createUser()} disabled={pending}>
-        Create Dummy User
-      </Button>
-      <div className="border-b-2 border-zinc-600" />
-      <Button
-        variant={"destructive"}
-        onClick={() => deleteProudct()}
-        disabled={pending}
-      >
-        Delete All Proudcts
-      </Button>
-      <Button
-        variant={"destructive"}
-        onClick={() => deleteUserOrder()}
-        disabled={pending}
-      >
-        Delete All UserOrder
-      </Button>
-    </main>
+    <AdminShell>
+      <AdminPageHeader
+        eyebrow="Restricted"
+        title="Super admin controls"
+        description="High-impact maintenance actions live here. These controls mutate core datasets and should be used deliberately."
+      />
+      <div className="grid gap-6 xl:grid-cols-2">
+        <AdminSectionCard
+          title="Seed and refresh"
+          description="Populate the workspace for testing and internal demos."
+          action={<DatabaseZap className="h-5 w-5 text-emerald-600" />}
+        >
+          <div className="grid gap-3">
+            <Button
+              onClick={() => generateDummyOrder()}
+              disabled={pending}
+              className="h-11 justify-start rounded-2xl bg-slate-950 px-5 text-white hover:bg-slate-950/90"
+            >
+              Create dummy orders
+            </Button>
+            <Button
+              onClick={() => createProudct()}
+              disabled={pending}
+              className="h-11 justify-start rounded-2xl bg-slate-950 px-5 text-white hover:bg-slate-950/90"
+            >
+              Re-generate product list
+            </Button>
+            <Button
+              onClick={() => createUser()}
+              disabled={pending}
+              className="h-11 justify-start rounded-2xl bg-slate-950 px-5 text-white hover:bg-slate-950/90"
+            >
+              Create dummy user
+            </Button>
+          </div>
+        </AdminSectionCard>
+        <AdminSectionCard
+          title="Destructive actions"
+          description="Use only when you explicitly want to clear live records."
+          action={<ShieldAlert className="h-5 w-5 text-rose-600" />}
+        >
+          <div className="grid gap-3">
+            <Button
+              variant={"destructive"}
+              onClick={() => deleteProudct()}
+              disabled={pending}
+              className="h-11 justify-start rounded-2xl px-5"
+            >
+              Delete all products
+            </Button>
+            <Button
+              variant={"destructive"}
+              onClick={() => deleteUserOrder()}
+              disabled={pending}
+              className="h-11 justify-start rounded-2xl px-5"
+            >
+              Delete all user orders
+            </Button>
+          </div>
+        </AdminSectionCard>
+      </div>
+    </AdminShell>
   );
 };
 

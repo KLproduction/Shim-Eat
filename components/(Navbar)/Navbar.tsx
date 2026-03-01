@@ -18,18 +18,12 @@ import {
   AiFillSetting,
 } from "react-icons/ai";
 import SideCart from "../SideCart";
-import { useEffect, useState } from "react";
-import AdminSwtich from "../AdminSwitch";
 import SignOutBtn from "../auth/SignOutBtn";
 import GoogleSignInBtn from "../auth/GoogleSignInBtn";
 import GitSignInBtn from "../auth/GitSignInBtn";
-import { useCurrentUser } from "@/hooks/use-current-user";
-import { ExtenderUser } from "@/next-auth";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { BsBagCheckFill } from "react-icons/bs";
 import NavbarLargeSrceenDropdown from "./_components/NavbarLargeSrceenDropdown";
-import { getCartIdbyUserId } from "@/data/getCartIdbyUserId";
-import { getCartItembyId } from "@/data/getCartItembyId";
 import AdminSwitch from "../AdminSwitch";
 import GlobalSignInBtn from "../global/global-sign-in-btn";
 import { cn } from "@/lib/utils";

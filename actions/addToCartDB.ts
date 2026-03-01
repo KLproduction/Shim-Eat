@@ -5,7 +5,6 @@ import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { TaddCartToDB } from "@/lib/type";
 import { $Enums, AddOns, Product, ProductCategory, Size } from "@prisma/client";
-import { tree } from "next/dist/build/templates/app-page";
 
 export const addToCart = async (data: TaddCartToDB[]) => {
   const user = await currentUser();

@@ -1,5 +1,6 @@
 "use client";
 
+import { DeliveryStatusBadge, OrderStatusBadge } from "@/components/admin/admin-badges";
 import { formatPrice } from "@/lib/formatPrice";
 import { TUserOrder } from "@/lib/type";
 
@@ -15,22 +16,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useRouter } from "next/navigation";
 import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
 import { BsChevronExpand } from "react-icons/bs";
-import { startTransition, useTransition } from "react";
-import { deleteSigalUserOrder } from "@/actions/deleteSigalUserOrder";
-import { toast } from "sonner";
-import {
-  Dialog,
-  DialogHeader,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-  DialogDescription,
-} from "@/components/ui/dialog";
-import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
-import { Card } from "@/components/ui/card";
 import { NavigateButton } from "./_components/NavigateButton";
 
 export const columns: ColumnDef<TUserOrder>[] = [
@@ -121,17 +108,7 @@ export const columns: ColumnDef<TUserOrder>[] = [
       const data = row.getValue("status") as string;
       return (
         <div className="flex justify-center">
-          <span
-            className={
-              data === "CANCELLED"
-                ? "font-bold text-red-800"
-                : data === "PENDING"
-                  ? "font-bold text-zinc-600"
-                  : "font-bold text-green-500"
-            }
-          >
-            {data}
-          </span>
+          <OrderStatusBadge status={data as TUserOrder["status"]} />
         </div>
       );
     },
@@ -162,17 +139,7 @@ export const columns: ColumnDef<TUserOrder>[] = [
       const data = row.getValue("deliveryStatus") as string;
       return (
         <div className="flex justify-center">
-          <span
-            className={
-              data === "DELIVERED"
-                ? "font-bold text-green-500"
-                : data === "DISPATCHED"
-                  ? "font-bold text-orange-500"
-                  : "font-bold text-zinc-500"
-            }
-          >
-            {data}
-          </span>
+          <DeliveryStatusBadge status={data as TUserOrder["deliveryStatus"]} />
         </div>
       );
     },
@@ -200,7 +167,7 @@ export const columns: ColumnDef<TUserOrder>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.getValue("createdAt") as string;
+      const data = row.getValue("updatedAt") as string;
       const date = new Date(data);
       const formattedDate = new Intl.DateTimeFormat("en-GB", {
         timeZone: "Europe/London",
